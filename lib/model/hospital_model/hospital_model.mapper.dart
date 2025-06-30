@@ -1,5 +1,3 @@
-/*
-
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -22,33 +20,32 @@ class HospitalModelMapper extends ClassMapperBase<HospitalModel> {
   @override
   final String id = 'HospitalModel';
 
-  static int _$hospitalId(HospitalModel v) => v.hospitalId;
-  static const Field<HospitalModel, int> _f$hospitalId =
+  static String _$hospitalId(HospitalModel v) => v.hospitalId;
+  static const Field<HospitalModel, String> _f$hospitalId =
       Field('hospitalId', _$hospitalId, key: r'hospital_id');
-  static String _$fullName(HospitalModel v) => v.fullName;
-  static const Field<HospitalModel, String> _f$fullName =
-      Field('fullName', _$fullName, key: r'full_name');
-  static double _$charityLat(HospitalModel v) => v.charityLat;
-  static const Field<HospitalModel, double> _f$charityLat =
-      Field('charityLat', _$charityLat, key: r'charity_lat');
-  static double _$charityLong(HospitalModel v) => v.charityLong;
-  static const Field<HospitalModel, double> _f$charityLong =
-      Field('charityLong', _$charityLong, key: r'charity_long');
+  static String _$name(HospitalModel v) => v.name;
+  static const Field<HospitalModel, String> _f$name = Field('name', _$name);
+  static double _$hospitalLat(HospitalModel v) => v.hospitalLat;
+  static const Field<HospitalModel, double> _f$hospitalLat =
+      Field('hospitalLat', _$hospitalLat, key: r'hospital_lat');
+  static double _$hospitalLong(HospitalModel v) => v.hospitalLong;
+  static const Field<HospitalModel, double> _f$hospitalLong =
+      Field('hospitalLong', _$hospitalLong, key: r'hospital_long');
 
   @override
   final MappableFields<HospitalModel> fields = const {
     #hospitalId: _f$hospitalId,
-    #fullName: _f$fullName,
-    #charityLat: _f$charityLat,
-    #charityLong: _f$charityLong,
+    #name: _f$name,
+    #hospitalLat: _f$hospitalLat,
+    #hospitalLong: _f$hospitalLong,
   };
 
   static HospitalModel _instantiate(DecodingData data) {
     return HospitalModel(
         hospitalId: data.dec(_f$hospitalId),
-        fullName: data.dec(_f$fullName),
-        charityLat: data.dec(_f$charityLat),
-        charityLong: data.dec(_f$charityLong));
+        name: data.dec(_f$name),
+        hospitalLat: data.dec(_f$hospitalLat),
+        hospitalLong: data.dec(_f$hospitalLong));
   }
 
   @override
@@ -105,10 +102,10 @@ extension HospitalModelValueCopy<$R, $Out>
 abstract class HospitalModelCopyWith<$R, $In extends HospitalModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call(
-      {int? hospitalId,
-      String? fullName,
-      double? charityLat,
-      double? charityLong});
+      {String? hospitalId,
+      String? name,
+      double? hospitalLat,
+      double? hospitalLong});
   HospitalModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -122,27 +119,25 @@ class _HospitalModelCopyWithImpl<$R, $Out>
       HospitalModelMapper.ensureInitialized();
   @override
   $R call(
-          {int? hospitalId,
-          String? fullName,
-          double? charityLat,
-          double? charityLong}) =>
+          {String? hospitalId,
+          String? name,
+          double? hospitalLat,
+          double? hospitalLong}) =>
       $apply(FieldCopyWithData({
         if (hospitalId != null) #hospitalId: hospitalId,
-        if (fullName != null) #fullName: fullName,
-        if (charityLat != null) #charityLat: charityLat,
-        if (charityLong != null) #charityLong: charityLong
+        if (name != null) #name: name,
+        if (hospitalLat != null) #hospitalLat: hospitalLat,
+        if (hospitalLong != null) #hospitalLong: hospitalLong
       }));
   @override
   HospitalModel $make(CopyWithData data) => HospitalModel(
       hospitalId: data.get(#hospitalId, or: $value.hospitalId),
-      fullName: data.get(#fullName, or: $value.fullName),
-      charityLat: data.get(#charityLat, or: $value.charityLat),
-      charityLong: data.get(#charityLong, or: $value.charityLong));
+      name: data.get(#name, or: $value.name),
+      hospitalLat: data.get(#hospitalLat, or: $value.hospitalLat),
+      hospitalLong: data.get(#hospitalLong, or: $value.hospitalLong));
 
   @override
   HospitalModelCopyWith<$R2, HospitalModel, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
       _HospitalModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
-
-*/

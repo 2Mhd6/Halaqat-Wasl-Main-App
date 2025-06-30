@@ -18,15 +18,16 @@ class OnBoardScreen extends StatelessWidget {
 
   _navigate(BuildContext context) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Sets the onboarding as completed for the user
     await prefs.setBool('firstTime', false);
-    // TODO remove the next 6 lines
+
+    // Navigate to profile screen
     if (context.mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => ProfileScreen()),
       );
     }
     return;
-    // TODO remove the previous 6 lines
 
     // TODO Convert Navigation to match app navigation
     if (context.mounted) {
@@ -47,7 +48,7 @@ class OnBoardScreen extends StatelessWidget {
       );
     }
   }
-
+  // Get current onboarding page
   int getIndex(OnboardState state) => switch (state) {
     FirstOnboardState() => 0,
     SecondOnboardState() => 1,
@@ -61,8 +62,8 @@ class OnBoardScreen extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final bloc = context.watch<OnboardBloc>();
-
           final duration = Duration(milliseconds: 500);
+          // List of onboarding pages
           final pages = [
             OnBoardItem(
               image: 'assets/images/onboard1.png',
@@ -90,20 +91,17 @@ class OnBoardScreen extends StatelessWidget {
                   if (getIndex(state) == -1) {
                     // Navigate to main page
                     _navigate(context);
-                  } else {
-                    bloc.pageController.nextPage(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOut,
-                    );
                   }
                 },
                 builder: (BuildContext context, OnboardState state) {
+                  // Get the current page index
                   final currentIndex = getIndex(state) == -1
                       ? pages.length - 1
                       : getIndex(state);
 
                   return Column(
                     children: [
+                      // Skip button
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Align(
@@ -123,26 +121,23 @@ class OnBoardScreen extends StatelessWidget {
                       ),
                       Gap.gapH80,
                       Expanded(
+                      // Page content (title - image - description)
                         flex: 2,
-                        child: PageView.builder(
-                          controller: bloc.pageController,
-                          itemCount: pages.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return Padding(
+                        child: Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 24.0,
                               ),
 
                               child: Column(
-                                key: ValueKey(index),
+                                key: ValueKey(currentIndex),
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  // Title
                                   AnimatedSwitcher(
                                     duration: Duration(milliseconds: 500),
                                     child: Text(
-                                      pages[index].title,
-                                      key: ValueKey(pages[index].title),
+                                      pages[currentIndex].title,
+                                      key: ValueKey(pages[currentIndex].title),
                                       style: AppTextStyle.sfProBold24.copyWith(
                                         color: Color(0xffAAB3D5),
                                       ),
@@ -150,6 +145,7 @@ class OnBoardScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Gap.gapH40,
+                                   // Image
                                   AnimatedSwitcher(
                                     duration: duration,
                                     child: Padding(
@@ -161,11 +157,12 @@ class OnBoardScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Gap.gapH40,
+                                  // Description
                                   AnimatedSwitcher(
                                     duration: Duration(milliseconds: 500),
                                     child: Text(
-                                      pages[index].description,
-                                      key: ValueKey(pages[index].description),
+                                      pages[currentIndex].description,
+                                      key: ValueKey(pages[currentIndex].description),
                                       style: AppTextStyle.sfProBold24.copyWith(
                                         color: Color(0xffAAB3D5),
                                       ),
@@ -174,9 +171,7 @@ class OnBoardScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                            );
-                          },
-                        ),
+                            ),
                       ),
                       Column(
                         children: [
@@ -184,7 +179,7 @@ class OnBoardScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: List.generate(
-                                3,
+                                pages.length,
                                 (index) => Container(
                                   height: 5.0,
                                   width: 20.0,

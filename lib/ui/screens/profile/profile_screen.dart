@@ -9,7 +9,6 @@ import 'package:halaqat_wasl_main_app/ui/screens/profile/widgets/profile_item.da
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -18,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
     return BlocProvider<ProfileBloc>(
       // Create the Bloc and add initial event to load profile data
       create: (context) => ProfileBloc()..add(ProfileDataLoadRequested()),
-      child: Builder( 
+      child: Builder(
         builder: (context) {
           return Scaffold(
             body: SafeArea(
@@ -49,79 +48,133 @@ class ProfileScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: BlocBuilder<ProfileBloc, ProfileState>(
-                            builder: (context, state){
-                            if(state is ProfileData){
+                            builder: (context, state) {
+                              if (state is ProfileData) {
+                                return Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            tr('profile_screen.profile'),
+                                            textAlign: TextAlign.center,
+                                            style: AppTextStyle.sfProBold24,
+                                          ),
+                                        ),
 
-                              return Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      tr('profile_screen.profile'),
-                                      textAlign: TextAlign.center,
-                                      style: AppTextStyle.sfProBold24,
+                                        // Navigate to Edit Profile screen
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    EditProfileScreen(),
+                                              ),
+                                            );
+                                          },
+                                          icon: Icon(LucideIcons.edit),
+                                        ),
+                                      ],
                                     ),
-                                  ),
 
-                                  // Navigate to Edit Profile screen
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EditProfileScreen()));
-                                    },
-                                    icon: Icon(LucideIcons.edit),
-                                  ),
-                                ],
-                              ),
+                                    // List view showing profile data items
+                                    Expanded(
+                                      child: ListView(
+                                        primary: false,
+                                        children: [
+                                          ProfileItemWidget(
+                                            item: ProfileItem(
+                                              hintText: 'Mohammed Ali Alharbi',
+                                              icon: 'assets/icons/account.png',
+                                            ),
+                                          ),
+                                          ProfileItemWidget(
+                                            item: ProfileItem(
+                                              hintText: 'Mohammed@gmail.com',
+                                              icon: 'assets/icons/email.png',
+                                            ),
+                                          ),
+                                          ProfileItemWidget(
+                                            item: ProfileItem(
+                                              hintText: '+966 561577821',
+                                              icon: 'assets/icons/call.png',
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () async {
+                                              // Handle language selection
+                                               context.locale.languageCode == 'en'
+                                                  ? await context.setLocale(Locale('ar')) 
+                                                  : await context.setLocale(Locale('en'));
+                                            },
+                                            child: ProfileItemWidget(
+                                              item: ProfileItem(
+                                                hintText:  tr('profile_screen.arabic'),
+                                                icon: 'assets/icons/language.png',
+                                              ),
+                                            ),
+                                          ),
+                                          ProfileItemWidget(
+                                            item: ProfileItem(
+                                              hintText:
+                                                  'Support@Halaqat_wasl.com',
+                                              icon: 'assets/icons/support.png',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
 
-                               // List view showing profile data items
-                              Expanded(child: ListView.builder(primary: false, itemCount: state.data.length, itemBuilder: (contex, index){
-                                final item = state.data[index];
-                                return ProfileItemWidget(item: item);
-                              },),),
+                                    // Logout button
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: 16.0,
+                                        left: 8.0,
+                                        right: 8.0,
+                                      ),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          // context.read<AuthBloc>.add(LogoutEvent());
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppColor.cancelButtonColor,
+                                          foregroundColor: Colors.white,
+                                          padding: EdgeInsets.all(16.0),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.logout),
+                                            Gap.gapW16,
+                                            Text(
+                                              tr('profile_screen.logout'),
+                                              style: AppTextStyle.sfProBold16,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
 
-                              // Logout button
-                              Padding(
-                                padding: EdgeInsets.only(bottom: 16.0,left: 8.0, right: 8.0 ),
-                                child: ElevatedButton(
+                                // Loading state - show loading spinner
+                              } else if (state is ProfileLoading) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
 
-                                  onPressed: () {
-                                    // context.read<AuthBloc>.add(LogoutEvent());
+                                // Error state - show error message
+                              } else if (state is ProfileError) {
+                                return Center(child: Text(state.message));
 
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColor.cancelButtonColor,
-                                    foregroundColor: Colors.white,
-                                    padding: EdgeInsets.all(16.0)
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.logout),
-                                      Gap.gapW16,
-                                      Text(tr('profile_screen.logout'), style: AppTextStyle.sfProBold16),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-
-                          // Loading state - show loading spinner
-                            }else if(state is ProfileLoading){
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-
-                            // Error state - show error message
-                            }else if(state is ProfileError){
-                                return Center(child: Text(state.message),);
-
-                            // Unknown state - show empty container
-                            }else{
-                              return Container();
-                            }
-                          }),
+                                // Unknown state - show empty container
+                              } else {
+                                return Container();
+                              }
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -129,7 +182,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
           );
         },
       ),

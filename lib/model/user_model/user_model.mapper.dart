@@ -1,5 +1,3 @@
-/*
-
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -25,9 +23,14 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
   static int _$userId(UserModel v) => v.userId;
   static const Field<UserModel, int> _f$userId =
       Field('userId', _$userId, key: r'user_id');
-  static String _$notificationId(UserModel v) => v.notificationId;
+  static String? _$notificationId(UserModel v) => v.notificationId;
   static const Field<UserModel, String> _f$notificationId =
       Field('notificationId', _$notificationId, key: r'notification_id');
+  static String _$role(UserModel v) => v.role;
+  static const Field<UserModel, String> _f$role = Field('role', _$role);
+  static String _$fullName(UserModel v) => v.fullName;
+  static const Field<UserModel, String> _f$fullName =
+      Field('fullName', _$fullName, key: r'full_name');
   static String _$email(UserModel v) => v.email;
   static const Field<UserModel, String> _f$email = Field('email', _$email);
   static String _$phoneNumber(UserModel v) => v.phoneNumber;
@@ -40,6 +43,8 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
   final MappableFields<UserModel> fields = const {
     #userId: _f$userId,
     #notificationId: _f$notificationId,
+    #role: _f$role,
+    #fullName: _f$fullName,
     #email: _f$email,
     #phoneNumber: _f$phoneNumber,
     #gender: _f$gender,
@@ -49,6 +54,8 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
     return UserModel(
         userId: data.dec(_f$userId),
         notificationId: data.dec(_f$notificationId),
+        role: data.dec(_f$role),
+        fullName: data.dec(_f$fullName),
         email: data.dec(_f$email),
         phoneNumber: data.dec(_f$phoneNumber),
         gender: data.dec(_f$gender));
@@ -108,6 +115,8 @@ abstract class UserModelCopyWith<$R, $In extends UserModel, $Out>
   $R call(
       {int? userId,
       String? notificationId,
+      String? role,
+      String? fullName,
       String? email,
       String? phoneNumber,
       String? gender});
@@ -125,13 +134,17 @@ class _UserModelCopyWithImpl<$R, $Out>
   @override
   $R call(
           {int? userId,
-          String? notificationId,
+          Object? notificationId = $none,
+          String? role,
+          String? fullName,
           String? email,
           String? phoneNumber,
           String? gender}) =>
       $apply(FieldCopyWithData({
         if (userId != null) #userId: userId,
-        if (notificationId != null) #notificationId: notificationId,
+        if (notificationId != $none) #notificationId: notificationId,
+        if (role != null) #role: role,
+        if (fullName != null) #fullName: fullName,
         if (email != null) #email: email,
         if (phoneNumber != null) #phoneNumber: phoneNumber,
         if (gender != null) #gender: gender
@@ -140,6 +153,8 @@ class _UserModelCopyWithImpl<$R, $Out>
   UserModel $make(CopyWithData data) => UserModel(
       userId: data.get(#userId, or: $value.userId),
       notificationId: data.get(#notificationId, or: $value.notificationId),
+      role: data.get(#role, or: $value.role),
+      fullName: data.get(#fullName, or: $value.fullName),
       email: data.get(#email, or: $value.email),
       phoneNumber: data.get(#phoneNumber, or: $value.phoneNumber),
       gender: data.get(#gender, or: $value.gender));
@@ -149,5 +164,3 @@ class _UserModelCopyWithImpl<$R, $Out>
           Then<$Out2, $R2> t) =>
       _UserModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
-
-*/

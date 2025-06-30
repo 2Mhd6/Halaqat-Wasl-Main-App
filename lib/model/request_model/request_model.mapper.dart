@@ -1,5 +1,3 @@
-/*
-
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
@@ -22,30 +20,30 @@ class RequestModelMapper extends ClassMapperBase<RequestModel> {
   @override
   final String id = 'RequestModel';
 
-  static int _$requestId(RequestModel v) => v.requestId;
-  static const Field<RequestModel, int> _f$requestId =
+  static String _$requestId(RequestModel v) => v.requestId;
+  static const Field<RequestModel, String> _f$requestId =
       Field('requestId', _$requestId, key: r'request_id');
-  static int _$userId(RequestModel v) => v.userId;
-  static const Field<RequestModel, int> _f$userId =
+  static String _$userId(RequestModel v) => v.userId;
+  static const Field<RequestModel, String> _f$userId =
       Field('userId', _$userId, key: r'user_id');
-  static int _$charityId(RequestModel v) => v.charityId;
-  static const Field<RequestModel, int> _f$charityId =
+  static String? _$charityId(RequestModel v) => v.charityId;
+  static const Field<RequestModel, String> _f$charityId =
       Field('charityId', _$charityId, key: r'charity_id');
-  static int _$hospitalId(RequestModel v) => v.hospitalId;
-  static const Field<RequestModel, int> _f$hospitalId =
+  static String _$hospitalId(RequestModel v) => v.hospitalId;
+  static const Field<RequestModel, String> _f$hospitalId =
       Field('hospitalId', _$hospitalId, key: r'hospital_id');
-  static int _$complaintId(RequestModel v) => v.complaintId;
-  static const Field<RequestModel, int> _f$complaintId =
+  static String? _$complaintId(RequestModel v) => v.complaintId;
+  static const Field<RequestModel, String> _f$complaintId =
       Field('complaintId', _$complaintId, key: r'complaint_id');
-  static int _$driverId(RequestModel v) => v.driverId;
-  static const Field<RequestModel, int> _f$driverId =
+  static String? _$driverId(RequestModel v) => v.driverId;
+  static const Field<RequestModel, String> _f$driverId =
       Field('driverId', _$driverId, key: r'driver_id');
   static double _$pickupLat(RequestModel v) => v.pickupLat;
   static const Field<RequestModel, double> _f$pickupLat =
-      Field('pickupLat', _$pickupLat, key: r'pickup_lat');
+      Field('pickupLat', _$pickupLat, key: r'pick_up_lat');
   static double _$pickupLong(RequestModel v) => v.pickupLong;
   static const Field<RequestModel, double> _f$pickupLong =
-      Field('pickupLong', _$pickupLong, key: r'pickup_long');
+      Field('pickupLong', _$pickupLong, key: r'pick_up_long');
   static double _$destinationLat(RequestModel v) => v.destinationLat;
   static const Field<RequestModel, double> _f$destinationLat =
       Field('destinationLat', _$destinationLat, key: r'destination_lat');
@@ -144,12 +142,12 @@ extension RequestModelValueCopy<$R, $Out>
 abstract class RequestModelCopyWith<$R, $In extends RequestModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call(
-      {int? requestId,
-      int? userId,
-      int? charityId,
-      int? hospitalId,
-      int? complaintId,
-      int? driverId,
+      {String? requestId,
+      String? userId,
+      String? charityId,
+      String? hospitalId,
+      String? complaintId,
+      String? driverId,
       double? pickupLat,
       double? pickupLong,
       double? destinationLat,
@@ -169,12 +167,12 @@ class _RequestModelCopyWithImpl<$R, $Out>
       RequestModelMapper.ensureInitialized();
   @override
   $R call(
-          {int? requestId,
-          int? userId,
-          int? charityId,
-          int? hospitalId,
-          int? complaintId,
-          int? driverId,
+          {String? requestId,
+          String? userId,
+          Object? charityId = $none,
+          String? hospitalId,
+          Object? complaintId = $none,
+          Object? driverId = $none,
           double? pickupLat,
           double? pickupLong,
           double? destinationLat,
@@ -184,10 +182,10 @@ class _RequestModelCopyWithImpl<$R, $Out>
       $apply(FieldCopyWithData({
         if (requestId != null) #requestId: requestId,
         if (userId != null) #userId: userId,
-        if (charityId != null) #charityId: charityId,
+        if (charityId != $none) #charityId: charityId,
         if (hospitalId != null) #hospitalId: hospitalId,
-        if (complaintId != null) #complaintId: complaintId,
-        if (driverId != null) #driverId: driverId,
+        if (complaintId != $none) #complaintId: complaintId,
+        if (driverId != $none) #driverId: driverId,
         if (pickupLat != null) #pickupLat: pickupLat,
         if (pickupLong != null) #pickupLong: pickupLong,
         if (destinationLat != null) #destinationLat: destinationLat,
@@ -215,5 +213,3 @@ class _RequestModelCopyWithImpl<$R, $Out>
           Then<$Out2, $R2> t) =>
       _RequestModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }
-
-*/

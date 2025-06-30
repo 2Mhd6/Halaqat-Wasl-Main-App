@@ -1,7 +1,6 @@
 part of 'onboard_bloc.dart';
 
 
-//It compares events to determine if there is a change in state.
 @immutable
 sealed class OnboardState {}
    

@@ -11,13 +11,11 @@ class OnboardBloc extends Bloc<OnboardEvent, OnboardState> {
   
   OnboardBloc() : super(FirstOnboardState()) {
     pageController = PageController();
-    on<PageChangedEvent>(_pageChanged);// Listen for Event and State and handle it
+    on<PageChangedEvent>(_pageChanged);
     
   }
 
 
-
-// Update the onboarding state with the new page.
   void _pageChanged(PageChangedEvent event, Emitter<OnboardState> emit){
       emit(switch(state){
         

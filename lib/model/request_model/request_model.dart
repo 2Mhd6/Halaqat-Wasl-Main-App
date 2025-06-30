@@ -1,4 +1,4 @@
-/*import 'package:dart_mappable/dart_mappable.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
 part 'request_model.mapper.dart';
 
@@ -20,22 +20,22 @@ class RequestModel with RequestModelMappable {
   });
 
   @MappableField(key: 'request_id')
-  final int requestId;
+  final String requestId;
 
   @MappableField(key: 'user_id')
-  final int userId;
+  final String userId;
 
   @MappableField(key: 'charity_id')
-  final int charityId;
+  final String? charityId;
 
   @MappableField(key: 'hospital_id')
-  final int hospitalId;
+  final String hospitalId;
 
   @MappableField(key: 'complaint_id')
-  final int complaintId;
+  final String? complaintId;
 
   @MappableField(key: 'driver_id')
-  final int driverId;
+  final String? driverId;
 
   @MappableField(key: 'pick_up_lat')
   final double pickupLat;
@@ -53,5 +53,3 @@ class RequestModel with RequestModelMappable {
 
   final String? note;
 }
-
-*/

@@ -8,7 +8,7 @@ import 'package:halaqat_wasl_main_app/extensions/screen_size.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/onboard/onboard_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/splash/bloc/splash_bloc.dart';
 
-class SplashScreen extends StatelessWidget { 
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
@@ -44,7 +44,7 @@ class SplashScreen extends StatelessWidget {
                     );
                     return;
                     final isLoggedin = false;
-                    // ignore: dead_code
+                    
                     if (isLoggedin) {
                       Navigator.pushReplacement(
                         context,
