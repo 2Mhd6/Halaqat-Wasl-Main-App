@@ -8,6 +8,7 @@ class ProfileItem {
   ProfileItem({required this.hintText, required this.icon});
 }
 
+// Widget to display a single profile item in the UI
 class ProfileItemWidget extends StatelessWidget {
   const ProfileItemWidget({super.key, required this.item});
 

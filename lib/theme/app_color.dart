@@ -33,6 +33,8 @@ class AppColor {
 
   // -- Profile item border
   static const profileItemBorderColor = Color(0xffB0B7C3);
+
+  
 }
 
 

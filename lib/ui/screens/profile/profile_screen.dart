@@ -7,6 +7,8 @@ import 'package:halaqat_wasl_main_app/ui/screens/edit_profile/edit_profile_scree
 import 'package:halaqat_wasl_main_app/ui/screens/profile/bloc/profile_bloc.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/profile/widgets/profile_item.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -14,8 +16,9 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProfileBloc>(
+      // Create the Bloc and add initial event to load profile data
       create: (context) => ProfileBloc()..add(ProfileDataLoadRequested()),
-      child: Builder(
+      child: Builder( 
         builder: (context) {
           return Scaffold(
             body: SafeArea(
@@ -26,11 +29,14 @@ class ProfileScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // App logo
                     Image.asset(
                       'assets/images/logo.png',
                       height: 100,
                       width: 150,
                     ),
+
+                    // Card containing profile content
                     Expanded(
                       child: Card(
                         color: Colors.white,
@@ -52,11 +58,13 @@ class ProfileScreen extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Text(
-                                      'Profile',
+                                      tr('profile_screen.profile'),
                                       textAlign: TextAlign.center,
                                       style: AppTextStyle.sfProBold24,
                                     ),
                                   ),
+
+                                  // Navigate to Edit Profile screen
                                   IconButton(
                                     onPressed: () {
                                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=> EditProfileScreen()));
@@ -65,10 +73,14 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
+
+                               // List view showing profile data items
                               Expanded(child: ListView.builder(primary: false, itemCount: state.data.length, itemBuilder: (contex, index){
                                 final item = state.data[index];
                                 return ProfileItemWidget(item: item);
                               },),),
+
+                              // Logout button
                               Padding(
                                 padding: EdgeInsets.only(bottom: 16.0,left: 8.0, right: 8.0 ),
                                 child: ElevatedButton(
@@ -87,19 +99,25 @@ class ProfileScreen extends StatelessWidget {
                                     children: [
                                       Icon(Icons.logout),
                                       Gap.gapW16,
-                                      Text('Logout', style: AppTextStyle.sfProBold16),
+                                      Text(tr('profile_screen.logout'), style: AppTextStyle.sfProBold16),
                                     ],
                                   ),
                                 ),
                               ),
                             ],
                           );
+
+                          // Loading state - show loading spinner
                             }else if(state is ProfileLoading){
                               return Center(
                                 child: CircularProgressIndicator(),
                               );
+
+                            // Error state - show error message
                             }else if(state is ProfileError){
                                 return Center(child: Text(state.message),);
+
+                            // Unknown state - show empty container
                             }else{
                               return Container();
                             }

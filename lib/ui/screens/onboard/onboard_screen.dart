@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
@@ -7,6 +8,7 @@ import 'package:halaqat_wasl_main_app/ui/screens/home/home_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/login_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/onboard/onboard_item.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/profile/profile_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/onboard_bloc.dart';
 
 // displays the first onboarding page.
@@ -14,27 +16,36 @@ class OnBoardScreen extends StatelessWidget {
   const OnBoardScreen({super.key});
   static const routeName = '/onboard';
 
-  _navigate(BuildContext context) {
-
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>ProfileScreen()));
+  _navigate(BuildContext context) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('firstTime', false);
+    // TODO remove the next 6 lines
+    if (context.mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => ProfileScreen()),
+      );
+    }
     return;
+    // TODO remove the previous 6 lines
 
     // TODO Convert Navigation to match app navigation
-    final isLoggedin = false;
-    final Widget page;
-    // ignore: dead_code
-    if (isLoggedin) {
-      page = HomeScreen();
-    } else {
-      page = LoginScreen();
+    if (context.mounted) {
+      final isLoggedin = false;
+      final Widget page;
+      // ignore: dead_code
+      if (isLoggedin) {
+        page = HomeScreen();
+      } else {
+        page = LoginScreen();
+      }
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            return page;
+          },
+        ),
+      );
     }
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) {
-          return page;
-        },
-      ),
-    );
   }
 
   int getIndex(OnboardState state) => switch (state) {
@@ -55,22 +66,20 @@ class OnBoardScreen extends StatelessWidget {
           final pages = [
             OnBoardItem(
               image: 'assets/images/onboard1.png',
-              title: 'Welcome to Halaqt Wasl',
+              title: tr('onboarding_screen.first_title'),
               description:
-                  'Helping seniors reach \n their appointments safely \n and on time.',
+                  tr('onboarding_screen.first_body'),
             ),
             OnBoardItem(
               image: 'assets/images/onboard2.png',
-              title: 'Connected to the Association',
+              title: tr('onboarding_screen.second_title'),
               description:
-                  'Your trips are coordinated\nand tracked in real-time\nby the organization',
-            ),
+                     tr('onboarding_screen.second_body'),            ),
             OnBoardItem(
               image: 'assets/images/onboard3.png',
-              title: 'Let’s Go',
+              title: tr('onboarding_screen.third_title'),
               description:
-                  'Your next ride is just a tap away.\nWe’re here to serve you.',
-            ),
+                     tr('onboarding_screen.third_body'),            ),
           ];
 
           return Scaffold(
@@ -104,7 +113,7 @@ class OnBoardScreen extends StatelessWidget {
                               _navigate(context);
                             },
                             child: Text(
-                              'Skip',
+                              tr('onboarding_screen.skip'),
                               style: AppTextStyle.sfProBold16.copyWith(
                                 color: AppColor.primaryButtonColor,
                               ),
@@ -134,9 +143,8 @@ class OnBoardScreen extends StatelessWidget {
                                     child: Text(
                                       pages[index].title,
                                       key: ValueKey(pages[index].title),
-                                      style: TextStyle(
-                                        fontSize: 28,
-                                        fontWeight: FontWeight.bold,
+                                      style: AppTextStyle.sfProBold24.copyWith(
+                                        color: Color(0xffAAB3D5),
                                       ),
                                       textAlign: TextAlign.center,
                                     ),
@@ -158,7 +166,9 @@ class OnBoardScreen extends StatelessWidget {
                                     child: Text(
                                       pages[index].description,
                                       key: ValueKey(pages[index].description),
-                                      style: TextStyle(fontSize: 16),
+                                      style: AppTextStyle.sfProBold24.copyWith(
+                                        color: Color(0xffAAB3D5),
+                                      ),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -211,8 +221,8 @@ class OnBoardScreen extends StatelessWidget {
                               ),
                               child: Text(
                                 currentIndex == pages.length - 1
-                                    ? 'Get Started'
-                                    : 'Next',
+                                    ? tr('onboarding_screen.get_started')
+                                    : tr('onboarding_screen.next'),
                                 style: AppTextStyle.sfProBold20.copyWith(
                                   color: Colors.white,
                                 ),

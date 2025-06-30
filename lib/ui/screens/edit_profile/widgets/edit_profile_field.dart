@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:halaqat_wasl_main_app/theme/app_color.dart';
 
-class EditProfileField extends StatelessWidget {
+
+// Widget for Edit Profile screen
+class EditProfileField extends StatelessWidget { 
   const EditProfileField({super.key, this.initialValue, this.icon, this.hintText, required this.controller, });
   final TextEditingController controller;
   final String? initialValue;
@@ -16,8 +18,8 @@ class EditProfileField extends StatelessWidget {
         elevation: 5.0,
          shadowColor: AppColor.profileItemBorderColor,
         child: TextFormField(
+          // Bind the text controller to the field
           controller: controller,
-          // initialValue: initialValue,
           decoration: InputDecoration(
             hintText: hintText,
             border: OutlineInputBorder(

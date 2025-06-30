@@ -6,22 +6,40 @@ part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  ProfileBloc() : super(ProfileInitial()) {
+   //initial state
+  ProfileBloc() : super(ProfileInitial()) { 
+   // Listen for the ProfileDataLoadRequested event and handle it.
     on<ProfileDataLoadRequested>(_profileDataLoadRequested);
   }
 
+  Future<void> _profileDataLoadRequested(
+    ProfileDataLoadRequested event,
+    Emitter<ProfileState> emit,
+  ) async {
+    emit(ProfileLoading()); //Emit loading state
 
-  Future<void> _profileDataLoadRequested(ProfileDataLoadRequested event, Emitter<ProfileState> emit)async{
-    emit(ProfileLoading());
-
-
-    emit(ProfileData(data:  [
-      ProfileItem(hintText: 'Mohammed Ali Alharbi', icon: 'assets/icons/account.png'),
-      ProfileItem(hintText: 'Mohammed@gmail.com', icon: 'assets/icons/email.png'),
-      ProfileItem(hintText: '+966 561577821', icon: 'assets/icons/call.png'),
-      ProfileItem(hintText: 'Arabic', icon: 'assets/icons/language.png'),
-      ProfileItem(hintText: 'Support@Halaqat_wasl.com', icon: 'assets/icons/support.png'),
-
-    ]));
+    emit(
+      ProfileData(
+        data: [
+          ProfileItem(
+            hintText: 'Mohammed Ali Alharbi',
+            icon: 'assets/icons/account.png',
+          ),
+          ProfileItem(
+            hintText: 'Mohammed@gmail.com',
+            icon: 'assets/icons/email.png',
+          ),
+          ProfileItem(
+            hintText: '+966 561577821',
+            icon: 'assets/icons/call.png',
+          ),
+          ProfileItem(hintText: 'Arabic', icon: 'assets/icons/language.png'),
+          ProfileItem(
+            hintText: 'Support@Halaqat_wasl.com',
+            icon: 'assets/icons/support.png',
+          ),
+        ],
+      ),
+    );
   }
 }
