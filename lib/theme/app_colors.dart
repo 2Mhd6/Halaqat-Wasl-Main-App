@@ -23,11 +23,11 @@ class AppColors {
   static const cancelButtonColor = Color(0xffFF5D38);
 
   // -- Status Colors
-  // static const pendingBackgroundColor = Color(0xffFFEDD5);
-  // static const pendingForegroundColor = Color(0xffC1410B);
+  static const pendingBackgroundColor = Color(0xffFFEDD5);
+  static const pendingForegroundColor = Color(0xffC1410B);
 
-  // static const acceptedBackgroundColor = Color(0xffE1F3FF);
-  // static const acceptedForegroundColor = Color(0xff179CF3);
+  static const acceptedBackgroundColor = Color(0xffE1F3FF);
+  static const acceptedForegroundColor = Color(0xff179CF3);
 
   // static const completedBackgroundColor = Color.fromRGBO(123, 235, 161, 36);
   // static const completedForegroundColor = Color(0xff1C9E48);
@@ -63,4 +63,7 @@ class AppColors {
   static const titleTextColor = Color(0xFF1C1C1E);
   static const requestIdPending = Color(0xFFFF9B04);
   static const requestIdCompleted = Color(0xFF12B76A);
+
+    // -- Profile item border
+  static const profileItemBorderColor = Color(0xffB0B7C3);
 }

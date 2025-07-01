@@ -17,6 +17,6 @@ class AppTheme {
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(10))
       )
-    )
+    ),
   );
 }

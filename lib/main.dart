@@ -13,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: '.env');
+  await EasyLocalization.ensureInitialized();
 
   await SetupSupabase.setUpSupabase();
   await EasyLocalization.ensureInitialized();
