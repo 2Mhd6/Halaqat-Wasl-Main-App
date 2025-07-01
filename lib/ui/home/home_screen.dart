@@ -7,7 +7,6 @@ import 'package:halaqat_wasl_main_app/data/user_data.dart';
 import 'package:halaqat_wasl_main_app/extensions/nav.dart';
 import 'package:halaqat_wasl_main_app/extensions/screen_size.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/app_custom_button.dart';
-import 'package:halaqat_wasl_main_app/shared/widgets/app_snack_bar.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';

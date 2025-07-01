@@ -49,6 +49,12 @@ class AppTextStyle {
     fontSize: 14,
     color: AppColors.secondaryTextColor,
   );
+
+  static const sfPro60012 = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w100,
+    fontSize: 12,
+  );
   
   static const sfPro20012 = TextStyle(
     fontFamily: 'SFPro',

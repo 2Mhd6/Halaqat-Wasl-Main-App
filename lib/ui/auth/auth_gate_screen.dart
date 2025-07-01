@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:halaqat_wasl_main_app/data/user_data.dart';
-import 'package:halaqat_wasl_main_app/repo/auth/auth_repo.dart';
 import 'package:halaqat_wasl_main_app/repo/user_operation/user_operation_repo.dart';
 import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/log_in_screen.dart';
