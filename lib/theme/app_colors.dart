@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 
-class AppColor {
+class AppColors {
 
-  static const appBackgroundColor = Color.fromRGBO(249, 250, 252, 98);
+  static const appBackgroundColor = Color.fromRGBO(249, 250, 252, 0.98);
+  static const primaryAppColor = Color(0xff4A6CF7);
+  static const secondaryColor = Color.fromRGBO(176, 183, 195, 59);
+
+  static const successColor = Color.fromRGBO(123, 235, 161, 36);
+  static const errorColor = Color(0xffFF5D38);
+
+  // -- Text Color
+  static const primaryTextColor = Color(0xff1E1E1E);
+  static const secondaryTextColor = Color.fromRGBO(176, 183, 195, 59);
+  static const forgetPasswordTextColor = Color.fromRGBO(74, 108, 247, 47);
+
+  // -- Border Color 
+  static const borderColor = Color(0xffB0B7C3);
 
   // -- Buttons Colors
   static const primaryButtonColor = Color(0xff4A6CF7);
@@ -20,15 +33,5 @@ class AppColor {
   static const completedBackgroundColor = Color.fromRGBO(123, 235, 161, 36);
   static const completedForegroundColor = Color(0xff1C9E48);
 
-  static const arrivedBackgroundColor = Color(0xffE0DFFF);
-  static const arrivedForegroundColor = Color.fromRGBO(74, 108, 247, 87);
-
-  // -- Rating
-  static const selectedStarRatingColor = Color(0xffFFE600);
-  static const unselectedStarRatingColor = Color(0xff979797);
-
-
-  // -- Requests Details Color 
-  static const infoBackgroundColor = Color.fromRGBO(204, 205, 211, 24);
 
 }

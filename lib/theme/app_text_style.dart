@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 
 class AppTextStyle {
+
 
   static const sfProBold36 = TextStyle(
     fontFamily: 'SFPro',
@@ -8,21 +10,10 @@ class AppTextStyle {
     fontSize: 36,
   );
 
-  static const sfProW60014 = TextStyle(
+  static const sfPro60024 = TextStyle(
     fontFamily: 'SFPro',
     fontWeight: FontWeight.w600,
-    fontSize: 14,
-  );
-
-  static const sfProW40016 = TextStyle(
-    fontFamily: 'SFPro',
-    fontWeight: FontWeight.w400,
-    fontSize: 16,
-  );
-
-  static const sfPro11 = TextStyle(
-    fontFamily: 'SFPro', 
-    fontSize: 11
+    fontSize: 24,
   );
 
   static const sfProBold20 = TextStyle(
@@ -31,11 +22,69 @@ class AppTextStyle {
     fontSize: 20,
   );
 
-  static const sfProW60012 = TextStyle(
+  static const sfPro60016 = TextStyle(
     fontFamily: 'SFPro',
     fontWeight: FontWeight.w600,
-    fontSize: 12,
+    fontSize: 16,
   );
+
+  static const sfPro60016SecondaryTextColor = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: AppColors.secondaryTextColor
+  );
+
+
+  static const sfPro60016WhiteTextColor = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: Colors.white,
+  );
+
+  static const sfPro60014SecondaryTextColor = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    color: AppColors.secondaryTextColor,
+  );
+  
+  static const sfPro20012 = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w200,
+    fontSize: 12,
+    color: AppColors.primaryTextColor,
+  );
+
+  static const sfProPrimaryAppColor20012 = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w200,
+    fontSize: 12,
+    color: AppColors.primaryAppColor,
+  );
+
+  static const sfProForgetPasswordColor20012 = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w200,
+    fontSize: 12,
+    color: AppColors.forgetPasswordTextColor,
+  );
+
+  static const sfPro60014 = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+  );
+
+
+
+  static const sfPro11 = TextStyle(
+    fontFamily: 'SFPro', 
+    fontSize: 11
+  );
+
+
 
   static const sfPro14 = TextStyle(
     fontFamily: 'SFPro', 
