@@ -4,14 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/theme/app_color.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/home/home_screen.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/login_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/onboard/onboard_item.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/profile/profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/onboard_bloc.dart';
 
-// displays the first onboarding page.
+// displays the first onboarding page. 
 class OnBoardScreen extends StatelessWidget {
   const OnBoardScreen({super.key});
   static const routeName = '/onboard';
@@ -21,33 +19,25 @@ class OnBoardScreen extends StatelessWidget {
     //Sets the onboarding as completed for the user
     await prefs.setBool('firstTime', false);
 
+
+
+    // If you have an AuthGateScreen, uncomment the following lines
+    // and replace the navigation to ProfileScreen with AuthGateScreen
+    //  if (context.mounted) {
+    //    Navigator.of(context).pushReplacement(
+    //      MaterialPageRoute(builder: (context) => AuthGateScreen()), 
+    //    );
+    //  }
+
     // Navigate to profile screen
     if (context.mounted) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => ProfileScreen()),
       );
     }
-    return;
 
-    // TODO Convert Navigation to match app navigation
-    if (context.mounted) {
-      final isLoggedin = false;
-      final Widget page;
-      // ignore: dead_code
-      if (isLoggedin) {
-        page = HomeScreen();
-      } else {
-        page = LoginScreen();
-      }
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return page;
-          },
-        ),
-      );
-    }
   }
+
   // Get current onboarding page
   int getIndex(OnboardState state) => switch (state) {
     FirstOnboardState() => 0,
@@ -61,26 +51,25 @@ class OnBoardScreen extends StatelessWidget {
       create: (context) => OnboardBloc(),
       child: Builder(
         builder: (context) {
-          final bloc = context.watch<OnboardBloc>();
+          // final bloc = context.watch<OnboardBloc>(); 
           final duration = Duration(milliseconds: 500);
           // List of onboarding pages
           final pages = [
             OnBoardItem(
               image: 'assets/images/onboard1.png',
               title: tr('onboarding_screen.first_title'),
-              description:
-                  tr('onboarding_screen.first_body'),
+              description: tr('onboarding_screen.first_body'),
             ),
             OnBoardItem(
               image: 'assets/images/onboard2.png',
               title: tr('onboarding_screen.second_title'),
-              description:
-                     tr('onboarding_screen.second_body'),            ),
+              description: tr('onboarding_screen.second_body'),
+            ),
             OnBoardItem(
               image: 'assets/images/onboard3.png',
               title: tr('onboarding_screen.third_title'),
-              description:
-                     tr('onboarding_screen.third_body'),            ),
+              description: tr('onboarding_screen.third_body'),
+            ),
           ];
 
           return Scaffold(
@@ -89,7 +78,7 @@ class OnBoardScreen extends StatelessWidget {
               child: BlocConsumer<OnboardBloc, OnboardState>(
                 listener: (context, state) {
                   if (getIndex(state) == -1) {
-                    // Navigate to main page
+                    // Navigate to home page
                     _navigate(context);
                   }
                 },
@@ -121,57 +110,57 @@ class OnBoardScreen extends StatelessWidget {
                       ),
                       Gap.gapH80,
                       Expanded(
-                      // Page content (title - image - description)
+                        // Page content (title - image - description)
                         flex: 2,
                         child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24.0,
-                              ),
+                          padding: const EdgeInsets.symmetric(horizontal: 24.0),
 
-                              child: Column(
-                                key: ValueKey(currentIndex),
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  // Title
-                                  AnimatedSwitcher(
-                                    duration: Duration(milliseconds: 500),
-                                    child: Text(
-                                      pages[currentIndex].title,
-                                      key: ValueKey(pages[currentIndex].title),
-                                      style: AppTextStyle.sfProBold24.copyWith(
-                                        color: Color(0xffAAB3D5),
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
+                          child: Column(
+                            key: ValueKey(currentIndex),
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              // Title
+                              AnimatedSwitcher(
+                                duration: Duration(milliseconds: 500),
+                                child: Text(
+                                  pages[currentIndex].title,
+                                  key: ValueKey(pages[currentIndex].title),
+                                  style: AppTextStyle.sfProBold24.copyWith(
+                                    color: Color(0xffAAB3D5),
                                   ),
-                                  Gap.gapH40,
-                                   // Image
-                                  AnimatedSwitcher(
-                                    duration: duration,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Image.asset(
-                                        pages[currentIndex].image,
-                                        height: 300,
-                                      ),
-                                    ),
-                                  ),
-                                  Gap.gapH40,
-                                  // Description
-                                  AnimatedSwitcher(
-                                    duration: Duration(milliseconds: 500),
-                                    child: Text(
-                                      pages[currentIndex].description,
-                                      key: ValueKey(pages[currentIndex].description),
-                                      style: AppTextStyle.sfProBold24.copyWith(
-                                        color: Color(0xffAAB3D5),
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
-                            ),
+                              Gap.gapH40,
+                              // Image
+                              AnimatedSwitcher(
+                                duration: duration,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Image.asset(
+                                    pages[currentIndex].image,
+                                    height: 300,
+                                  ),
+                                ),
+                              ),
+                              Gap.gapH40,
+                              // Description
+                              AnimatedSwitcher(
+                                duration: Duration(milliseconds: 500),
+                                child: Text(
+                                  pages[currentIndex].description,
+                                  key: ValueKey(
+                                    pages[currentIndex].description,
+                                  ),
+                                  style: AppTextStyle.sfProBold24.copyWith(
+                                    color: Color(0xffAAB3D5),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       Column(
                         children: [

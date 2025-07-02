@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/home/home_screen.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/login_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/screens/profile/profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:halaqat_wasl_main_app/extensions/screen_size.dart';
@@ -38,24 +36,24 @@ class SplashScreen extends StatelessWidget {
                     );
                   } else {
                     
-                   // If NOT first time, navigate to ProfileScreen
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ProfileScreen()),
-                    );
-                    return;
-                    final isLoggedin = false;
+                    // If not first time, check if user is logged in
+                    // Uncomment the following line if you have AuthGateScreen
+                    // to replace with the AuthGateScreen navigation 
+
+                      //  Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => AuthGateScreen()),
+                      // );
                     
-                    if (isLoggedin) {
+
+                    // Delete the following lines if you have AuthGateScreen
+                    // and replace with the AuthGateScreen navigation
+                    
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        MaterialPageRoute(builder: (context) => ProfileScreen()),
                       );
-                    } else {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
-                      );
-                    }
+
                   }
                 }
               }

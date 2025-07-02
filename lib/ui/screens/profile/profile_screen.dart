@@ -13,7 +13,7 @@ class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return BlocProvider<ProfileBloc>(
       // Create the Bloc and add initial event to load profile data
       create: (context) => ProfileBloc()..add(ProfileDataLoadRequested()),

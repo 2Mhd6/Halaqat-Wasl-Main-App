@@ -2,7 +2,7 @@ part of 'edit_profile_bloc.dart';
 
 @immutable
 // Base class for bloc states
-sealed class EditProfileState {} 
+sealed class EditProfileState {}
 
 
 // Initial state

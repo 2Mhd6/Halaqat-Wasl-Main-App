@@ -7,7 +7,7 @@ import 'package:halaqat_wasl_main_app/ui/screens/edit_profile/widgets/edit_profi
 import 'package:easy_localization/easy_localization.dart';
 import 'bloc/edit_profile_bloc.dart';
 
-class EditProfileScreen extends StatelessWidget {
+class EditProfileScreen extends StatelessWidget { 
   const EditProfileScreen({super.key});
 
   @override

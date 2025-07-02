@@ -1,7 +1,7 @@
 part of 'profile_bloc.dart';
 
 @immutable
-sealed class ProfileState {}
+sealed class ProfileState {} 
 //initial state
 final class ProfileInitial extends ProfileState {}
 

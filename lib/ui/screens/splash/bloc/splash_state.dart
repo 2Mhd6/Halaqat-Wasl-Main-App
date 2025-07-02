@@ -1,7 +1,7 @@
 part of 'splash_bloc.dart';
 
 
-// Base class for all states related to SplashBloc 
+// Base class for all states related to SplashBloc
 sealed class SplashState {
 }
 // Initial state
