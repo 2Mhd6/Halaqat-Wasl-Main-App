@@ -4,10 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/home/home_screen.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/login_screen.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/onboard/onboard_item.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/profile/profile_screen.dart';
+
+import 'package:halaqat_wasl_main_app/ui/onboard/onboard_item.dart';
+import 'package:halaqat_wasl_main_app/ui/profile/profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/onboard_bloc.dart';
 
@@ -29,24 +28,24 @@ class OnBoardScreen extends StatelessWidget {
     }
     return;
 
-    // TODO Convert Navigation to match app navigation
-    if (context.mounted) {
-      final isLoggedin = false;
-      final Widget page;
-      // ignore: dead_code
-      if (isLoggedin) {
-        page = HomeScreen();
-      } else {
-        page = LoginScreen();
-      }
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return page;
-          },
-        ),
-      );
-    }
+    // // TODO Convert Navigation to match app navigation
+    // if (context.mounted) {
+    //   final isLoggedin = false;
+    //   final Widget page;
+    //   // ignore: dead_code
+    //   if (isLoggedin) {
+    //     page = HomeScreen();
+    //   } else {
+    //     page = LoginScreen();
+    //   }
+    //   Navigator.of(context).pushReplacement(
+    //     MaterialPageRoute(
+    //       builder: (context) {
+    //         return page;
+    //       },
+    //     ),
+    //   );
+    // }
   }
   // Get current onboarding page
   int getIndex(OnboardState state) => switch (state) {

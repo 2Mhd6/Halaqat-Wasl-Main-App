@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/profile/widgets/profile_item.dart';
+import 'package:halaqat_wasl_main_app/ui/profile/widgets/profile_item.dart';
 import 'package:meta/meta.dart';
 
 part 'profile_event.dart';

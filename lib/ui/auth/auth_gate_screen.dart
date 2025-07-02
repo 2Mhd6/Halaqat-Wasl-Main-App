@@ -5,7 +5,7 @@ import 'package:halaqat_wasl_main_app/repo/user_operation/user_operation_repo.da
 import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/log_in_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/sign_up_screen.dart';
-import 'package:halaqat_wasl_main_app/ui/home/home_screen.dart';
+import 'package:halaqat_wasl_main_app/ui/bottom_nav/bottom_nav_screen.dart';
 
 class AuthGateScreen extends StatelessWidget {
   const AuthGateScreen({super.key});
@@ -18,18 +18,18 @@ class AuthGateScreen extends StatelessWidget {
         final authState = snapshot.data;
         
         if (snapshot.connectionState == ConnectionState.waiting) {
-           return const Scaffold(
+           return  Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
 
         if (authState?.session == null) {
-          return const SignUpScreen();
+          return  SignUpScreen();
         }
 
         final userId = authState?.session?.user.id;
         if (userId == null) {
-          return const LogInScreen();
+          return  LogInScreen();
         }
 
         
@@ -37,20 +37,20 @@ class AuthGateScreen extends StatelessWidget {
           future: UserOperationRepo.getUserDetailsFromDB(),
           builder: (context, userSnapshot) {
             if (userSnapshot.connectionState == ConnectionState.waiting) {
-              return const Scaffold(
+              return  Scaffold(
                 body: Center(child: CircularProgressIndicator()),
               );
             }
 
             if (userSnapshot.hasError || !userSnapshot.hasData) {
-              return const LogInScreen(); 
+              return  LogInScreen(); 
             }
 
             final user = userSnapshot.data!;
             final role = user.role;
             GetIt.I.get<UserData>().user = user;
             if (role == 'user') {
-              return const HomeScreen();
+              return  BottomNavScreen();
             } else{
               return Scaffold(
                 body: Center(child: Text('You need to go ${role!} app'),),

@@ -39,7 +39,7 @@ class ShowDataAndTimePicker extends StatelessWidget {
           color: AppColors.appBackgroundColor,
           borderRadius: BorderRadius.circular(10),
         ),
-        height: context.getHeight(multiplied: 0.39),
+        height: context.getHeight(multiplied: 0.42),
         width: context.getWidth(),
         child: Column(
           children: [
