@@ -4,7 +4,6 @@ import 'package:halaqat_wasl_main_app/data/user_data.dart';
 import 'package:halaqat_wasl_main_app/repo/user_operation/user_operation_repo.dart';
 import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/log_in_screen.dart';
-import 'package:halaqat_wasl_main_app/ui/auth/sign_up_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/bottom_nav/bottom_nav_screen.dart';
 
 class AuthGateScreen extends StatelessWidget {
@@ -23,12 +22,7 @@ class AuthGateScreen extends StatelessWidget {
           );
         }
 
-        if (authState?.session == null) {
-          return  SignUpScreen();
-        }
-
-        final userId = authState?.session?.user.id;
-        if (userId == null) {
+        if ( authState == null || authState.session == null) {
           return  LogInScreen();
         }
 

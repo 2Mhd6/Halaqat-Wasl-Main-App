@@ -62,7 +62,7 @@ class SignUpScreen extends StatelessWidget {
                       Gap.gapH16,
 
                       Form(
-                        key: authBloc.formKey,
+                        key: authBloc.signupFormKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 8,
@@ -155,10 +155,14 @@ class SignUpScreen extends StatelessWidget {
                             buttonColor: AppColors.primaryButtonColor,
                             width: context.getWidth(),
                             height: context.getHeight(multiplied: 0.055),
-                            onPressed: () {
-                              if (authBloc.formKey.currentState!.validate()) {
+                            onPressed: ()async {
+                              if (authBloc.signupFormKey.currentState!.validate()) {
                                 authBloc.add(SignUpEvent());
-                                context.moveToWithReplacement(context: context, screen: LogInScreen());
+                                
+                                await Future.delayed(Duration(milliseconds: 1400));
+                                if(context.mounted){
+                                  context.moveToWithReplacement(context: context,screen: LogInScreen());
+                                }
                               }
                             },
                           );
@@ -170,10 +174,7 @@ class SignUpScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: InkWell(
-                          onTap: () => context.moveToWithReplacement(
-                            context: context,
-                            screen: LogInScreen(),
-                          ),
+                          onTap: () => context.moveToWithReplacement(context: context,screen: LogInScreen()),
                           child: RichText(
                             text: TextSpan(
                               text: tr(

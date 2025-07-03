@@ -82,10 +82,10 @@ class MapScreen extends StatelessWidget {
 
                       // -- Why do I need some delay ?
                       // For making the location field with the data and make the user location var in location bloc has the new value
-                      await Future.delayed(Duration(milliseconds: 1200));
+                      // await Future.delayed(Duration(milliseconds: 600));
 
-                      requestBloc.userLocation = locationBloc.userLocation;
-                      requestBloc.readableLocation = locationBloc.readableLocation;
+                      requestBloc.userLocation = await locationBloc.passUserLocation();
+                      requestBloc.readableLocation = await locationBloc.passReadableLocation();
                       
                       requestBloc.add(CheckIfAllFieldsAreFilled());
                       if(context.mounted){

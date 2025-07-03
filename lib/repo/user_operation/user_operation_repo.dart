@@ -7,7 +7,7 @@ class UserOperationRepo {
 
   static Future<void> insertUserDetailsIntoDB({required UserModel user}) async {
    try{
-     return await _userOperationSupabase.client.from('users').insert(user.toMap());
+      await _userOperationSupabase.client.from('users').insert(user.toMap());
    }catch(error){
     throw error.toString();
    }

@@ -33,7 +33,7 @@ class RequestDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.appBackgroundColor,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         leading: const BackButton(color: Colors.black),
         title: const Text('Request Details', style: AppTextStyle.sfProBold20),
       ),

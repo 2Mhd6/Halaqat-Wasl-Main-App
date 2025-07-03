@@ -1,11 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_it/get_it.dart';
+import 'package:halaqat_wasl_main_app/data/shared_local_storage.dart';
 import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 import 'package:halaqat_wasl_main_app/theme/app_theme.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/auth_gate_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/bloc/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:halaqat_wasl_main_app/ui/onboarding/onboarding_screen.dart';
+
 
 
 
@@ -17,7 +21,10 @@ void main() async {
 
   await SetupSupabase.setUpSupabase();
   await EasyLocalization.ensureInitialized();
-  InjectionContainer.setUp();
+
+  await InjectionContainer.setUp();
+
+  await GetIt.I.allReady();
 
 
   runApp(
@@ -31,7 +38,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  // When the user entre the app first time goes to the onboarding screen, otherwise goes to auth screen
+  final bool isFirstTime = GetIt.I.get<SharedLocalStorage>().sharedPreference!.getBool('isFirstTime') ?? true;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +53,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        home: AuthGateScreen(),
+        home: isFirstTime ? OnboardingScreen() : AuthGateScreen() ,
       ),
     );
   }

@@ -9,6 +9,9 @@ class AppColors {
   static const successColor = Color.fromRGBO(123, 235, 161, 36);
   static const errorColor = Color(0xffFF5D38);
 
+  // -- Onboarding Color 
+  static const onboardingSecondColor = Color(0xffE1F3FF);
+
   // -- Text Color
   static const primaryTextColor = Color(0xff1E1E1E);
   static const secondaryTextColor = Color.fromRGBO(176, 183, 195, 59);

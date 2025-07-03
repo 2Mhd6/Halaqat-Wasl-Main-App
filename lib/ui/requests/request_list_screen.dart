@@ -10,18 +10,14 @@ class RequestListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: AppBar(
+        title: Text('Requests', style: AppTextStyle.sfProBold20),
+        centerTitle: false,
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            //Space before title
-            Gap.gapH16,
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text('Requests', style: AppTextStyle.sfProBold20),
-            ),
-            Gap.gapH16,
 
       
             //Class containing tab bar details
@@ -29,10 +25,7 @@ backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             Gap.gapH16,
             //Class containig ListView
             const Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: _RequestsListView(),
-              ),
+              child: _RequestsListView(),
             ),
           ],
         ),

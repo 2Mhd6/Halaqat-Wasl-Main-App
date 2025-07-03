@@ -16,6 +16,13 @@ class AppTextStyle {
     fontSize: 24,
   );
 
+  static const sfProBold24Onboarding = TextStyle(
+    fontFamily: 'SFPro',
+    fontWeight: FontWeight.bold,
+    fontSize: 24,
+    color: Color(0xffAAB3D5)
+  );
+
   static const sfProBold20 = TextStyle(
     fontFamily: 'SFPro',
     fontWeight: FontWeight.bold,
@@ -97,7 +104,13 @@ class AppTextStyle {
     fontSize: 14
   );
 
-  static const sfProW40024 = TextStyle(
+  static const sfProBold14 = TextStyle(
+    fontFamily: 'SFPro', 
+    fontSize: 14,
+    fontWeight: FontWeight.bold
+  );
+
+  static const sfPro40024 = TextStyle(
     fontFamily: 'SFPro',
     fontWeight: FontWeight.w400,
     fontSize: 24,

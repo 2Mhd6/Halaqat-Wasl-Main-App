@@ -16,7 +16,8 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   // -- Related to the form
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -30,10 +31,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<AuthEvent>((event, emit) {});
     
+    // -- Handling UI
     on<TogglePasswordViabilityEvent>((event, emit){
       isShowPassword = !isShowPassword;
       emit(SuccessTogglingPasswordViability());
     });
+    
     
     on<SelectedGenderEvent>((event, emit) {
       selectedGender = event.genderIndex == 1 ? 'male' : 'female';
@@ -50,11 +53,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final password = passwordController.text;
 
     try{
+
       emit(LoadingState());
       
       if (email.trim().isEmpty || password.trim().isEmpty) {
         throw 'Email and password must not be empty';
       }
+
       phoneNumberController.text;
       final res = await AuthRepo.signUp(email: email, password: password);
 

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
@@ -56,14 +57,16 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     }
 
     final user = GetIt.I.get<UserData>().user;
+    log(requestDate.toString());
 
+    // The static Driver Id for testing purpose
     final request = RequestModel(
       requestId: Uuid().v4(), 
       userId: user!.userId , 
       charityId: null, 
       hospitalId: selectedHospital!.hospitalId, 
       complaintId: null, 
-      driverId: null, 
+      driverId: '520568cb-ee01-45e8-b5e7-172278340115', 
       pickupLat: userLocation!.latitude, 
       pickupLong: userLocation!.longitude, 
       destinationLat: selectedHospital!.hospitalLat, 
@@ -76,18 +79,20 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     try{
       
       await RequestRepo.insertRequestIntoDB(request: request);
+      log('Inserting request to DB ');
       
       clear();
       emit(SuccessRequestState());
     }catch(error){
+      log('Failed to insert to DB - ${error.toString()}');
       emit(FailedSendingRequestState(errorMessage: error.toString()));
     }
 
 
   }
 
+  // -- Clearing Fields
   void clear(){
-    // -- Clearing Fields
     requestDate = null;
     formattedDate = null;
     userLocation = null;

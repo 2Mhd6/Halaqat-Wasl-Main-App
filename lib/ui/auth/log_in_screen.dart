@@ -64,6 +64,7 @@ class LogInScreen extends StatelessWidget {
                       Gap.gapH24,
 
                       Form(
+                        key: authBloc.loginFormKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           spacing: 8,
@@ -123,11 +124,17 @@ class LogInScreen extends StatelessWidget {
                             width: context.getWidth(),
                             height: context.getHeight(multiplied: 0.055),
                             onPressed: () async {
-                              authBloc.add(LogInEvent());
-                              await Future.delayed(Duration(milliseconds: 1600));
-                              if(context.mounted){
-                                context.moveToWithReplacement(context: context, screen: AuthGateScreen());
+                              if(authBloc.loginFormKey.currentState!.validate()){
+                                
+                                authBloc.add(LogInEvent());
+                                
+                                await Future.delayed(Duration(milliseconds: 800));
+                                
+                                if(context.mounted){
+                                  context.moveToWithReplacement(context: context, screen: AuthGateScreen());
+                                }
                               }
+
                             },
                           );
                         },

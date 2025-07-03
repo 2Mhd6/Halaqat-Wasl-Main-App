@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
@@ -134,7 +135,7 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          // context.read<AuthBloc>.add(LogoutEvent());
+                                          SetupSupabase.sharedSupabase.client.auth.signOut();
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:

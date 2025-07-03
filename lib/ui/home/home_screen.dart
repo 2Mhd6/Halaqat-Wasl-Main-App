@@ -159,6 +159,8 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
+
+                          Gap.gapH56,
                         ],
                       ),
                     ),

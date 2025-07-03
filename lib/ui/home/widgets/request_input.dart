@@ -25,7 +25,7 @@ class RequestInput extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onPressed,
-        title: Text(label,style: AppTextStyle.sfPro60014SecondaryTextColor,),
+        title: Text(label,style: AppTextStyle.sfPro60014SecondaryTextColor),
         trailing: iconPath.isEmpty ? null : SvgPicture.asset(iconPath),
       ),
     );

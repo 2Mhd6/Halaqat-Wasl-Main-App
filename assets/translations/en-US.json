@@ -1,4 +1,16 @@
 {
+    "onboarding_screen": {
+        "first_title": "Welcome to Halaqt Wasl",
+        "first_body": "Helping seniors reach\ntheir appointments safely\n and on time.",
+        "second_title": "Connected to the Association",
+        "second_body": "Your trips are coordinated\nand tracked in real-time\n by the organization",
+        "third_title": "Let’s Go",
+        "third_body": "Your next ride is just a tap away\nWe’re here to serve you.",
+        "skip": "Skip",
+        "next": "Next",
+        "get_started": "Get Started"
+    },
+
     "sign_up_screen": {
         "sign_up": "Sign up",
         "sign_up_text": "One step to book a safe and comfortable ride.",
@@ -73,5 +85,28 @@
     "successful_bottom_sheet_home_screen": {
         "successful": "Successful",
         "message_success": "You have successfully scheduled a ride "
+    },
+
+    "profile_screen": {
+        "profile": "Profile",
+        "full_name_stored": "{}full_name",
+        "email_stored": "{}email",
+        "phone_number_stored": "{}phone_number",
+        "english": "EN",
+        "arabic": "AR",
+        "support_email": "Support@Halaqat_wasl.com",
+        "logout": "Logout"
+    },
+    "edit_profile_screen": {
+        "profile": "Edit Profile",
+        "full_name_stored": "{}full_name",
+        "email_stored": "{}email",
+        "phone_number_stored": "{}phone_number",
+        "change_password": "Change Password",
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "save": "Save",
+        "delete_account": "Delete account"
     }
 }
