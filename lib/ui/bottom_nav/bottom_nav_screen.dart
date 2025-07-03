@@ -28,9 +28,18 @@ class BottomNavScreen extends StatelessWidget {
               final selectedIndex = bottomNabBloc.selectedIndex;
 
               return Scaffold(
-
-                bottomNavigationBar: AnimatedBottomNav(selectedIndex: selectedIndex, onIndexChanged: (value) => bottomNabBloc.add(ChangeIndexEvent(index: value))),
-                body: screens.elementAt(bottomNabBloc.selectedIndex),
+                extendBody: true,
+                backgroundColor: Colors.white,
+                //bottomNavigationBar: 
+                body: Stack(
+                  children: [
+                    screens.elementAt(selectedIndex),
+                    Positioned(
+                      bottom: 0,
+                      child: AnimatedBottomNav(selectedIndex: selectedIndex, onIndexChanged: (value) => bottomNabBloc.add(ChangeIndexEvent(index: value)))
+                    )
+                  ],
+                ),
               );
             },
           );
@@ -57,9 +66,10 @@ class AnimatedBottomNav extends StatelessWidget {
     final icons = [LucideIcons.home, LucideIcons.clipboardList, LucideIcons.user];
 
     return Container(
+      //color: Colors.amber,
       width: context.getWidth(),
-      height: context.getHeight(multiplied: 0.1),
-      padding: EdgeInsets.only(bottom: 32),
+      height: context.getHeight(multiplied: 0.12),
+      padding: EdgeInsets.only(bottom: 48),
 
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16),
@@ -82,8 +92,8 @@ class AnimatedBottomNav extends StatelessWidget {
                   // Animated icon size
                   TweenAnimationBuilder<double>(
                     tween: Tween(
-                      begin: isSelected ? 20 : 32,
-                      end: isSelected ? 32 : 20,
+                      begin: isSelected ? 20 : 30,
+                      end: isSelected ? 30 : 20,
                     ),
                     duration: Duration(milliseconds: 300),
                     curve: Curves.easeOutQuad,

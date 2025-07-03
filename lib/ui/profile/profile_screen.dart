@@ -4,6 +4,7 @@ import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
+
 import 'package:halaqat_wasl_main_app/ui/edit_profile/edit_profile_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/profile/bloc/profile_bloc.dart';
 import 'package:halaqat_wasl_main_app/ui/profile/widgets/profile_item.dart';
