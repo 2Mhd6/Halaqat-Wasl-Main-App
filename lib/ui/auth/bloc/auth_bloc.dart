@@ -67,7 +67,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         userId: res.user!.id,
         notificationId: Uuid().v4(), 
         fullName: fullNameController.text, 
-        email: email, 
+        email: email.toLowerCase(), 
         role: 'user',
         phoneNumber: '+966${phoneNumberController.text}', 
         gender: selectedGender
