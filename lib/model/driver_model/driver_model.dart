@@ -6,9 +6,9 @@ import 'package:dart_mappable/dart_mappable.dart';
 part 'driver_model.mapper.dart';
 
 @MappableClass()
-class DriverNotification with DriverNotificationMappable {
+class DriverModel with DriverModelMappable {
   
-  DriverNotification({
+  DriverModel({
     required this.driverId,
     required this.charityId,
     required this.notificationId,

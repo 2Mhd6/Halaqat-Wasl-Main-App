@@ -15,7 +15,8 @@ class RequestModel with RequestModelMappable {
     required this.pickupLong,
     required this.destinationLat,
     required this.destinationLong,
-    required this.state,
+    required this.requestDate,
+    required this.status,
     this.note,
   });
 
@@ -49,7 +50,10 @@ class RequestModel with RequestModelMappable {
   @MappableField(key: 'destination_long')
   final double destinationLong;
 
-  final String state;
+  @MappableField(key: 'request_date')
+  final DateTime requestDate;
+
+  final String status;
 
   final String? note;
 }

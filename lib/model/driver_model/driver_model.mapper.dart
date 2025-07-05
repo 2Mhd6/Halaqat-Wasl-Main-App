@@ -6,44 +6,42 @@
 
 part of 'driver_model.dart';
 
-class DriverNotificationMapper extends ClassMapperBase<DriverNotification> {
-  DriverNotificationMapper._();
+class DriverModelMapper extends ClassMapperBase<DriverModel> {
+  DriverModelMapper._();
 
-  static DriverNotificationMapper? _instance;
-  static DriverNotificationMapper ensureInitialized() {
+  static DriverModelMapper? _instance;
+  static DriverModelMapper ensureInitialized() {
     if (_instance == null) {
-      MapperContainer.globals.use(_instance = DriverNotificationMapper._());
+      MapperContainer.globals.use(_instance = DriverModelMapper._());
     }
     return _instance!;
   }
 
   @override
-  final String id = 'DriverNotification';
+  final String id = 'DriverModel';
 
-  static String _$driverId(DriverNotification v) => v.driverId;
-  static const Field<DriverNotification, String> _f$driverId =
+  static String _$driverId(DriverModel v) => v.driverId;
+  static const Field<DriverModel, String> _f$driverId =
       Field('driverId', _$driverId, key: r'driver_id');
-  static String _$charityId(DriverNotification v) => v.charityId;
-  static const Field<DriverNotification, String> _f$charityId =
+  static String _$charityId(DriverModel v) => v.charityId;
+  static const Field<DriverModel, String> _f$charityId =
       Field('charityId', _$charityId, key: r'charity_id');
-  static String? _$notificationId(DriverNotification v) => v.notificationId;
-  static const Field<DriverNotification, String> _f$notificationId =
+  static String? _$notificationId(DriverModel v) => v.notificationId;
+  static const Field<DriverModel, String> _f$notificationId =
       Field('notificationId', _$notificationId, key: r'notification_id');
-  static String _$fullName(DriverNotification v) => v.fullName;
-  static const Field<DriverNotification, String> _f$fullName =
+  static String _$fullName(DriverModel v) => v.fullName;
+  static const Field<DriverModel, String> _f$fullName =
       Field('fullName', _$fullName, key: r'full_name');
-  static String _$role(DriverNotification v) => v.role;
-  static const Field<DriverNotification, String> _f$role =
-      Field('role', _$role);
-  static String _$status(DriverNotification v) => v.status;
-  static const Field<DriverNotification, String> _f$status =
-      Field('status', _$status);
-  static int _$totalServices(DriverNotification v) => v.totalServices;
-  static const Field<DriverNotification, int> _f$totalServices =
+  static String _$role(DriverModel v) => v.role;
+  static const Field<DriverModel, String> _f$role = Field('role', _$role);
+  static String _$status(DriverModel v) => v.status;
+  static const Field<DriverModel, String> _f$status = Field('status', _$status);
+  static int _$totalServices(DriverModel v) => v.totalServices;
+  static const Field<DriverModel, int> _f$totalServices =
       Field('totalServices', _$totalServices, key: r'total_services');
 
   @override
-  final MappableFields<DriverNotification> fields = const {
+  final MappableFields<DriverModel> fields = const {
     #driverId: _f$driverId,
     #charityId: _f$charityId,
     #notificationId: _f$notificationId,
@@ -53,8 +51,8 @@ class DriverNotificationMapper extends ClassMapperBase<DriverNotification> {
     #totalServices: _f$totalServices,
   };
 
-  static DriverNotification _instantiate(DecodingData data) {
-    return DriverNotification(
+  static DriverModel _instantiate(DecodingData data) {
+    return DriverModel(
         driverId: data.dec(_f$driverId),
         charityId: data.dec(_f$charityId),
         notificationId: data.dec(_f$notificationId),
@@ -67,58 +65,55 @@ class DriverNotificationMapper extends ClassMapperBase<DriverNotification> {
   @override
   final Function instantiate = _instantiate;
 
-  static DriverNotification fromMap(Map<String, dynamic> map) {
-    return ensureInitialized().decodeMap<DriverNotification>(map);
+  static DriverModel fromMap(Map<String, dynamic> map) {
+    return ensureInitialized().decodeMap<DriverModel>(map);
   }
 
-  static DriverNotification fromJson(String json) {
-    return ensureInitialized().decodeJson<DriverNotification>(json);
+  static DriverModel fromJson(String json) {
+    return ensureInitialized().decodeJson<DriverModel>(json);
   }
 }
 
-mixin DriverNotificationMappable {
+mixin DriverModelMappable {
   String toJson() {
-    return DriverNotificationMapper.ensureInitialized()
-        .encodeJson<DriverNotification>(this as DriverNotification);
+    return DriverModelMapper.ensureInitialized()
+        .encodeJson<DriverModel>(this as DriverModel);
   }
 
   Map<String, dynamic> toMap() {
-    return DriverNotificationMapper.ensureInitialized()
-        .encodeMap<DriverNotification>(this as DriverNotification);
+    return DriverModelMapper.ensureInitialized()
+        .encodeMap<DriverModel>(this as DriverModel);
   }
 
-  DriverNotificationCopyWith<DriverNotification, DriverNotification,
-          DriverNotification>
-      get copyWith => _DriverNotificationCopyWithImpl<DriverNotification,
-          DriverNotification>(this as DriverNotification, $identity, $identity);
+  DriverModelCopyWith<DriverModel, DriverModel, DriverModel> get copyWith =>
+      _DriverModelCopyWithImpl<DriverModel, DriverModel>(
+          this as DriverModel, $identity, $identity);
   @override
   String toString() {
-    return DriverNotificationMapper.ensureInitialized()
-        .stringifyValue(this as DriverNotification);
+    return DriverModelMapper.ensureInitialized()
+        .stringifyValue(this as DriverModel);
   }
 
   @override
   bool operator ==(Object other) {
-    return DriverNotificationMapper.ensureInitialized()
-        .equalsValue(this as DriverNotification, other);
+    return DriverModelMapper.ensureInitialized()
+        .equalsValue(this as DriverModel, other);
   }
 
   @override
   int get hashCode {
-    return DriverNotificationMapper.ensureInitialized()
-        .hashValue(this as DriverNotification);
+    return DriverModelMapper.ensureInitialized().hashValue(this as DriverModel);
   }
 }
 
-extension DriverNotificationValueCopy<$R, $Out>
-    on ObjectCopyWith<$R, DriverNotification, $Out> {
-  DriverNotificationCopyWith<$R, DriverNotification, $Out>
-      get $asDriverNotification => $base.as(
-          (v, t, t2) => _DriverNotificationCopyWithImpl<$R, $Out>(v, t, t2));
+extension DriverModelValueCopy<$R, $Out>
+    on ObjectCopyWith<$R, DriverModel, $Out> {
+  DriverModelCopyWith<$R, DriverModel, $Out> get $asDriverModel =>
+      $base.as((v, t, t2) => _DriverModelCopyWithImpl<$R, $Out>(v, t, t2));
 }
 
-abstract class DriverNotificationCopyWith<$R, $In extends DriverNotification,
-    $Out> implements ClassCopyWith<$R, $In, $Out> {
+abstract class DriverModelCopyWith<$R, $In extends DriverModel, $Out>
+    implements ClassCopyWith<$R, $In, $Out> {
   $R call(
       {String? driverId,
       String? charityId,
@@ -127,18 +122,17 @@ abstract class DriverNotificationCopyWith<$R, $In extends DriverNotification,
       String? role,
       String? status,
       int? totalServices});
-  DriverNotificationCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(
-      Then<$Out2, $R2> t);
+  DriverModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
-class _DriverNotificationCopyWithImpl<$R, $Out>
-    extends ClassCopyWithBase<$R, DriverNotification, $Out>
-    implements DriverNotificationCopyWith<$R, DriverNotification, $Out> {
-  _DriverNotificationCopyWithImpl(super.value, super.then, super.then2);
+class _DriverModelCopyWithImpl<$R, $Out>
+    extends ClassCopyWithBase<$R, DriverModel, $Out>
+    implements DriverModelCopyWith<$R, DriverModel, $Out> {
+  _DriverModelCopyWithImpl(super.value, super.then, super.then2);
 
   @override
-  late final ClassMapperBase<DriverNotification> $mapper =
-      DriverNotificationMapper.ensureInitialized();
+  late final ClassMapperBase<DriverModel> $mapper =
+      DriverModelMapper.ensureInitialized();
   @override
   $R call(
           {String? driverId,
@@ -158,7 +152,7 @@ class _DriverNotificationCopyWithImpl<$R, $Out>
         if (totalServices != null) #totalServices: totalServices
       }));
   @override
-  DriverNotification $make(CopyWithData data) => DriverNotification(
+  DriverModel $make(CopyWithData data) => DriverModel(
       driverId: data.get(#driverId, or: $value.driverId),
       charityId: data.get(#charityId, or: $value.charityId),
       notificationId: data.get(#notificationId, or: $value.notificationId),
@@ -168,7 +162,7 @@ class _DriverNotificationCopyWithImpl<$R, $Out>
       totalServices: data.get(#totalServices, or: $value.totalServices));
 
   @override
-  DriverNotificationCopyWith<$R2, DriverNotification, $Out2> $chain<$R2, $Out2>(
+  DriverModelCopyWith<$R2, DriverModel, $Out2> $chain<$R2, $Out2>(
           Then<$Out2, $R2> t) =>
-      _DriverNotificationCopyWithImpl<$R2, $Out2>($value, $cast, t);
+      _DriverModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

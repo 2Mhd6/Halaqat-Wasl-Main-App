@@ -2,10 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
-import 'package:halaqat_wasl_main_app/theme/app_color.dart';
+import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/onboard/onboard_item.dart';
-import 'package:halaqat_wasl_main_app/ui/screens/profile/profile_screen.dart';
+import 'package:halaqat_wasl_main_app/ui/profile/profile_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'bloc/onboard_bloc.dart';
 
@@ -102,7 +101,7 @@ class OnBoardScreen extends StatelessWidget {
                             child: Text(
                               tr('onboarding_screen.skip'),
                               style: AppTextStyle.sfProBold16.copyWith(
-                                color: AppColor.primaryButtonColor,
+                                color: AppColors.primaryButtonColor,
                               ),
                             ),
                           ),
@@ -176,8 +175,8 @@ class OnBoardScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5.0),
                                     color: currentIndex == index
-                                        ? AppColor.primaryButtonColor
-                                        : AppColor.acceptedBackgroundColor,
+                                        ? AppColors.primaryButtonColor
+                                        : AppColors.acceptedBackgroundColor,
                                   ),
                                 ),
                               ),
@@ -197,7 +196,7 @@ class OnBoardScreen extends StatelessWidget {
                               },
                               style: ButtonStyle(
                                 backgroundColor: WidgetStatePropertyAll(
-                                  AppColor.primaryButtonColor,
+                                  AppColors.primaryButtonColor,
                                 ),
                                 padding: WidgetStatePropertyAll(
                                   EdgeInsets.symmetric(vertical: 12.0),
@@ -225,4 +224,16 @@ class OnBoardScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class OnBoardItem {
+  final String image;
+  final String title;
+  final String description;
+
+  const OnBoardItem({
+    required this.image,
+    required this.title,
+    required this.description,
+  });
 }

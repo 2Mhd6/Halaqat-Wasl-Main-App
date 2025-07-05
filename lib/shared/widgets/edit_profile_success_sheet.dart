@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:halaqat_wasl_main_app/extensions/screen_size.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
-import 'package:halaqat_wasl_main_app/theme/app_color.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
+import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 
 class EditProfileSuccessSheet extends StatelessWidget {
   const EditProfileSuccessSheet({super.key});
@@ -24,7 +24,7 @@ class EditProfileSuccessSheet extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: const BoxDecoration(
-                color: AppColor.primaryButtonColor,
+                color: AppColors.primaryButtonColor,
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.check_rounded, color: Colors.white, size: 36),

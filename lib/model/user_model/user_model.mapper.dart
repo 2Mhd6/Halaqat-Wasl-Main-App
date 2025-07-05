@@ -20,14 +20,15 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
   @override
   final String id = 'UserModel';
 
-  static int _$userId(UserModel v) => v.userId;
-  static const Field<UserModel, int> _f$userId =
+  static String _$userId(UserModel v) => v.userId;
+  static const Field<UserModel, String> _f$userId =
       Field('userId', _$userId, key: r'user_id');
   static String? _$notificationId(UserModel v) => v.notificationId;
   static const Field<UserModel, String> _f$notificationId =
       Field('notificationId', _$notificationId, key: r'notification_id');
-  static String _$role(UserModel v) => v.role;
-  static const Field<UserModel, String> _f$role = Field('role', _$role);
+  static String? _$role(UserModel v) => v.role;
+  static const Field<UserModel, String> _f$role =
+      Field('role', _$role, opt: true);
   static String _$fullName(UserModel v) => v.fullName;
   static const Field<UserModel, String> _f$fullName =
       Field('fullName', _$fullName, key: r'full_name');
@@ -113,7 +114,7 @@ extension UserModelValueCopy<$R, $Out> on ObjectCopyWith<$R, UserModel, $Out> {
 abstract class UserModelCopyWith<$R, $In extends UserModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call(
-      {int? userId,
+      {String? userId,
       String? notificationId,
       String? role,
       String? fullName,
@@ -133,9 +134,9 @@ class _UserModelCopyWithImpl<$R, $Out>
       UserModelMapper.ensureInitialized();
   @override
   $R call(
-          {int? userId,
+          {String? userId,
           Object? notificationId = $none,
-          String? role,
+          Object? role = $none,
           String? fullName,
           String? email,
           String? phoneNumber,
@@ -143,7 +144,7 @@ class _UserModelCopyWithImpl<$R, $Out>
       $apply(FieldCopyWithData({
         if (userId != null) #userId: userId,
         if (notificationId != $none) #notificationId: notificationId,
-        if (role != null) #role: role,
+        if (role != $none) #role: role,
         if (fullName != null) #fullName: fullName,
         if (email != null) #email: email,
         if (phoneNumber != null) #phoneNumber: phoneNumber,

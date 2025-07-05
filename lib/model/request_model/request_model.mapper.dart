@@ -50,8 +50,12 @@ class RequestModelMapper extends ClassMapperBase<RequestModel> {
   static double _$destinationLong(RequestModel v) => v.destinationLong;
   static const Field<RequestModel, double> _f$destinationLong =
       Field('destinationLong', _$destinationLong, key: r'destination_long');
-  static String _$state(RequestModel v) => v.state;
-  static const Field<RequestModel, String> _f$state = Field('state', _$state);
+  static DateTime _$requestDate(RequestModel v) => v.requestDate;
+  static const Field<RequestModel, DateTime> _f$requestDate =
+      Field('requestDate', _$requestDate, key: r'request_date');
+  static String _$status(RequestModel v) => v.status;
+  static const Field<RequestModel, String> _f$status =
+      Field('status', _$status);
   static String? _$note(RequestModel v) => v.note;
   static const Field<RequestModel, String> _f$note =
       Field('note', _$note, opt: true);
@@ -68,7 +72,8 @@ class RequestModelMapper extends ClassMapperBase<RequestModel> {
     #pickupLong: _f$pickupLong,
     #destinationLat: _f$destinationLat,
     #destinationLong: _f$destinationLong,
-    #state: _f$state,
+    #requestDate: _f$requestDate,
+    #status: _f$status,
     #note: _f$note,
   };
 
@@ -84,7 +89,8 @@ class RequestModelMapper extends ClassMapperBase<RequestModel> {
         pickupLong: data.dec(_f$pickupLong),
         destinationLat: data.dec(_f$destinationLat),
         destinationLong: data.dec(_f$destinationLong),
-        state: data.dec(_f$state),
+        requestDate: data.dec(_f$requestDate),
+        status: data.dec(_f$status),
         note: data.dec(_f$note));
   }
 
@@ -152,7 +158,8 @@ abstract class RequestModelCopyWith<$R, $In extends RequestModel, $Out>
       double? pickupLong,
       double? destinationLat,
       double? destinationLong,
-      String? state,
+      DateTime? requestDate,
+      String? status,
       String? note});
   RequestModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -177,7 +184,8 @@ class _RequestModelCopyWithImpl<$R, $Out>
           double? pickupLong,
           double? destinationLat,
           double? destinationLong,
-          String? state,
+          DateTime? requestDate,
+          String? status,
           Object? note = $none}) =>
       $apply(FieldCopyWithData({
         if (requestId != null) #requestId: requestId,
@@ -190,7 +198,8 @@ class _RequestModelCopyWithImpl<$R, $Out>
         if (pickupLong != null) #pickupLong: pickupLong,
         if (destinationLat != null) #destinationLat: destinationLat,
         if (destinationLong != null) #destinationLong: destinationLong,
-        if (state != null) #state: state,
+        if (requestDate != null) #requestDate: requestDate,
+        if (status != null) #status: status,
         if (note != $none) #note: note
       }));
   @override
@@ -205,7 +214,8 @@ class _RequestModelCopyWithImpl<$R, $Out>
       pickupLong: data.get(#pickupLong, or: $value.pickupLong),
       destinationLat: data.get(#destinationLat, or: $value.destinationLat),
       destinationLong: data.get(#destinationLong, or: $value.destinationLong),
-      state: data.get(#state, or: $value.state),
+      requestDate: data.get(#requestDate, or: $value.requestDate),
+      status: data.get(#status, or: $value.status),
       note: data.get(#note, or: $value.note));
 
   @override

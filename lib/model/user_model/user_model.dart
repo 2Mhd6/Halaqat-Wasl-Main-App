@@ -7,7 +7,7 @@ class UserModel with UserModelMappable {
   UserModel({
     required this.userId,
     required this.notificationId,
-    required this.role,
+    this.role,
     required this.fullName,
     required this.email,
     required this.phoneNumber,
@@ -15,7 +15,7 @@ class UserModel with UserModelMappable {
   });
 
   @MappableField(key: 'user_id')
-  final int userId;
+  final String userId;
 
   @MappableField(key: 'notification_id')
   final String? notificationId;
@@ -23,7 +23,7 @@ class UserModel with UserModelMappable {
   @MappableField(key: 'full_name')
   final String fullName;
 
-  final String role;
+  final String? role;
 
   final String email;
 
