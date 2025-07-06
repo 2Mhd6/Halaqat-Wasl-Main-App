@@ -30,7 +30,7 @@
       "log_in_text": "One step to book a safe and comfortable ride.",
       "password": "Password",
       "forget_password": "Forget password?",
-      "don't_have_an_account": "Don’t have an account? ",
+      "dont_have_an_account": "Don’t have an account? ",
       "sign_up": " Sign up"
     },
   
@@ -57,9 +57,9 @@
     },
   
     "navigator_screen": {
-      "Home": "Home",
-      "Requests": "Requests",
-      "Account": "Account"
+      "home": "Home",
+      "requests": "Requests",
+      "account": "Account"
     },
   
     "date_and_time_dialog": {

@@ -168,7 +168,7 @@ class LogInScreen extends StatelessWidget {
                           ),
                           child: RichText(
                             text: TextSpan(
-                              text: tr('log_in_screen.don’t_have_an_account'),
+                              text: tr('log_in_screen.dont_have_an_account'),
                               style: AppTextStyle
                                   .sfPro20012, // Required for visibility
                               children: [
