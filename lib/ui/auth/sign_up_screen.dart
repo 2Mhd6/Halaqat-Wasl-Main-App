@@ -9,8 +9,8 @@ import 'package:halaqat_wasl_main_app/shared/widgets/app_snack_bar.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
+import 'package:halaqat_wasl_main_app/ui/auth/auth_gate_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/bloc/auth_bloc.dart';
-import 'package:halaqat_wasl_main_app/ui/auth/log_in_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/widgets/auth_text_field_with_label.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/widgets/gender_chip.dart';
 
@@ -24,7 +24,11 @@ class SignUpScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is ErrorState) {
-          appSnackBar(context: context,message: state.errorMessage,isSuccess: false);
+          appSnackBar(
+            context: context,
+            message: state.errorMessage,
+            isSuccess: false,
+          );
         }
       },
       child: Scaffold(
@@ -145,8 +149,10 @@ class SignUpScreen extends StatelessWidget {
                       BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
                           String? label = tr('sign_up_screen.sign_up');
-                          Widget? loading =CircularProgressIndicator(color: Colors.white);
-                          if(state is LoadingState){
+                          Widget? loading = CircularProgressIndicator(
+                            color: Colors.white,
+                          );
+                          if (state is LoadingState) {
                             label = null;
                           }
                           return AppCustomButton(
@@ -155,13 +161,19 @@ class SignUpScreen extends StatelessWidget {
                             buttonColor: AppColors.primaryButtonColor,
                             width: context.getWidth(),
                             height: context.getHeight(multiplied: 0.055),
-                            onPressed: ()async {
-                              if (authBloc.signupFormKey.currentState!.validate()) {
+                            onPressed: () async {
+                              if (authBloc.signupFormKey.currentState!
+                                  .validate()) {
                                 authBloc.add(SignUpEvent());
-                                
-                                await Future.delayed(Duration(milliseconds: 1400));
-                                if(context.mounted){
-                                  context.moveToWithReplacement(context: context,screen: LogInScreen());
+
+                                await Future.delayed(
+                                  Duration(milliseconds: 1400),
+                                );
+                                if (context.mounted) {
+                                  context.moveToWithReplacement(
+                                    context: context,
+                                    screen: AuthGateScreen(),
+                                  );
                                 }
                               }
                             },
@@ -174,7 +186,13 @@ class SignUpScreen extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: InkWell(
-                          onTap: () => context.moveToWithReplacement(context: context,screen: LogInScreen()),
+                          onTap: () => context.moveToWithReplacement(
+                            context: context,
+                            screen: BlocProvider(
+                              create: (context) => AuthBloc(),
+                              child: AuthGateScreen(whereYouWantToGo: 'log_in'),
+                            ),
+                          ),
                           child: RichText(
                             text: TextSpan(
                               text: tr(

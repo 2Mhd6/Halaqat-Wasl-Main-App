@@ -10,7 +10,6 @@ import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/auth_gate_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/bloc/auth_bloc.dart';
-import 'package:halaqat_wasl_main_app/ui/auth/sign_up_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/auth/widgets/auth_text_field_with_label.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -23,8 +22,12 @@ class LogInScreen extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is ErrorState) {
-          appSnackBar(context: context,message: state.errorMessage,isSuccess: false);
-        } 
+          appSnackBar(
+            context: context,
+            message: state.errorMessage,
+            isSuccess: false,
+          );
+        }
       },
       child: Scaffold(
         body: SafeArea(
@@ -81,7 +84,10 @@ class LogInScreen extends StatelessWidget {
                                   controller: authBloc.passwordController,
                                   isPassword: true,
                                   isShowPassword: authBloc.isShowPassword,
-                                  onPressedToShowPasswordViability: () =>authBloc.add(TogglePasswordViabilityEvent()),
+                                  onPressedToShowPasswordViability: () =>
+                                      authBloc.add(
+                                        TogglePasswordViabilityEvent(),
+                                      ),
                                 );
                               },
                             ),
@@ -113,8 +119,10 @@ class LogInScreen extends StatelessWidget {
                       BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
                           String? label = tr('log_in_screen.login');
-                          Widget? loading =CircularProgressIndicator(color: Colors.white);
-                          if(state is LoadingState){
+                          Widget? loading = CircularProgressIndicator(
+                            color: Colors.white,
+                          );
+                          if (state is LoadingState) {
                             label = null;
                           }
                           return AppCustomButton(
@@ -124,17 +132,21 @@ class LogInScreen extends StatelessWidget {
                             width: context.getWidth(),
                             height: context.getHeight(multiplied: 0.055),
                             onPressed: () async {
-                              if(authBloc.loginFormKey.currentState!.validate()){
-                                
+                              if (authBloc.loginFormKey.currentState!
+                                  .validate()) {
                                 authBloc.add(LogInEvent());
-                                
-                                await Future.delayed(Duration(milliseconds: 800));
-                                
-                                if(context.mounted){
-                                  context.moveToWithReplacement(context: context, screen: AuthGateScreen());
+
+                                await Future.delayed(
+                                  Duration(milliseconds: 800),
+                                );
+
+                                if (context.mounted) {
+                                  context.moveToWithReplacement(
+                                    context: context,
+                                    screen: AuthGateScreen(),
+                                  );
                                 }
                               }
-
                             },
                           );
                         },
@@ -147,7 +159,12 @@ class LogInScreen extends StatelessWidget {
                         child: InkWell(
                           onTap: () => context.moveToWithReplacement(
                             context: context,
-                            screen: SignUpScreen(),
+                            screen: BlocProvider(
+                              create: (context) => AuthBloc(),
+                              child: AuthGateScreen(
+                                whereYouWantToGo: 'sign_up',
+                              ),
+                            ),
                           ),
                           child: RichText(
                             text: TextSpan(

@@ -14,7 +14,6 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-
   // -- Related to the form
   final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
@@ -24,20 +23,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final TextEditingController phoneNumberController = TextEditingController();
   String selectedGender = 'male';
 
-  // -- Handling UI State 
+  // -- Handling UI State
   bool isShowPassword = false;
-
 
   AuthBloc() : super(AuthInitial()) {
     on<AuthEvent>((event, emit) {});
-    
+
     // -- Handling UI
-    on<TogglePasswordViabilityEvent>((event, emit){
+    on<TogglePasswordViabilityEvent>((event, emit) {
       isShowPassword = !isShowPassword;
       emit(SuccessTogglingPasswordViability());
     });
-    
-    
+
     on<SelectedGenderEvent>((event, emit) {
       selectedGender = event.genderIndex == 1 ? 'male' : 'female';
       emit(SuccessSelectingGender());
@@ -52,44 +49,44 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final email = emailController.text;
     final password = passwordController.text;
 
-    try{
-
+    try {
       emit(LoadingState());
-      
+
       if (email.trim().isEmpty || password.trim().isEmpty) {
         throw 'Email and password must not be empty';
       }
 
-      
+      phoneNumberController.text;
       final res = await AuthRepo.signUp(email: email, password: password);
 
       final UserModel user = UserModel(
         userId: res.user!.id,
-        notificationId: Uuid().v4(), 
-        fullName: fullNameController.text, 
-        email: email.toLowerCase(), 
+        notificationId: Uuid().v4(),
+        fullName: fullNameController.text,
+        email: email.toLowerCase(),
         role: 'user',
-        phoneNumber: '+966${phoneNumberController.text}', 
-        gender: selectedGender
+        phoneNumber: '+966${phoneNumberController.text}',
+        gender: selectedGender,
       );
 
       // -- Inserting a record in users table
       await UserOperationRepo.insertUserDetailsIntoDB(user: user);
 
-      // -- inject the user data 
-      GetIt.I.get<UserData>().user = await UserOperationRepo.getUserDetailsFromDB();
+      // -- inject the user data
+      GetIt.I.get<UserData>().user =
+          await UserOperationRepo.getUserDetailsFromDB();
 
       emit(SuccessState(successMessage: 'Welcome ${fullNameController.text}'));
-      
+
       clearControllers();
-    }catch(e){
-      clearControllers();
+      if (!isClosed) clearControllers();
+    } catch (e) {
+      if (!isClosed) clearControllers();
       emit(ErrorState(errorMessage: e.toString()));
     }
   }
 
-  FutureOr<void> login(LogInEvent event, Emitter<AuthState> emit) async{
-    
+  FutureOr<void> login(LogInEvent event, Emitter<AuthState> emit) async {
     final email = emailController.text;
     final password = passwordController.text;
 
@@ -102,19 +99,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final res = await AuthRepo.logIn(email: email, password: password);
 
-      // -- inject the user data 
-      GetIt.I.get<UserData>().user = await UserOperationRepo.getUserDetailsFromDB();
+      // -- inject the user data
+      GetIt.I.get<UserData>().user =
+          await UserOperationRepo.getUserDetailsFromDB();
 
-
-      clearControllers();
       emit(SuccessState(successMessage: 'Welcome Back ${res.user!.email}'));
-      
+
+      if (!isClosed) clearControllers();
     } catch (e) {
-      clearControllers();
+      if (!isClosed) clearControllers();
       emit(ErrorState(errorMessage: e.toString()));
     }
   }
-
 
   void clearControllers() {
     fullNameController.clear();
@@ -132,5 +128,3 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return super.close();
   }
 }
-
-
