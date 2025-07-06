@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:halaqat_wasl_main_app/model/complaint_model/complaint_model.dart';
 import 'package:halaqat_wasl_main_app/shared/set_up.dart';
+import 'package:uuid/uuid.dart';
 
 class ComplaintRepo {
   static final _supabase = SetupSupabase.sharedSupabase.client;
@@ -35,7 +36,7 @@ class ComplaintRepo {
     required String? charityId,
   }) async {
     //random complaint ID
-    final complaintId = 'comp_${Random().nextInt(100000)}';
+    final complaintId = Uuid().v4();
 
     //Create complaint model
     final complaint = ComplaintModel(
