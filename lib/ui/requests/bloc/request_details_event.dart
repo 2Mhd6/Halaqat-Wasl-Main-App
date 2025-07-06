@@ -13,7 +13,12 @@ class StartWritingComplaint extends RequestDetailsEvent {}
 
 class WritingComplaintEmpty extends RequestDetailsEvent {}
 
-class SubmitComplaint extends RequestDetailsEvent {}
+class SubmitComplaint extends RequestDetailsEvent {
+  final String complaintText;
+
+  SubmitComplaint(this.complaintText);
+}
+
 
 class WaitForResponse extends RequestDetailsEvent {}
 
