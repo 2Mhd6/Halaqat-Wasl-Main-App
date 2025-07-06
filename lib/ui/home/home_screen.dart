@@ -132,7 +132,7 @@ class HomeScreen extends StatelessWidget {
                           Gap.gapH40,
 
                           AppCustomButton(
-                            label: 'Place Order',
+                            label:tr('home_screen.place_request'),
                             buttonColor: AppColors.primaryAppColor,
                             width: context.getWidth(),
                             height: context.getHeight(multiplied: 0.055),

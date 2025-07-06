@@ -51,14 +51,13 @@
     },
   
     "google_map_screen": {
-      "search_bar_hint": "Where should we pick you up?",
       "confirm_location": "Confirm Location"
     },
   
     "navigator_screen": {
-      "Home": "Home",
-      "Requests": "Requests",
-      "Account": "Account"
+      "home": "Home",
+      "requests": "Requests",
+      "account": "Account"
     },
   
     "date_and_time_dialog": {
@@ -76,12 +75,6 @@
       "pm": "PM"
     },
   
-    "current location_dialog_home_screen": {
-      "Pick-up_location": "Pick-up Location",
-      "street": "street",
-      "city": "city",
-      "Confirm_Location": "Confirm Location"
-    },
   
     "select_hospital_bottom_sheet_home_screen": {
       "select_hospital": "Select Hospital"

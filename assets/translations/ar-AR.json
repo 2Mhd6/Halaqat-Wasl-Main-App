@@ -11,9 +11,9 @@
         "get_started": "ابدأ الآن"
     },
 
-    "signup_screen": {
-        "signup": "تسجيل حساب",
-        "signup_text": "خطوة واحدة لحجز رحلة آمنة ومريحة.",
+    "sign_up_screen": {
+        "sign_up": "تسجيل حساب",
+        "sign_up_text": "خطوة واحدة لحجز رحلة آمنة ومريحة.",
         "full_name": "الاسم الكامل",
         "email": "البريد الإلكتروني",
         "password": "كلمة المرور",
@@ -22,7 +22,7 @@
         "male": "ذكر"
     },
 
-    "login_screen": {
+    "log_in_screen": {
         "login": "تسجيل الدخول",
         "email": "البريد الإلكتروني",
         "password": "كلمة المرور",
@@ -34,11 +34,12 @@
     "home_screen": {
         "hello": "مرحبًا",
         "user_name": "اسم المستخدم",
-        "pickup_date_&_time": "تاريخ ووقت الاستلام",
+        "pickup_date_and_time": "تاريخ و وقت الاستلام",
         "current_location": "الموقع الحالي",
         "select_hospital": "اختر المستشفى",
-        "additional_notes_(optional)": "ملاحظات إضافية (اختياري)",
-        "additional_notes": "يرجى إعلامنا إذا كان لديك أي طلبات أو متطلبات خاصة...",
+        "additional_notes": "ملاحظات إضافية",
+        "optional": "(اختياري)",
+        "additional_notes_filed": "يرجى إعلامنا إذا كان لديك أي طلبات أو متطلبات خاصة...",
         "place_request": "إرسال الطلب",
         "no_ride_request": "ليس لديك أي طلب رحلة حاليًا. انتظر لحظة!",
         "req_id": "رقم الطلب",
@@ -47,15 +48,19 @@
         "completed": "مكتمل"
     },
 
-    "navigator_screen": {
-        "Home": "الرئيسية",
-        "Requests": "الطلبات",
-        "Account": "الحساب"
+    "google_map_screen": {
+        "confirm_location": "اكد موقعك"
     },
 
-    "date&time_dialog_home_screen": {
-        "choose_date": "اختر التاريخ",
-        "schedule_notice": "يمكنك جدولة رحلة فقط خلال الثلاثين يومًا القادمة",
+    "navigator_screen": {
+        "home": "الصفحة الرئيسية",
+        "requests": "الطلبات",
+        "account": "الحساب"
+    },
+
+    "date_and_time_dialog": {
+        "choose_date_and_time": "اختر التاريخ والوقت",
+        "schedule_notice": "يمكنك جدولة رحلة فقط خلال سبع يومًا القادمة",
         "sun": "الأحد",
         "mon": "الاثنين",
         "tue": "الثلاثاء",
@@ -67,15 +72,9 @@
         "am": "ص",
         "pm": "م"
     },
-    "current location_dialog_home_screen": {
-        "Pick-up_location": "موقع الاستلام",
-        "street": "الشارع",
-        "city": "المدينة",
-        "Confirm_Location": "تأكيد الموقع"
-    },
 
-    "select_hospital_bottomsheet_home_screen": {
-        "hospital_name": "اسم المستشفى"
+    "select_hospital_bottom_sheet_home_screen": {
+        "select_hospital": "اسم المستشفى"
     },
     "successful_bottomsheet_home_screen": {
         "message_success": "تم جدولة رحلتك بنجاح"
