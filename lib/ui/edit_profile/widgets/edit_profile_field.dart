@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 
 // Widget for Edit Profile screen
 class EditProfileField extends StatelessWidget { 
   const EditProfileField({
     super.key,
-    this.initialValue,
     this.icon,
     this.hintText,
     required this.controller,
     this.validator,
     this.obsecureText = false, this.suffixIcon,
+    this.keyboardType = TextInputType.text,
+    this.onChanged,
+    this.inputFormatters,
   });
 
   final TextEditingController controller;
 
-  final String? initialValue;
+  final TextInputType keyboardType;
 
   final String? icon;
 
@@ -26,6 +29,11 @@ class EditProfileField extends StatelessWidget {
   final bool obsecureText;
 
   final Widget? suffixIcon;
+
+  final ValueChanged<String>? onChanged;
+
+  final List<TextInputFormatter>? inputFormatters;
+
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +48,9 @@ class EditProfileField extends StatelessWidget {
           controller: controller,
           validator: validator,
            obscureText: obsecureText,
+           keyboardType: keyboardType,
+           onChanged: onChanged,
+          inputFormatters: inputFormatters,
           decoration: InputDecoration(
             hintText: hintText,
             border: OutlineInputBorder(

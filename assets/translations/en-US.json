@@ -20,7 +20,7 @@
       "phone_number": "Phone number",
       "female": "Female",
       "male": "Male",
-      "log_in": "Log in",
+      "log_in": "Login",
       "already_have_an_account": "Do you have an account already? "
     },
   
@@ -36,6 +36,7 @@
   
     "home_screen": {
       "hello": "Hello",
+      "user_name": "User Name",
       "pickup_date_and_time": "Pickup Date & Time",
       "current_location": "Current Location",
       "select_hospital": "Select Hospital",
@@ -75,7 +76,6 @@
       "pm": "PM"
     },
   
-  
     "select_hospital_bottom_sheet_home_screen": {
       "select_hospital": "Select Hospital"
     },
@@ -84,7 +84,52 @@
       "successful": "Successful",
       "message_success": "You have successfully scheduled a ride "
     },
+
+    "arrived_bottom_sheet_home_screen": {
+      "message_arrived": "Your driver has arrived at your location",
+      "user_name": "User Name",
+      "rate_driver": "How was your ride with {}user_name?",
+      "rate": "Rate"
+    },
+
+    "request_details_screen": {
+      "request_details": "Request Details",
+      "request_number": "Request Number",
+      "request_id": "Request ID",
+      "request_status": "Request Status",
+      "pickup": "Pickup",
+      "hospital_name": "Hospital Name",
+      "dare_time": "Date & Time",
+      "additional_notes": "Additional Notes",
+      "driver_info": "Driver Info",
+      "user_name": "User Name",
+      "call": "Call",
+      "message": "Message",
+      "cancel": "Cancel",
+      "complaint_description": "Complaint Description",
+      "complaint_header": "Please describe the issue in detail...",
+      "submit" : "Submit",
+      "complaint": "Complaint",
+      "complaint_description_user": "Complaint Description from User",
+      "response": "Response from Admin"      
+    },
   
+ "complaint_bottomsheet_details_screen": {
+        "successful_complaint": "Complaint Submitted",
+        "complaint_message": "Your complaint has been successfully submitted. We will review it and get back to you soon."
+    },
+
+    "my_request_screen": {
+        "my_request": "My Requests",
+        "search_request": "Search Request",
+        "all": "All",
+        "completed": "Completed",
+        "cancelled": "Cancelled",
+        "req_id": "Request ID",
+        "hospital_name": "Hospital Name",
+        "date_&_time": "Date & Time"
+    },
+
     "profile_screen": {
       "profile": "Profile",
       "full_name_stored": "{}full_name",
@@ -112,8 +157,15 @@
       "confirm_password_required": "Confirm password is required",
       "passwords_not_match": "Passwords do not match",
       "password_updated": "Password updated successfully",
-      "password_too_short": "Password must be at least 6 characters long"
+      "password_too_short": "Password must be at least 6 characters long",
+      "phone_number_invalid": "Phone number must be 9 digits long"
+    },
 
+    "delete_account_dialog_home_screen": {
+        "confirm": "Are you sure you want to delete your account?",
+        "confirm_message": "Do you really want to delete your account? This action cannot be undone.",
+        "cancel": "Cancel",
+        "delete": "Delete Account"
     }
   }
   

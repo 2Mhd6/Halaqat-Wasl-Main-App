@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/edit_profile_success_sheet.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
@@ -83,20 +84,66 @@ class EditProfileScreen extends StatelessWidget {
                                     primary: false,
                                     children: [
                                       // Fields to edit name, email, and phone number
-                                      EditProfileField(
-                                        controller: bloc.nameController,
-                                        initialValue: 'Mohammed Ali Alharbi',
-                                        icon: 'assets/icons/account.png',
-                                      ),
-                                      EditProfileField(
-                                        controller: bloc.emailController,
-                                        initialValue: 'Mohammed@gmail.com',
-                                        icon: 'assets/icons/email.png',
-                                      ),
-                                      EditProfileField(
-                                        controller: bloc.phoneController,
-                                        initialValue: '+966 561577821',
-                                        icon: 'assets/icons/call.png',
+                                      Form(
+                                        key: bloc.detailsFormKey,
+                                        child: Column(
+                                          children: [
+                                            EditProfileField(
+                                              controller: bloc.nameController,
+                                              icon: 'assets/icons/account.png',
+                                            ),
+                                            EditProfileField(
+                                              controller: bloc.emailController,
+                                              icon: 'assets/icons/email.png',
+                                            ),
+                                            EditProfileField(
+                                              controller: bloc.phoneController,
+                                              icon: 'assets/icons/call.png',
+                                              keyboardType: TextInputType.phone,
+                                              inputFormatters: [
+                                                // Prevent deleting the country code
+                                                TextInputFormatter.withFunction((
+                                                  oldValue,
+                                                  newValue,
+                                                ) {
+                                                  if (!newValue.text.startsWith(
+                                                    bloc.countryCode,
+                                                  )) {
+                                                    return oldValue;
+                                                  }
+                                            
+                                                  // Part after the country code (phone number)
+                                                  final afterCode = newValue.text
+                                                      .substring(
+                                                        bloc.countryCode.length,
+                                                      );
+                                            
+                                                  // Ensure only digits are entered after the country code
+                                                  if (afterCode.contains(
+                                                    RegExp(r'[^\d]'),
+                                                  )) {
+                                                    return oldValue;
+                                                  }
+                                            
+                                                  return newValue;
+                                                }),
+                                              ],
+                                            
+                                              validator: (value) {
+                                                if (value!.contains('+966')) {
+                                                  final phoneNumber = value
+                                                      .replaceAll('+966', '');
+                                                  if (phoneNumber.length != 9) {
+                                                    return tr(
+                                                      'edit_profile_screen.phone_number_invalid',
+                                                    );
+                                                  }
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Text(
                                         tr(
@@ -108,7 +155,7 @@ class EditProfileScreen extends StatelessWidget {
 
                                       // Fields to edit current password, new password, confirm password
                                       Form(
-                                        key: bloc.formKey,
+                                        key: bloc.passwordFormKey,
                                         child: Column(
                                           children: [
                                             BlocSelector<
@@ -139,14 +186,14 @@ class EditProfileScreen extends StatelessWidget {
                                                       ToggleCurrentPasswordVisibility(),
                                                     );
                                                   },
-                                                  
                                                 ),
-                                                validator: (value) => 
-                                                  value == null || value.isEmpty
-                                                      ? tr(
-                                                          'edit_profile_screen.current_password_required',
-                                                        )
-                                                      : null,
+                                                validator: (value) =>
+                                                    value == null ||
+                                                        value.isEmpty
+                                                    ? tr(
+                                                        'edit_profile_screen.current_password_required',
+                                                      )
+                                                    : null,
                                               ),
                                             ),
                                             BlocSelector<
@@ -300,7 +347,6 @@ class EditProfileScreen extends StatelessWidget {
                                               )
                                             : ElevatedButton(
                                                 onPressed: () {
-                                                
                                                   //save event
                                                   bloc.add(
                                                     SaveProfileRequested(),

@@ -10,17 +10,32 @@ part 'edit_profile_state.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   // Connects the form to validate or save data
-  final formKey = GlobalKey<FormState>();
+  final passwordFormKey = GlobalKey<FormState>();
+  final detailsFormKey = GlobalKey<FormState>();
 
+
+  final countryCode  = '+966';
   // Text controllers to manage form fields values
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  late final  TextEditingController phoneController;
+  
   TextEditingController currentPasswordController = TextEditingController();
   TextEditingController newPassordController = TextEditingController();
   TextEditingController confirmNewPasswordController = TextEditingController();
 
   EditProfileBloc() : super(EditProfileState()) {
+
+    phoneController = TextEditingController();
+    phoneController.addListener(() {
+      // Prevent editing country code
+      if (phoneController.selection.start < countryCode.length) {
+        phoneController.selection = TextSelection.collapsed(
+          offset: phoneController.text.length,
+        );
+      }
+    });
+
     on<EditProfileDataLoadRequested>(_editProfileDataLoadRequested);
     on<SaveProfileRequested>(_saveProfileRequested);
     on<ResetIsSavedState>((event, emit) {
@@ -76,6 +91,10 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         userData.fullName == name &&
         userData.phoneNumber == phone) {
     } else {
+      if (!detailsFormKey.currentState!.validate()) {
+        return;
+      }
+
       emit(state.copyWith(isLoading: true, errorMessage: null));
 
       final newUserData = userData.copyWith(
@@ -108,7 +127,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     if (currentPassword.isNotEmpty ||
         newPassword.isNotEmpty ||
         confirmNewPassword.isNotEmpty) {
-      if (!formKey.currentState!.validate()) {
+      if (!passwordFormKey.currentState!.validate()) {
         return;
       }
 

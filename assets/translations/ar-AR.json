@@ -19,12 +19,15 @@
         "password": "كلمة المرور",
         "phone_number": "رقم الهاتف",
         "female": "أنثى",
-        "male": "ذكر"
+        "male": "ذكر",
+        "log_in": "تسجيل الدخول",
+        "already_have_an_account": "هل لديك حساب بالفعل؟ "
     },
 
     "log_in_screen": {
         "login": "تسجيل الدخول",
         "email": "البريد الإلكتروني",
+        "log_in_text": "خطوة واحدة لحجز رحلة آمنة ومريحة.",
         "password": "كلمة المرور",
         "forget_password": "هل نسيت كلمة المرور؟",
         "don’t_have_an_account": "ليس لديك حساب؟",
@@ -76,7 +79,9 @@
     "select_hospital_bottom_sheet_home_screen": {
         "select_hospital": "اسم المستشفى"
     },
+
     "successful_bottomsheet_home_screen": {
+        "successful": "نجاح",
         "message_success": "تم جدولة رحلتك بنجاح"
     },
 
@@ -108,6 +113,7 @@
         "complaint_description_user": "وصف الشكوى من المستخدم",
         "response": "رد الإدارة"
     },
+
     "complaint_bottomsheet_details_screen": {
         "successful_complaint": "تم بنجاح",
         "complaint_message": "تم إرسال الشكوى بنجاح"
@@ -134,6 +140,7 @@
         "support_email": "Support@Halaqat_wasl.com",
         "logout": "تسجيل الخروج"
     },
+
     "edit_profile_screen": {
         "profile": "الملف الشخصي",
         "full_name_stored": "{}الاسم الكامل",
@@ -149,8 +156,11 @@
         "new_password_required": "كلمة المرور الجديدة مطلوبة",
         "confirm_password_required": "تأكيد كلمة المرور مطلوب",
         "passwords_not_match": "كلمات المرور غير متطابقة",
-        "password_updated": "تم تحديث كلمة المرور بنجاح"
+        "password_updated": "تم تحديث كلمة المرور بنجاح",
+        "password_too_short": "يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل",
+        "phone_number_invalid": "يجب أن يتكون رقم الهاتف من 9 أرقام"
     },
+    
    "delete_account_dialog_home_screen": {
         "confirm": "هل أنت متأكد؟",
         "confirm_message": "هل تريد حقًا حذف حسابك؟",
