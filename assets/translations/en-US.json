@@ -52,13 +52,14 @@
     },
   
     "google_map_screen": {
+      "search_bar_hint": "Where should we pick you up?",
       "confirm_location": "Confirm Location"
     },
   
     "navigator_screen": {
-      "home": "Home",
-      "requests": "Requests",
-      "account": "Account"
+      "Home": "Home",
+      "Requests": "Requests",
+      "Account": "Account"
     },
   
     "date_and_time_dialog": {
@@ -168,4 +169,5 @@
         "delete": "Delete Account"
     }
   }
-  
+
+

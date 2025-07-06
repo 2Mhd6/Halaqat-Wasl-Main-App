@@ -1,16 +1,16 @@
 {
     "onboarding_screen": {
-        "first_title": "مرحبًا بك في حلقة وصل ",
-        "first_body": "نساعد كبار السن في الوصول إلى مواعيدهم بأمان وفي الوقت المحدد.  ",
-        "second_title": "تواصل مع الجمعية   ",
-        "second_body": "يتم تنسيق رحلاتك وتتبعها من خلال الجمعية",
-        "third_title": "لننطلق! ",
-        "third_body": "رحلتك القادمة بلمسة زر فقط، نحن هنا لخدمتك.",
-        "skip": "تخطي",
-        "next": "التالي",
-        "get_started": "ابدأ الآن"
+      "first_title": "مرحبًا بك في حلقة وصل",
+      "first_body": "نساعد كبار السن في الوصول إلى مواعيدهم\nبأمان وفي الوقت المحدد.",
+      "second_title": "متصل بالجمعية",
+      "second_body": "يتم تنسيق رحلاتك ومتابعتها\nبشكل مباشر من قبل الجمعية.",
+      "third_title": "لننطلق",
+      "third_body": "رحلتك التالية على بُعد نقرة واحدة\nنحن هنا لخدمتك.",
+      "skip": "تخطي",
+      "next": "التالي",
+      "get_started": "ابدأ الآن"
     },
-
+  
     "sign_up_screen": {
         "sign_up": "تسجيل حساب",
         "sign_up_text": "خطوة واحدة لحجز رحلة آمنة ومريحة.",
@@ -23,7 +23,7 @@
         "log_in": "تسجيل الدخول",
         "already_have_an_account": "هل لديك حساب بالفعل؟ "
     },
-
+  
     "log_in_screen": {
         "login": "تسجيل الدخول",
         "email": "البريد الإلكتروني",
@@ -33,51 +33,52 @@
         "don’t_have_an_account": "ليس لديك حساب؟",
         "sign_up": "سجّل الآن"
     },
-
+  
     "home_screen": {
-        "hello": "مرحبًا",
-        "user_name": "اسم المستخدم",
-        "pickup_date_and_time": "تاريخ و وقت الاستلام",
-        "current_location": "الموقع الحالي",
-        "select_hospital": "اختر المستشفى",
-        "additional_notes": "ملاحظات إضافية",
-        "optional": "(اختياري)",
-        "additional_notes_filed": "يرجى إعلامنا إذا كان لديك أي طلبات أو متطلبات خاصة...",
-        "place_request": "إرسال الطلب",
-        "no_ride_request": "ليس لديك أي طلب رحلة حاليًا. انتظر لحظة!",
-        "req_id": "رقم الطلب",
-        "pending": "قيد الانتظار",
-        "accepted": "تم القبول",
-        "completed": "مكتمل"
+      "hello": "مرحبًا",
+      "user_name": "اسم المستخدم",
+      "pickup_date_and_time": "تاريخ و وقت الاستلام",
+      "current_location": "الموقع الحالي",
+      "select_hospital": "اختر المستشفى",
+      "additional_notes": "ملاحظات إضافية",
+      "optional": "(اختياري)",
+      "additional_notes_filed": "يرجى إعلامنا إذا كان لديك أي طلبات أو متطلبات خاصة...",
+      "place_request": "إرسال الطلب",
+      "no_ride_request": "ليس لديك أي طلب رحلة حاليًا. انتظر لحظة!",
+      "req_id": "رقم الطلب",
+      "pending": "قيد الانتظار",
+      "accepted": "تم القبول",
+      "completed": "مكتمل",
+      "canceled": "تم الإلغاء"
     },
-
+  
     "google_map_screen": {
-        "confirm_location": "اكد موقعك"
+      "confirm_location": "اكد موقعك"
     },
-
+  
     "navigator_screen": {
-        "home": "الصفحة الرئيسية",
-        "requests": "الطلبات",
-        "account": "الحساب"
+      "home": "الصفحة الرئيسية",
+      "requests": "الطلبات",
+      "account": "الحساب"
     },
-
+  
     "date_and_time_dialog": {
-        "choose_date_and_time": "اختر التاريخ والوقت",
-        "schedule_notice": "يمكنك جدولة رحلة فقط خلال سبع يومًا القادمة",
-        "sun": "الأحد",
-        "mon": "الاثنين",
-        "tue": "الثلاثاء",
-        "wed": "الأربعاء",
-        "thu": "الخميس",
-        "fri": "الجمعة",
-        "sat": "السبت",
-        "continue": "متابعة",
-        "am": "ص",
-        "pm": "م"
+      "choose_date_and_time": "اختر التاريخ والوقت",
+      "schedule_notice": "يمكنك جدولة رحلة فقط خلال سبع يومًا القادمة",
+      "sun": "الأحد",
+      "mon": "الاثنين",
+      "tue": "الثلاثاء",
+      "wed": "الأربعاء",
+      "thu": "الخميس",
+      "fri": "الجمعة",
+      "sat": "السبت",
+      "continue": "متابعة",
+      "am": "ص",
+      "pm": "م"
     },
-
+  
     "select_hospital_bottom_sheet_home_screen": {
-        "select_hospital": "اسم المستشفى"
+      "select_hospital": "اسم المستشفى"
     },
 
     "successful_bottomsheet_home_screen": {
@@ -131,14 +132,14 @@
     },
 
     "profile_screen": {
-        "profile": "الملف الشخصي",
-        "full_name_stored": "{}الاسم الكامل",
-        "email_stored": "{}البريد الإلكتروني",
-        "phone_number_stored": "{}رقم الهاتف",
-        "english": "EN",
-        "arabic": "AR",
-        "support_email": "Support@Halaqat_wasl.com",
-        "logout": "تسجيل الخروج"
+      "profile": "الملف الشخصي",
+      "full_name_stored": "{}الاسم الكامل",
+      "email_stored": "{}البريد الإلكتروني",
+      "phone_number_stored": "{}رقم الجوال",
+      "english": "EN",
+      "arabic": "AR",
+      "support_email": "Support@Halaqat_wasl.com",
+      "logout": "تسجيل الخروج"
     },
 
     "edit_profile_screen": {
@@ -167,4 +168,5 @@
         "cancel": "إلغاء",
         "delete": "حذف"
     }
-}
+  }
+  

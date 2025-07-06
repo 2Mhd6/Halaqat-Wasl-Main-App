@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:halaqat_wasl_main_app/repo/request/driver_repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:halaqat_wasl_main_app/model/request_model/request_model.dart';
 import 'package:halaqat_wasl_main_app/model/complaint_model/complaint_model.dart';
@@ -21,12 +22,13 @@ class RequestDetailsScreen extends StatelessWidget {
   final RequestModel request;
   final ComplaintModel? complaint;
 
-  const RequestDetailsScreen({
+  RequestDetailsScreen({
     super.key,
     required this.request,
     required this.complaint,
   });
 
+  final TextEditingController _complaintController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RequestDetailsBloc, RequestDetailsState>(
@@ -93,9 +95,19 @@ class RequestDetailsScreen extends StatelessWidget {
                 Gap.gapH16,
                 //Driver name is not displayed in pending and cancelled statuses.
                 if (status != 'pending' && status != 'cancelled')
-                  _infoItem(
-                    'Driver Name',
-                    request.driverId ?? 'No driver assigned',
+                  FutureBuilder<String?>(
+                    //Wait for the driver name to be fetched from Supabase.
+                    future: DriverRepo.getDriverNameById(
+                      request.driverId ?? '',
+                    ),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const SizedBox();
+                      }
+
+                      final driverName = snapshot.data ?? 'No driver assigned';
+                      return _infoItem('Driver Name', driverName);
+                    },
                   ),
 
                 // Completed status -> The complaint box appears with the appropriate button
@@ -121,7 +133,7 @@ class RequestDetailsScreen extends StatelessWidget {
                       ), //Always receives a text, even if there is no reply so as not to cause a crash or show a white screen.
                   ],
                   Gap.gapH32,
-                  // 🔵 زر "Submit Complaint" أو "Okay"
+                  // Status button SubmitComplaint & Okay
                   SizedBox(
                     width: double.infinity,
                     height: 48,
@@ -136,7 +148,9 @@ class RequestDetailsScreen extends StatelessWidget {
                               } else if (complaintStatus ==
                                   ComplaintStatus.writing) {
                                 context.read<RequestDetailsBloc>().add(
-                                  SubmitComplaint(), //The user writes a complaint, presses the button to send it to the BloC until the status changes.
+                                  SubmitComplaint(
+                                    _complaintController.text.trim(),
+                                  ), //The user writes a complaint, presses the button to send it to the BloC until the status changes.
                                 );
                               }
                             }
@@ -298,6 +312,7 @@ class RequestDetailsScreen extends StatelessWidget {
         status == ComplaintStatus.writingButEmpty;
 
     return TextFormField(
+      controller: _complaintController,
       enabled:
           isEditable, //Control the ability to write within the complaint field
       maxLines: 5,
