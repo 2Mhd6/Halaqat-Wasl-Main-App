@@ -29,7 +29,10 @@ class RequestRepo {
   }
 //getAllRequests function -> fetches all requests from the requests table
   static Future<List<RequestModel>> getAllRequests() async {
-    final response = await _requestSupabase.from('requests').select();
+
+    final userId = _requestSupabase.auth.currentUser!.id;
+    final response = await _requestSupabase.from('requests').select()
+        .eq('user_id', userId);
 
     return (response as List)
         .map((map) => RequestModelMapper.fromMap(map))

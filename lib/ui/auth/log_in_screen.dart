@@ -28,6 +28,13 @@ class LogInScreen extends StatelessWidget {
             isSuccess: false,
           );
         }
+
+        if (state is SuccessState) {
+          context.moveToWithReplacement(
+            context: context,
+            screen: AuthGateScreen(),
+          );
+        }
       },
       child: Scaffold(
         body: SafeArea(
@@ -139,13 +146,6 @@ class LogInScreen extends StatelessWidget {
                                 await Future.delayed(
                                   Duration(milliseconds: 800),
                                 );
-
-                                if (context.mounted) {
-                                  context.moveToWithReplacement(
-                                    context: context,
-                                    screen: AuthGateScreen(),
-                                  );
-                                }
                               }
                             },
                           );
