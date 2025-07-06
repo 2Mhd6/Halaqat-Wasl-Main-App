@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-
-  static const appBackgroundColor = Color.fromRGBO(249, 250, 252, 0.98);
+  static const appBackgroundColor = Color(0xFFF9FAFC);
+  // static const appBackgroundColor = Color.fromRGBO(249, 250, 252, 0.98);
   static const primaryAppColor = Color(0xff4A6CF7);
   static const secondaryColor = Color.fromRGBO(176, 183, 195, 59);
 
   static const successColor = Color.fromRGBO(123, 235, 161, 36);
   static const errorColor = Color(0xffFF5D38);
 
-  // -- Onboarding Color 
+  // -- Onboarding Color
   static const onboardingSecondColor = Color(0xffE1F3FF);
 
   // -- Text Color
@@ -17,7 +17,7 @@ class AppColors {
   static const secondaryTextColor = Color.fromRGBO(176, 183, 195, 59);
   static const forgetPasswordTextColor = Color.fromRGBO(74, 108, 247, 47);
 
-  // -- Border Color 
+  // -- Border Color
   static const borderColor = Color(0xffB0B7C3);
 
   // -- Buttons Colors
@@ -50,8 +50,9 @@ class AppColors {
 
   static const mainBlue = Color(0xFF3366FF);
   static const cardShadow = Color(0x0A000000);
-  
-  static const fieldBackground = Color(0xFFF3F4F6);
+  static const fieldBackground = Color(0xFFEDF0F3);
+
+  // static const fieldBackground = Color(0xFFF3F4F6);
 
   static const statusPendingBackground = Color(0xFFFFF3E6);
   static const statusPendingText = Color(0xFFFF9B04);
@@ -62,11 +63,14 @@ class AppColors {
   static const statusCompletedBackground = Color(0xFFE9FBF0);
   static const statusCompletedText = Color(0xFF12B76A);
 
+static const statusCancelledBackground = Color(0xFFFFE5E5); 
+static const statusCancelledText = Color(0xFFCC0000);      
+
   static const labelTextColor = Color(0xFFA4A4A4);
   static const titleTextColor = Color(0xFF1C1C1E);
   static const requestIdPending = Color(0xFFFF9B04);
   static const requestIdCompleted = Color(0xFF12B76A);
 
-    // -- Profile item border
+  // -- Profile item border
   static const profileItemBorderColor = Color(0xffB0B7C3);
 }

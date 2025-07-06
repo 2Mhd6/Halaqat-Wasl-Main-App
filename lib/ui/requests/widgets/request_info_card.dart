@@ -90,11 +90,13 @@ class RequestInfoCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        requestId.toUpperCase(),
+                        //show first 5 number of request
+                        requestId.toUpperCase().substring(0, 5),
                         style: AppTextStyle.sfProBold16.copyWith(
                           color: getRequestIdColor(status),
                         ),
                       ),
+
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,
@@ -140,9 +142,7 @@ class RequestInfoCard extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     time,
-                    style: AppTextStyle.sfPro60016.copyWith(
-                      color: Colors.grey,
-                    ),
+                    style: AppTextStyle.sfPro60016.copyWith(color: Colors.grey),
                   ),
                 ],
               ),
