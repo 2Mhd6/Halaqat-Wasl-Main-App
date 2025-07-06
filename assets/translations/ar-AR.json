@@ -36,33 +36,35 @@
   
     "home_screen": {
       "hello": "مرحبًا",
-      "pickup_date_and_time": "تاريخ ووقت الالتقاط",
+      "user_name": "اسم المستخدم",
+      "pickup_date_and_time": "تاريخ و وقت الاستلام",
       "current_location": "الموقع الحالي",
       "select_hospital": "اختر المستشفى",
       "additional_notes": "ملاحظات إضافية",
       "optional": "(اختياري)",
-      "additional_notes_filed": "يرجى إعلامنا إذا كان لديك أي طلبات أو احتياجات خاصة...",
+      "additional_notes_filed": "يرجى إعلامنا إذا كان لديك أي طلبات أو متطلبات خاصة...",
       "place_request": "إرسال الطلب",
-      "no_ride_request": "ليس لديك أي طلبات حالياً.",
+      "no_ride_request": "ليس لديك أي طلب رحلة حاليًا. انتظر لحظة!",
+      "req_id": "رقم الطلب",
       "pending": "قيد الانتظار",
       "accepted": "تم القبول",
-      "canceled": "تم الإلغاء",
-      "completed": "مكتملة"
+      "completed": "مكتمل",
+      "canceled": "تم الإلغاء"
     },
   
     "google_map_screen": {
-      "confirm_location": "تأكيد الموقع"
+      "confirm_location": "اكد موقعك"
     },
   
     "navigator_screen": {
-      "home": "الرئيسية",
+      "home": "الصفحة الرئيسية",
       "requests": "الطلبات",
       "account": "الحساب"
     },
   
     "date_and_time_dialog": {
       "choose_date_and_time": "اختر التاريخ والوقت",
-      "schedule_notice": "يمكنك جدولة رحلة خلال الأيام السبعة القادمة فقط",
+      "schedule_notice": "يمكنك جدولة رحلة فقط خلال سبع يومًا القادمة",
       "sun": "الأحد",
       "mon": "الاثنين",
       "tue": "الثلاثاء",
@@ -70,13 +72,13 @@
       "thu": "الخميس",
       "fri": "الجمعة",
       "sat": "السبت",
-      "continue": "استمرار",
+      "continue": "متابعة",
       "am": "ص",
       "pm": "م"
     },
   
     "select_hospital_bottom_sheet_home_screen": {
-      "select_hospital": "اختر المستشفى"
+      "select_hospital": "اسم المستشفى"
     },
   
     "successful_bottom_sheet_home_screen": {

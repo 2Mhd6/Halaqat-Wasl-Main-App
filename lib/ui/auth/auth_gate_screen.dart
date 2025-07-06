@@ -30,10 +30,17 @@ class AuthGateScreen extends StatelessWidget {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
         }
 
-        if (authState == null || authState.session == null) {
+        // if(authState == null){
+        //   return BlocProvider(
+        //     create: (context) => AuthBloc(),
+        //     child: LogInScreen(),
+        //   );
+        // }
+
+        if ( authState == null || authState.session == null) {
           return BlocProvider(
             create: (context) => AuthBloc(),
-            child: LogInScreen(),
+            child: SignUpScreen(),
           );
         }
 

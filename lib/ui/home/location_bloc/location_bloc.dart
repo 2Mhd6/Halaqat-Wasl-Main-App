@@ -87,12 +87,12 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     // You might ask why I used Future.delayed here.
     // Simply put, there's a slight delay before the readable location stores its new value.
     // To prevent the app from crashing, I added a short wait.
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 800));
     return readableLocation!;
   }
 
   Future<LatLng> passUserLocation() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(milliseconds: 800));
     return userLocation!;
   }
 }
