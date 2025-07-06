@@ -13,6 +13,7 @@ class UserOperationRepo {
    }
   }
 
+  
   static Future<UserModel> getUserDetailsFromDB() async {
     final String userId = _userOperationSupabase.client.auth.currentSession!.user.id;
     final Map<String,dynamic> query = await _userOperationSupabase.client.from('users').select().eq('user_id', userId).single();

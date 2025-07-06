@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/widgets.dart';
-import 'package:meta/meta.dart';
 
 part 'onboarding_event.dart';
 part 'onboarding_state.dart';
@@ -14,10 +13,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   final PageController pageController = PageController();
 
   OnboardingBloc() : super(OnboardingInitial()) {
-    on<OnboardingEvent>((event, emit) {
-      // TODO: implement event handler
-    });
-
     on<GoToNextPageEvent>(goToNextPage);
 
     on<SkipOnboardingEvent>((event, emit) => emit(SuccessPresentingOnboarding()));

@@ -4,12 +4,12 @@ import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
-
 import 'package:halaqat_wasl_main_app/ui/edit_profile/edit_profile_screen.dart';
 import 'package:halaqat_wasl_main_app/ui/profile/bloc/profile_bloc.dart';
 import 'package:halaqat_wasl_main_app/ui/profile/widgets/profile_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -25,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
             body: SafeArea(
               child: Container(
                 width: double.infinity,
-                margin: EdgeInsets.only(top: 16.0),
+                margin: EdgeInsets.only(top: 16.0, bottom: 75.0),
                 padding: EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,41 +86,61 @@ class ProfileScreen extends StatelessWidget {
                                         children: [
                                           ProfileItemWidget(
                                             item: ProfileItem(
-                                              hintText: 'Mohammed Ali Alharbi',
+                                              hintText: state.data.fullName,
                                               icon: 'assets/icons/account.png',
                                             ),
                                           ),
                                           ProfileItemWidget(
                                             item: ProfileItem(
-                                              hintText: 'Mohammed@gmail.com',
+                                              hintText: state.data.email,
                                               icon: 'assets/icons/email.png',
                                             ),
                                           ),
                                           ProfileItemWidget(
                                             item: ProfileItem(
-                                              hintText: '+966 561577821',
+                                              hintText: state.data.phoneNumber,
                                               icon: 'assets/icons/call.png',
                                             ),
                                           ),
                                           GestureDetector(
                                             onTap: () async {
                                               // Handle language selection
-                                               context.locale.languageCode == 'en'
-                                                  ? await context.setLocale(Locale('ar')) 
-                                                  : await context.setLocale(Locale('en'));
+                                              context.locale.languageCode ==
+                                                      'en'
+                                                  ? await context.setLocale(
+                                                      Locale('ar', 'AR'),
+                                                    )
+                                                  : await context.setLocale(
+                                                      Locale('en', 'US'),
+                                                    );
                                             },
                                             child: ProfileItemWidget(
                                               item: ProfileItem(
-                                                hintText:  tr('profile_screen.arabic'),
-                                                icon: 'assets/icons/language.png',
+                                                hintText: tr(
+                                                  'profile_screen.arabic',
+                                                ),
+                                                icon:
+                                                    'assets/icons/language.png',
                                               ),
                                             ),
                                           ),
-                                          ProfileItemWidget(
-                                            item: ProfileItem(
-                                              hintText:
-                                                  'Support@Halaqat_wasl.com',
-                                              icon: 'assets/icons/support.png',
+                                          GestureDetector(
+                                            onTap: () {
+                                              // Handle support email tap
+                                              final Uri emailLaunchUri = Uri(
+                                                scheme: 'mailto',
+                                                path: 'Support@gmail.com',
+                                              );
+
+                                              // Launch email client
+                                              launchUrl(emailLaunchUri);
+                                            },
+                                            child: ProfileItemWidget(
+                                              item: ProfileItem(
+                                                hintText: 'Support@gmail.com',
+                                                icon:
+                                                    'assets/icons/support.png',
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -136,7 +156,11 @@ class ProfileScreen extends StatelessWidget {
                                       ),
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          SetupSupabase.sharedSupabase.client.auth.signOut();
+                                          SetupSupabase
+                                              .sharedSupabase
+                                              .client
+                                              .auth
+                                              .signOut();
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:

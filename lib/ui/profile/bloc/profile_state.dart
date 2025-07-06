@@ -10,7 +10,7 @@ final class ProfileLoading extends ProfileState {}
 
 // The state when the profile data has been successfully loaded.
 final class ProfileData extends ProfileState {
-  final List<ProfileItem> data;
+  final UserModel data;
   ProfileData({required this.data});
 }
 

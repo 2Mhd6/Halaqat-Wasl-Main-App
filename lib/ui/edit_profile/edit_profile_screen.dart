@@ -13,23 +13,31 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<EditProfileBloc>(
-      // Create EditProfileBloc to manage edit profile logic
-      create: (context) => EditProfileBloc(),
+      create: (context) =>
+          EditProfileBloc()..add(EditProfileDataLoadRequested()),
       child: Scaffold(
         body: SafeArea(
           child: Builder(
             builder: (context) {
               final bloc = context.read<EditProfileBloc>();
               return BlocListener<EditProfileBloc, EditProfileState>(
-                // Listen for success state to show confirmation bottom sheet
+                //bottom sheet
                 listener: (context, state) {
-                  if (state is EditProfileData) {
+                  if (state.isSaved) {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) {
                         return EditProfileSuccessSheet();
                       },
                     );
+                    Future.delayed(const Duration(seconds: 2), () {
+                      if (context.mounted) {
+                        context.read<EditProfileBloc>().add(
+                          ResetIsSavedState(),
+                        );
+                        Navigator.of(context).pop();
+                      }
+                    });
                   }
                 },
                 child: Container(
@@ -58,7 +66,7 @@ class EditProfileScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                              // Page title "Edit Profile"
+                                // Page title "Edit Profile"
                                 Row(
                                   children: [
                                     Expanded(
@@ -74,7 +82,7 @@ class EditProfileScreen extends StatelessWidget {
                                   child: ListView(
                                     primary: false,
                                     children: [
-                                    // Fields to edit name, email, and phone number
+                                      // Fields to edit name, email, and phone number
                                       EditProfileField(
                                         controller: bloc.nameController,
                                         initialValue: 'Mohammed Ali Alharbi',
@@ -99,30 +107,177 @@ class EditProfileScreen extends StatelessWidget {
                                       ),
 
                                       // Fields to edit current password, new password, confirm password
-                                      EditProfileField(
-                                        controller:
-                                            bloc.currentPasswordController,
-                                        hintText: tr(
-                                          'edit_profile_screen.current_password',
-                                        ),
-                                      ),
-                                      EditProfileField(
-                                        controller: bloc.newPassordController,
-                                        hintText: tr(
-                                          'edit_profile_screen.new_password',
-                                        ),
-                                      ),
-                                      EditProfileField(
-                                        controller:
-                                            bloc.confirmNewPasswordController,
-                                        hintText: tr(
-                                          'edit_profile_screen.confirm_password',
+                                      Form(
+                                        key: bloc.formKey,
+                                        child: Column(
+                                          children: [
+                                            BlocSelector<
+                                              EditProfileBloc,
+                                              EditProfileState,
+                                              bool
+                                            >(
+                                              selector: (state) => state
+                                                  .currentPasswordObscureText,
+                                              builder: (context, state) => EditProfileField(
+                                                controller: bloc
+                                                    .currentPasswordController,
+                                                hintText: tr(
+                                                  'edit_profile_screen.current_password',
+                                                ),
+                                                obsecureText: state,
+                                                suffixIcon: IconButton(
+                                                  icon: Icon(
+                                                    state
+                                                        ? Icons.visibility
+                                                        : Icons.visibility_off,
+                                                    color: AppColors
+                                                        .primaryButtonColor,
+                                                  ),
+                                                  onPressed: () {
+                                                    // Toggle password visibility
+                                                    bloc.add(
+                                                      ToggleCurrentPasswordVisibility(),
+                                                    );
+                                                  },
+                                                  
+                                                ),
+                                                validator: (value) => 
+                                                  value == null || value.isEmpty
+                                                      ? tr(
+                                                          'edit_profile_screen.current_password_required',
+                                                        )
+                                                      : null,
+                                              ),
+                                            ),
+                                            BlocSelector<
+                                              EditProfileBloc,
+                                              EditProfileState,
+                                              bool
+                                            >(
+                                              selector: (state) =>
+                                                  state.newPasswordObscureText,
+
+                                              builder: (context, state) {
+                                                return EditProfileField(
+                                                  controller:
+                                                      bloc.newPassordController,
+                                                  hintText: tr(
+                                                    'edit_profile_screen.new_password',
+                                                  ),
+                                                  obsecureText: state,
+                                                  suffixIcon: IconButton(
+                                                    icon: Icon(
+                                                      state
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                                .visibility_off,
+                                                      color: AppColors
+                                                          .primaryButtonColor,
+                                                    ),
+                                                    onPressed: () {
+                                                      // Toggle password visibility
+                                                      bloc.add(
+                                                        ToggleNewPasswordVisibility(),
+                                                      );
+                                                    },
+                                                  ),
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return tr(
+                                                        'edit_profile_screen.new_password_required',
+                                                      );
+                                                    }
+                                                    if (value.length < 6) {
+                                                      return tr(
+                                                        'edit_profile_screen.password_too_short',
+                                                      );
+                                                    }
+                                                    return null;
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                            BlocSelector<
+                                              EditProfileBloc,
+                                              EditProfileState,
+                                              bool
+                                            >(
+                                              selector: (state) => state
+                                                  .confirmNewPasswordObscureText,
+
+                                              builder: (context, state) {
+                                                return EditProfileField(
+                                                  controller: bloc
+                                                      .confirmNewPasswordController,
+                                                  hintText: tr(
+                                                    'edit_profile_screen.confirm_password',
+                                                  ),
+                                                  obsecureText: state,
+                                                  suffixIcon: IconButton(
+                                                    icon: Icon(
+                                                      state
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                                .visibility_off,
+                                                      color: AppColors
+                                                          .primaryButtonColor,
+                                                    ),
+                                                    onPressed: () {
+                                                      // Toggle password visibility
+                                                      bloc.add(
+                                                        ToggleConfirmNewPasswordVisibility(),
+                                                      );
+                                                    },
+                                                  ),
+
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return tr(
+                                                        'edit_profile_screen.confirm_password_required',
+                                                      );
+                                                    }
+                                                    if (value !=
+                                                        bloc
+                                                            .newPassordController
+                                                            .text) {
+                                                      return tr(
+                                                        'edit_profile_screen.passwords_not_match',
+                                                      );
+                                                    }
+                                                    return null;
+                                                  },
+                                                );
+                                              },
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-
+                                // Error message
+                                BlocSelector<
+                                  EditProfileBloc,
+                                  EditProfileState,
+                                  String?
+                                >(
+                                  selector: (state) => state.errorMessage,
+                                  builder: (context, errorMessage) {
+                                    return errorMessage != null
+                                        ? Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              errorMessage,
+                                              style: AppTextStyle.sfPro16
+                                                  .copyWith(color: Colors.red),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          )
+                                        : SizedBox.shrink();
+                                  },
+                                ),
                                 // Save button
                                 Padding(
                                   padding: EdgeInsets.only(
@@ -130,28 +285,48 @@ class EditProfileScreen extends StatelessWidget {
                                     left: 8.0,
                                     right: 8.0,
                                   ),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                       // Send save event to Bloc
-                                      bloc.add(SaveProfileRequested());
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          AppColors.primaryButtonColor,
-                                      foregroundColor: Colors.white,
-                                      padding: EdgeInsets.all(16.0),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          tr('edit_profile_screen.save'),
-                                          style: AppTextStyle.sfProBold16,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  child:
+                                      BlocSelector<
+                                        EditProfileBloc,
+                                        EditProfileState,
+                                        bool
+                                      >(
+                                        selector: (state) => state.isLoading,
+                                        builder: (context, isLoading) =>
+                                            isLoading
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              )
+                                            : ElevatedButton(
+                                                onPressed: () {
+                                                
+                                                  //save event
+                                                  bloc.add(
+                                                    SaveProfileRequested(),
+                                                  );
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor: AppColors
+                                                      .primaryButtonColor,
+                                                  foregroundColor: Colors.white,
+                                                  padding: EdgeInsets.all(16.0),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      tr(
+                                                        'edit_profile_screen.save',
+                                                      ),
+                                                      style: AppTextStyle
+                                                          .sfProBold16,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                      ),
                                 ),
                               ],
                             ),

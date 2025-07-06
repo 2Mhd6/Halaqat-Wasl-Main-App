@@ -113,7 +113,14 @@
       "new_password": "New Password",
       "confirm_password": "Confirm Password",
       "save": "Save",
-      "delete_account": "Delete account"
+      "delete_account": "Delete account",
+      "current_password_required": "Current password is required",
+      "new_password_required": "New password is required",
+      "confirm_password_required": "Confirm password is required",
+      "passwords_not_match": "Passwords do not match",
+      "password_updated": "Password updated successfully",
+      "password_too_short": "Password must be at least 6 characters long"
+
     }
   }
   
