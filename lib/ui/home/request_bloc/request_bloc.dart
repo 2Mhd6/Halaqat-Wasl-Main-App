@@ -16,7 +16,6 @@ part 'request_event.dart';
 part 'request_state.dart';
 
 class RequestBloc extends Bloc<RequestEvent, RequestState> {
-
   DateTime? requestDate;
   String? formattedDate;
   LatLng? userLocation;
@@ -36,23 +35,37 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     on<AddNewRequestEvent>(addNewRequest);
   }
 
-    FutureOr<void> checkIfAllFieldsAreFilled(CheckIfAllFieldsAreFilled event, Emitter<RequestState> emit) {
-      
-      if(requestDate == null || userLocation == null || selectedHospital == null){
-        isFilledAllFields = false;
-        emit(FailedSendingRequestState(errorMessage: 'Fill all the fields, to send your request'));
-        return null;
-      }
+  FutureOr<void> checkIfAllFieldsAreFilled(
+    CheckIfAllFieldsAreFilled event,
+    Emitter<RequestState> emit,
+  ) {
+    if (requestDate == null ||
+        userLocation == null ||
+        selectedHospital == null) {
+      isFilledAllFields = false;
+      emit(
+        FailedSendingRequestState(
+          errorMessage: 'Fill all the fields, to send your request',
+        ),
+      );
+      return null;
+    }
 
-      isFilledAllFields = true;
+    isFilledAllFields = true;
 
-      emit(AllFieldsAreFilledSuccessfully());
+    emit(AllFieldsAreFilledSuccessfully());
   }
 
-  FutureOr<void> addNewRequest(AddNewRequestEvent event, Emitter<RequestState> emit) async{
-
-    if(!isFilledAllFields){
-      emit(FailedSendingRequestState(errorMessage: 'Fill all the fields, to send your request'));
+  FutureOr<void> addNewRequest(
+    AddNewRequestEvent event,
+    Emitter<RequestState> emit,
+  ) async {
+    if (!isFilledAllFields) {
+      emit(
+        FailedSendingRequestState(
+          errorMessage: 'Fill all the fields, to send your request',
+        ),
+      );
       return null;
     }
 
@@ -61,38 +74,36 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
 
     // The static Driver Id for testing purpose
     final request = RequestModel(
-      requestId: Uuid().v4(), 
-      userId: user!.userId , 
-      charityId: null, 
-      hospitalId: selectedHospital!.hospitalId, 
-      complaintId: null, 
-      driverId: '520568cb-ee01-45e8-b5e7-172278340115', 
-      pickupLat: userLocation!.latitude, 
-      pickupLong: userLocation!.longitude, 
-      destinationLat: selectedHospital!.hospitalLat, 
-      destinationLong: selectedHospital!.hospitalLong, 
+      requestId: Uuid().v4(),
+      userId: user!.userId,
+      charityId: null,
+      hospitalId: selectedHospital!.hospitalId,
+      complaintId: null,
+      driverId: '520568cb-ee01-45e8-b5e7-172278340115',
+      pickupLat: userLocation!.latitude,
+      pickupLong: userLocation!.longitude,
+      destinationLat: selectedHospital!.hospitalLat,
+      destinationLong: selectedHospital!.hospitalLong,
       note: notesController.text.isEmpty ? null : notesController.text,
       requestDate: requestDate!,
-      status: 'pending'
+      status: 'pending',
     );
 
-    try{
-      
-      await RequestRepo.insertRequestIntoDB(request: request);
+    try {
+      await RequestRepo.insertRequest(request);
+
       log('Inserting request to DB ');
-      
+
       clear();
       emit(SuccessRequestState());
-    }catch(error){
+    } catch (error) {
       log('Failed to insert to DB - ${error.toString()}');
       emit(FailedSendingRequestState(errorMessage: error.toString()));
     }
-
-
   }
 
   // -- Clearing Fields
-  void clear(){
+  void clear() {
     requestDate = null;
     formattedDate = null;
     userLocation = null;
@@ -101,6 +112,7 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     isFilledAllFields = false;
     notesController.clear();
   }
+
   @override
   Future<void> close() {
     notesController.dispose();
