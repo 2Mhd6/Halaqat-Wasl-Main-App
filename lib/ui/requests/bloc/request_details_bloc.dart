@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halaqat_wasl_main_app/model/request_model/request_model.dart';
 import 'package:halaqat_wasl_main_app/model/complaint_model/complaint_model.dart';
 import 'package:halaqat_wasl_main_app/repo/request/complaint_repo.dart';
+import 'package:halaqat_wasl_main_app/repo/request/request_repo.dart';
 
 part 'request_details_event.dart';
 part 'request_details_state.dart';
@@ -79,10 +80,12 @@ class RequestDetailsBloc
 
   //When the user clicks the "Cancel" button in the pending request state -> the state inside the request object changes to 'cancelled', sending the new state RequestCancelled
   void _onCancelRequest(
-    CancelRequest event,
-    Emitter<RequestDetailsState> emit,
-  ) async {
-    request?.status = 'cancelled';
-    emit(RequestCancelled());
-  }
+  CancelRequest event,
+  Emitter<RequestDetailsState> emit,
+) async {
+  await RequestRepo.cancelRequest(request!.requestId); //  Update to Supabase
+  request?.status = 'cancelled'; //Update locally 
+  emit(RequestCancelled());
+}
+
 }

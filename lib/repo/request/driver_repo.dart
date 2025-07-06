@@ -7,8 +7,8 @@ class DriverRepo {
   static Future<String?> getDriverNameById(String driverId) async {
     try {
       final response = await _supabase
-          .from('driver') 
-          .select('name')  
+          .from('driver')
+          .select('full_name')
           .eq('driver_id', driverId)
           .maybeSingle();
 

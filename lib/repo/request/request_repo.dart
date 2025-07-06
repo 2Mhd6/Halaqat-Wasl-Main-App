@@ -5,7 +5,7 @@ import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 class RequestRepo {
   static final _requestSupabase = SetupSupabase.sharedSupabase.client;
 
-//getRequestById function -> Searches for a single request by requestId
+  //getRequestById function -> Searches for a single request by requestId
   static Future<RequestModel?> getRequestById(String requestId) async {
     try {
       final response = await _requestSupabase
@@ -27,11 +27,13 @@ class RequestRepo {
       return null;
     }
   }
-//getAllRequests function -> fetches all requests from the requests table
-  static Future<List<RequestModel>> getAllRequests() async {
 
+  //getAllRequests function -> fetches all requests from the requests table
+  static Future<List<RequestModel>> getAllRequests() async {
     final userId = _requestSupabase.auth.currentUser!.id;
-    final response = await _requestSupabase.from('requests').select()
+    final response = await _requestSupabase
+        .from('requests')
+        .select()
         .eq('user_id', userId);
 
     return (response as List)
@@ -39,8 +41,17 @@ class RequestRepo {
         .toList();
   }
 
-//The insertRequest -> function is used to add a new request to the database.
-  static Future<void> insertRequestIntoDB({required RequestModel request}) async {
+  //The insertRequest -> function is used to add a new request to the database.
+  static Future<void> insertRequestIntoDB({
+    required RequestModel request,
+  }) async {
     await _requestSupabase.from('requests').insert(request.toMap());
+  }
+
+  static Future<void> cancelRequest(String requestId) async {
+    await _requestSupabase
+        .from('requests')
+        .update({'status': 'cancelled'})
+        .eq('request_id', requestId);
   }
 }

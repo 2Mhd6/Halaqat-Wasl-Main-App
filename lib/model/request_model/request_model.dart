@@ -53,7 +53,7 @@ class RequestModel with RequestModelMappable {
   @MappableField(key: 'request_date')
   final DateTime requestDate;
 
-   String status;
+  String status;
 
   final String? note;
 }
