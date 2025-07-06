@@ -28,16 +28,24 @@ class BottomNavScreen extends StatelessWidget {
               final selectedIndex = bottomNabBloc.selectedIndex;
 
               return Scaffold(
-                extendBody: true,
+                resizeToAvoidBottomInset: true,
+                
                 backgroundColor: Colors.white,
                 //bottomNavigationBar: 
                 body: Stack(
                   children: [
                     screens.elementAt(selectedIndex),
-                    Positioned(
-                      bottom: 0,
-                      child: AnimatedBottomNav(selectedIndex: selectedIndex, onIndexChanged: (value) => bottomNabBloc.add(ChangeIndexEvent(index: value)))
-                    )
+                    
+                    
+                      Positioned(
+                        bottom: 0,
+                        child: AnimatedBottomNav(
+                          selectedIndex: selectedIndex,
+                          isKeyBoardShown: MediaQuery.of(context).viewInsets.bottom == 0 ? false : true,
+                          onIndexChanged: (value) =>
+                              bottomNabBloc.add(ChangeIndexEvent(index: value)),
+                        ),
+                      ),
                   ],
                 ),
               );
@@ -54,9 +62,10 @@ class BottomNavScreen extends StatelessWidget {
 
 class AnimatedBottomNav extends StatelessWidget {
   
-  const AnimatedBottomNav({super.key,required this.selectedIndex, required this.onIndexChanged,});
+  const AnimatedBottomNav({super.key,required this.selectedIndex, required this.isKeyBoardShown ,required this.onIndexChanged,});
 
   final int selectedIndex;
+  final bool isKeyBoardShown;
   final void Function(int index) onIndexChanged;
 
   @override
@@ -65,7 +74,10 @@ class AnimatedBottomNav extends StatelessWidget {
     final labels = ['Home', 'Requests', 'Account'];
     final icons = [LucideIcons.home, LucideIcons.clipboardList, LucideIcons.user];
 
-    return Container(
+    return isKeyBoardShown ? 
+    SizedBox() 
+    : 
+    Container(
       //color: Colors.amber,
       width: context.getWidth(),
       height: context.getHeight(multiplied: 0.12),

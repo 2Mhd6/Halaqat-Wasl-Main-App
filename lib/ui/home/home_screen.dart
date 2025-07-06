@@ -64,7 +64,8 @@ class HomeScreen extends StatelessWidget {
                             label: requestBloc.formattedDate == null
                                 ? tr('home_screen.pickup_date_and_time')
                                 : requestBloc.formattedDate!,
-                            iconPath: 'assets/home/calender.svg',
+                            icon: Icons.calendar_month_rounded,
+                            isFilled: requestBloc.formattedDate?.isNotEmpty ?? false,
                             onPressed: () async {
                               await showDialog(
                                 context: context,
@@ -84,7 +85,8 @@ class HomeScreen extends StatelessWidget {
                             label: requestBloc.readableLocation == null
                                 ? tr('home_screen.current_location')
                                 : requestBloc.readableLocation!,
-                            iconPath: 'assets/home/location.svg',
+                            icon: Icons.location_on,
+                            isFilled: requestBloc.readableLocation?.isNotEmpty ?? false,
                             onPressed: () {
                               context.moveTo(
                                 context: context,
@@ -105,9 +107,8 @@ class HomeScreen extends StatelessWidget {
                             label: requestBloc.selectedHospital == null
                                 ? tr('home_screen.select_hospital')
                                 : requestBloc.selectedHospital!.name,
-                            iconPath: requestBloc.selectedHospital == null
-                                ? 'assets/home/arrow.svg'
-                                : '',
+                            icon: Icons.chevron_right_sharp,
+                            isFilled: requestBloc.selectedHospital?.name.isNotEmpty ?? false,
                             onPressed: () {
                               showModalBottomSheet(
                                 isScrollControlled: true,

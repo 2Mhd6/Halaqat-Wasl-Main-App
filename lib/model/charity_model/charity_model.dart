@@ -23,12 +23,12 @@ class CharityModel with CharityModelMappable {
   final String charityId;
 
   @MappableField(key: 'charity_number')
-  final String charityNumber;
+  final String? charityNumber;
 
   @MappableField(key: 'charity_name')
   final String charityName;
 
-  final String role;
+  final String? role;
 
   @MappableField(key: 'charity_lat')
   final double charityLat;

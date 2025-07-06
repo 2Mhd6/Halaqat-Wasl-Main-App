@@ -3,10 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
 
 class RequestInput extends StatelessWidget {
-  const RequestInput({super.key, required this.label, required this.iconPath, required this.onPressed});
+  const RequestInput({super.key, required this.label, required this.icon, required this.isFilled ,required this.onPressed});
 
   final String label;
-  final String iconPath;
+  final IconData icon;
+  final bool isFilled;
   final void Function()? onPressed;
 
   @override
@@ -25,8 +26,8 @@ class RequestInput extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onPressed,
-        title: Text(label,style: AppTextStyle.sfPro60014SecondaryTextColor),
-        trailing: iconPath.isEmpty ? null : SvgPicture.asset(iconPath),
+        title: Text(label,style: isFilled ? AppTextStyle.sfPro60014 : AppTextStyle.sfPro60014SecondaryTextColor),
+        trailing: Icon(icon, color: isFilled ? Colors.black : Colors.grey,),
       ),
     );
   }

@@ -130,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
                                     // Logout button
                                     Padding(
                                       padding: EdgeInsets.only(
-                                        bottom: 16.0,
+                                        bottom: 16,
                                         left: 8.0,
                                         right: 8.0,
                                       ),

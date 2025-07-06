@@ -11,6 +11,7 @@ class AuthGateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return StreamBuilder(
       stream: SetupSupabase.sharedSupabase.client.auth.onAuthStateChange,
       builder: (context, snapshot) {
@@ -22,7 +23,7 @@ class AuthGateScreen extends StatelessWidget {
           );
         }
 
-        if ( authState == null || authState.session == null) {
+        if (authState == null || authState.session == null) {
           return  LogInScreen();
         }
 
@@ -30,6 +31,7 @@ class AuthGateScreen extends StatelessWidget {
         return FutureBuilder(
           future: UserOperationRepo.getUserDetailsFromDB(),
           builder: (context, userSnapshot) {
+
             if (userSnapshot.connectionState == ConnectionState.waiting) {
               return  Scaffold(
                 body: Center(child: CircularProgressIndicator()),
@@ -42,7 +44,9 @@ class AuthGateScreen extends StatelessWidget {
 
             final user = userSnapshot.data!;
             final role = user.role;
+
             GetIt.I.get<UserData>().user = user;
+            
             if (role == 'user') {
               return  BottomNavScreen();
             } else{

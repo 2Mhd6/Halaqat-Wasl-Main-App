@@ -6,10 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthRepo {
   static final Supabase _supabaseAuth = SetupSupabase.sharedSupabase;
 
-  static Future<AuthResponse> signUp({
-    required String email,
-    required String password,
-  }) async {
+  static Future<AuthResponse> signUp({required String email,required String password,}) async {
     try {
       return await _supabaseAuth.client.auth.signUp(
         email: email,

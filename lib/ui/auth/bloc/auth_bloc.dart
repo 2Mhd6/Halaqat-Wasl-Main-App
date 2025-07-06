@@ -60,7 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         throw 'Email and password must not be empty';
       }
 
-      phoneNumberController.text;
+      
       final res = await AuthRepo.signUp(email: email, password: password);
 
       final UserModel user = UserModel(

@@ -23,13 +23,13 @@ class CharityModelMapper extends ClassMapperBase<CharityModel> {
   static String _$charityId(CharityModel v) => v.charityId;
   static const Field<CharityModel, String> _f$charityId =
       Field('charityId', _$charityId, key: r'charity_id');
-  static String _$charityNumber(CharityModel v) => v.charityNumber;
+  static String? _$charityNumber(CharityModel v) => v.charityNumber;
   static const Field<CharityModel, String> _f$charityNumber =
       Field('charityNumber', _$charityNumber, key: r'charity_number');
   static String _$charityName(CharityModel v) => v.charityName;
   static const Field<CharityModel, String> _f$charityName =
       Field('charityName', _$charityName, key: r'charity_name');
-  static String _$role(CharityModel v) => v.role;
+  static String? _$role(CharityModel v) => v.role;
   static const Field<CharityModel, String> _f$role = Field('role', _$role);
   static double _$charityLat(CharityModel v) => v.charityLat;
   static const Field<CharityModel, double> _f$charityLat =
@@ -138,17 +138,17 @@ class _CharityModelCopyWithImpl<$R, $Out>
   @override
   $R call(
           {String? charityId,
-          String? charityNumber,
+          Object? charityNumber = $none,
           String? charityName,
-          String? role,
+          Object? role = $none,
           double? charityLat,
           double? charityLang,
           int? totalServices}) =>
       $apply(FieldCopyWithData({
         if (charityId != null) #charityId: charityId,
-        if (charityNumber != null) #charityNumber: charityNumber,
+        if (charityNumber != $none) #charityNumber: charityNumber,
         if (charityName != null) #charityName: charityName,
-        if (role != null) #role: role,
+        if (role != $none) #role: role,
         if (charityLat != null) #charityLat: charityLat,
         if (charityLang != null) #charityLang: charityLang,
         if (totalServices != null) #totalServices: totalServices
