@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:get_it/get_it.dart';
+import 'package:halaqat_wasl_main_app/data/user_data.dart';
 import 'package:halaqat_wasl_main_app/model/request_model/request_model.dart';
 import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 
@@ -40,6 +42,8 @@ class RequestRepo {
         .map((map) => RequestModelMapper.fromMap(map))
         .toList();
   }
+
+  final currentUserData = GetIt.I.get<UserData>().user;
 
   //The insertRequest -> function is used to add a new request to the database.
   static Future<void> insertRequestIntoDB({

@@ -8,6 +8,8 @@ import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
 import 'package:halaqat_wasl_main_app/theme/app_text_style.dart';
 import 'package:halaqat_wasl_main_app/shared/widgets/gap.dart';
 import 'package:halaqat_wasl_main_app/ui/requests/bloc/request_details_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:halaqat_wasl_main_app/ui/requests/widgets/request_details_widgets.dart';
 
 enum ComplaintStatus {
   //Represents each case of complaint
@@ -29,6 +31,7 @@ class RequestDetailsScreen extends StatelessWidget {
   });
 
   final TextEditingController _complaintController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RequestDetailsBloc, RequestDetailsState>(
@@ -52,10 +55,8 @@ class RequestDetailsScreen extends StatelessWidget {
 
         final status = request.status
             .toLowerCase(); //status variable for request status
-        // final isWithin2Hours =
-        //     request.requestDate.difference(DateTime.now()).inMinutes <= 120;
         final isWithin2Hours = true;
-
+        //     request.requestDate.difference(DateTime.now()).inMinutes <= 120;
         return Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
@@ -63,8 +64,8 @@ class RequestDetailsScreen extends StatelessWidget {
             elevation: 0,
             centerTitle: false,
             leading: const BackButton(color: Colors.black),
-            title: const Text(
-              'Request Details',
+            title: Text(
+              'request_details_screen.request_details'.tr(),
               style: AppTextStyle.sfProBold20,
             ),
           ),
@@ -73,7 +74,10 @@ class RequestDetailsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Request Number', style: AppTextStyle.sfProW40014),
+                Text(
+                  'request_details_screen.request_number'.tr(),
+                  style: AppTextStyle.sfProW40014,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -81,56 +85,73 @@ class RequestDetailsScreen extends StatelessWidget {
                       '#${request.requestId.toUpperCase().substring(0, 5)}', //Displays the first 5 digits of the order number along with the chip color depending on the status
                       style: AppTextStyle.sfProBold16,
                     ),
-                    _buildStatusChip(status),
+                    buildStatusChip(status),
                   ],
                 ),
                 Gap.gapH16,
-                _infoItem('Pick Up', 'King Abdulaziz Road'),
+                infoItem(
+                  'request_details_screen.pickup'.tr(),
+                  'King Abdulaziz Road',
+                ),
                 Gap.gapH16,
-                _infoItem('Destination', 'Alnahdi Pharmacy, Riyadh'),
+                infoItem(
+                  'request_details_screen.hospital_name'.tr(),
+                  'Alnahdi Pharmacy, Riyadh',
+                ),
                 Gap.gapH16,
-                _infoItem('Date & Time', _formatDate(request.requestDate)),
+                infoItem(
+                  'request_details_screen.dare_time'.tr(),
+                  _formatDate(request.requestDate),
+                ),
                 Gap.gapH16,
-                _infoItem('Additional Notes', request.note ?? 'No notes'),
+                infoItem(
+                  'request_details_screen.additional_notes'.tr(),
+                  request.note ?? 'No notes',
+                ),
                 Gap.gapH16,
+
                 //Driver name is not displayed in pending and cancelled statuses.
                 if (status != 'pending' && status != 'cancelled')
                   FutureBuilder<String?>(
-                    //Wait for the driver name to be fetched from Supabase.
+                    //Wait for the driver name to be fetched from Supabase
                     future: DriverRepo.getDriverNameById(
                       request.driverId ?? '',
                     ),
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
+                      if (snapshot.connectionState == ConnectionState.waiting)
                         return const SizedBox();
-                      }
-
                       final driverName = snapshot.data ?? 'No driver assigned';
-                      return _infoItem('Driver Name', driverName);
+                      return infoItem(
+                        'request_details_screen.driver_info'.tr(),
+                        driverName,
+                      );
                     },
                   ),
 
                 // Completed status -> The complaint box appears with the appropriate button
                 if (status == 'completed') ...[
                   Gap.gapH24,
-                  const Text(
-                    'Complaint Description',
+                  Text(
+                    'request_details_screen.complaint_description'.tr(),
                     style: AppTextStyle.sfProBold16,
                   ),
                   Gap.gapH8,
-                  _buildComplaintBox(context, complaintStatus),
-                  //This section is only displayed if the complaint is pending or has been responded to.
+                  buildComplaintBox(
+                    context: context,
+                    status: complaintStatus,
+                    controller: _complaintController,
+                  ),
                   if (complaintStatus == ComplaintStatus.waitingResponse ||
                       complaintStatus == ComplaintStatus.responded) ...[
                     Gap.gapH24,
-                    const Text('Response', style: AppTextStyle.sfProBold16),
+                    Text(
+                      'request_details_screen.response'.tr(),
+                      style: AppTextStyle.sfProBold16,
+                    ),
                     Gap.gapH8,
-                    if (complaintStatus == ComplaintStatus.waitingResponse)
-                      _waitingResponse()
-                    else
-                      _descriptionBox(
-                        complaint?.response ?? '',
-                      ), //Always receives a text, even if there is no reply so as not to cause a crash or show a white screen.
+                    complaintStatus == ComplaintStatus.waitingResponse
+                        ? waitingResponseIcon()
+                        : descriptionBox(complaint?.response ?? ''),
                   ],
                   Gap.gapH32,
                   // Status button SubmitComplaint & Okay
@@ -150,7 +171,7 @@ class RequestDetailsScreen extends StatelessWidget {
                                 context.read<RequestDetailsBloc>().add(
                                   SubmitComplaint(
                                     _complaintController.text.trim(),
-                                  ), //The user writes a complaint, presses the button to send it to the BloC until the status changes.
+                                  ),
                                 );
                               }
                             }
@@ -168,8 +189,8 @@ class RequestDetailsScreen extends StatelessWidget {
                         (complaintStatus == ComplaintStatus.responded ||
                                 complaintStatus ==
                                     ComplaintStatus.waitingResponse)
-                            ? 'Okay'
-                            : 'Submit Complaint',
+                            ? 'request_details_screen.cancel'.tr()
+                            : 'request_details_screen.submit'.tr(),
                         style: AppTextStyle.sfProW60016.copyWith(
                           color: Colors.white,
                         ),
@@ -183,7 +204,6 @@ class RequestDetailsScreen extends StatelessWidget {
                 if (status == 'accepted' && isWithin2Hours) ...[
                   Gap.gapH24,
                   Row(
-                    //If the driver is nearby, the user can call him or send him a message on WhatsApp.
                     children: [
                       Expanded(
                         child: OutlinedButton.icon(
@@ -192,8 +212,8 @@ class RequestDetailsScreen extends StatelessWidget {
                             Icons.phone,
                             color: AppColors.mainBlue,
                           ),
-                          label: const Text(
-                            'Call',
+                          label: Text(
+                            'request_details_screen.call'.tr(),
                             style: AppTextStyle.sfProW60016,
                           ),
                           style: OutlinedButton.styleFrom(
@@ -209,8 +229,8 @@ class RequestDetailsScreen extends StatelessWidget {
                         child: ElevatedButton.icon(
                           onPressed: () => _openWhatsAppChat('966561577826'),
                           icon: const Icon(Icons.message, size: 20),
-                          label: const Text(
-                            'Message',
+                          label: Text(
+                            'request_details_screen.message'.tr(),
                             style: AppTextStyle.sfProW60016,
                           ),
                           style: ElevatedButton.styleFrom(
@@ -224,22 +244,19 @@ class RequestDetailsScreen extends StatelessWidget {
                     ],
                   ),
                   Gap.gapH24,
-                  // If more than two hours remain, the Okay button will appear.
                   SizedBox(
                     width: double.infinity,
                     height: 48,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: () => Navigator.of(context).pop(),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.mainBlue,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text(
-                        'Okay',
+                      child: Text(
+                        'request_details_screen.cancel'.tr(),
                         style: AppTextStyle.sfProW60016,
                       ),
                     ),
@@ -254,9 +271,8 @@ class RequestDetailsScreen extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        context.read<RequestDetailsBloc>().add(
-                          CancelRequest(),
-                        ); //When the button is pressed, a CancelRequest event is sent to the Bloc to change the state to cancelled.
+                        context.read<RequestDetailsBloc>().add(CancelRequest());
+                        Navigator.of(context).pop(true);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.cancelButtonColor,
@@ -264,13 +280,14 @@ class RequestDetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: const Text(
-                        'Cancel',
+                      child: Text(
+                        'request_details_screen.cancel'.tr(),
                         style: AppTextStyle.sfProW60016,
                       ),
                     ),
                   ),
                 ],
+
                 //Cancel status
                 if (status == 'cancelled' || state is RequestCancelled) ...[
                   Gap.gapH32,
@@ -285,16 +302,13 @@ class RequestDetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-
-                      child: const Text(
-                        'Okay',
+                      child: Text(
+                        'request_details_screen.cancel'.tr(),
                         style: AppTextStyle.sfProW60016,
                       ),
                     ),
                   ),
                 ],
-
-                Gap.gapH24,
 
                 Gap.gapH24,
               ],
@@ -305,156 +319,23 @@ class RequestDetailsScreen extends StatelessWidget {
     );
   }
 
-  // Enable it only if the condition is: ComplaintWriting or ComplaintWritingButEmpty
-  Widget _buildComplaintBox(BuildContext context, ComplaintStatus status) {
-    final bool isEditable =
-        status == ComplaintStatus.writing ||
-        status == ComplaintStatus.writingButEmpty;
-
-    return TextFormField(
-      controller: _complaintController,
-      enabled:
-          isEditable, //Control the ability to write within the complaint field
-      maxLines: 5,
-      onChanged: (value) {
-        context.read<RequestDetailsBloc>().add(
-          value.trim().isEmpty
-              ? WritingComplaintEmpty() //If the value is empty, the "Submit Complaint" button will be disabled
-              : StartWritingComplaint(), //If the value is not empty, the "Submit Complaint" button will be activated.
-        );
-      },
-      //decoration
-      decoration: InputDecoration(
-        hintText: 'Let us know what happened',
-        filled: true,
-        fillColor: AppColors.fieldBackground,
-        contentPadding: const EdgeInsets.all(16),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none,
-        ),
-      ),
-      style: AppTextStyle.sfProW40014,
-    );
-  }
-
-  // descriptionBox for response from ManagerApp
-  Widget _descriptionBox(String text) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.fieldBackground,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Text(text, style: AppTextStyle.sfProW40014),
-    );
-  }
-
-  // Status Chip
-  Widget _buildStatusChip(String status) {
-    Color background;
-    Color textColor;
-
-    switch (status) {
-      case 'pending':
-        background = AppColors.statusPendingBackground;
-        textColor = AppColors.statusPendingText;
-        break;
-      case 'accepted':
-        background = AppColors.statusAcceptedBackground;
-        textColor = AppColors.statusAcceptedText;
-        break;
-      case 'cancelled':
-        background = AppColors.statusCancelledBackground;
-        textColor = AppColors.statusCancelledText;
-        break;
-      case 'completed':
-      default:
-        background = AppColors.statusCompletedBackground;
-        textColor = AppColors.statusCompletedText;
-        break;
-    }
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      decoration: BoxDecoration(
-        color: background, //Color changes depending on the order status.
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        (status.isNotEmpty)
-            ? status[0].toUpperCase() + status.substring(1)
-            : '',
-        style: TextStyle(
-          fontFamily: 'SFPro',
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: textColor,
-        ),
-      ),
-    );
-  }
-
-  // Widget to display address and data
-  Widget _infoItem(String label, String value) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: AppTextStyle.sfProW40014),
-        Gap.gapH8,
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: AppColors.fieldBackground,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Text(value, style: AppTextStyle.sfProW40014),
-        ),
-      ],
-    );
-  }
-
-  // Icon waiting
-  Widget _waitingResponse() {
-    return Container(
-      width: double.infinity,
-      height: 100,
-      decoration: BoxDecoration(
-        color: AppColors.fieldBackground,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: const Center(child: Icon(Icons.access_time, size: 36)),
-    );
-  }
-
-  // Format Date
   String _formatDate(DateTime dateTime) {
     return '${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}pm ${dateTime.day}-${dateTime.month}-${dateTime.year}';
   }
 
-  //Enable complaint button by status
   bool _getMainButtonEnabled(ComplaintStatus status) {
     return status == ComplaintStatus.writing ||
         status == ComplaintStatus.waitingResponse ||
         status == ComplaintStatus.responded;
   }
 
-  //url_launcher package
-  // Calling -> Convert the number to a link, check if this link can be played, if so, open the calling app
   void _makePhoneCall(String phoneNumber) async {
     final Uri url = Uri.parse('tel:$phoneNumber');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    }
+    if (await canLaunchUrl(url)) await launchUrl(url);
   }
 
-  // WhatsApp massage -> Takes the phone number as a String and opens a WhatsApp conversation with it, building a WhatsApp link using the WhatsApp API
   void _openWhatsAppChat(String phoneNumber) async {
     final Uri url = Uri.parse('https://wa.me/$phoneNumber');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    }
+    if (await canLaunchUrl(url)) await launchUrl(url);
   }
 }

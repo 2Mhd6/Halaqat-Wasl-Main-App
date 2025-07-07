@@ -201,7 +201,7 @@ class _RequestModelCopyWithImpl<$R, $Out>
         if (requestDate != null) #requestDate: requestDate,
         if (status != null) #status: status,
         if (note != $none) #note: note
-      }));
+      })); 
   @override
   RequestModel $make(CopyWithData data) => RequestModel(
       requestId: data.get(#requestId, or: $value.requestId),

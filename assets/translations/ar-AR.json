@@ -93,27 +93,30 @@
         "rate": "تقييم"
     },
 
-    "request_details_screen": {
-        "request_details": "تفاصيل الطلب",
-        "request_number": "رقم الطلب",
-        "req_id": "رقم الطلب",
-        "req_status": "حالة الطلب",
-        "pickup": "الاستلام",
-        "hospital_name": "اسم المستشفى",
-        "date_&_time": "التاريخ والوقت",
-        "additional_notes": "ملاحظات إضافية",
-        "driver_info": "معلومات السائق",
-        "user_name": "اسم المستخدم",
-        "call": "اتصال",
-        "message": "رسالة",
-        "cancel": "إلغاء",
-        "complaint_description": "وصف الشكوى",
-        "complaint_header": "يرجى وصف المشكلة بالتفصيل...",
-        "submit": "إرسال",
-        "complaint": "شكوى",
-        "complaint_description_user": "وصف الشكوى من المستخدم",
-        "response": "رد الإدارة"
-    },
+    
+        "request_details_screen": {
+          "request_details": "تفاصيل الطلب",
+          "request_number": "رقم الطلب",
+          "request_id": "معرف الطلب",
+          "request_status": "حالة الطلب",
+          "pickup": "نقطة الإلتقاء",
+          "hospital_name": "اسم المستشفى",
+          "dare_time": "التاريخ والوقت",
+          "additional_notes": "ملاحظات إضافية",
+          "driver_info": "اسم السائق",
+          "user_name": "اسم المستخدم",
+          "call": "اتصال",
+          "message": "رسالة",
+          "cancel": "إلغاء",
+          "complaint_description": "وصف الشكوى",
+          "complaint_header": "يرجى وصف المشكلة بالتفصيل...",
+          "submit": "إرسال",
+          "complaint": "شكوى",
+          "complaint_description_user": "وصف الشكوى من المستخدم",
+          "response": "رد الإدارة"
+        },
+      
+      
 
     "complaint_bottomsheet_details_screen": {
         "successful_complaint": "تم بنجاح",
@@ -121,15 +124,13 @@
     },
 
     "my_request_screen": {
-        "my_request": "طلباتي",
-        "search_request": "بحث عن طلب",
-        "all": "الكل",
-        "completed": "مكتمل",
-        "cancelled": "ملغي",
-        "req_id": "رقم الطلب",
-        "hospital_name": "اسم المستشفى",
-        "date_&_time": "التاريخ والوقت"
-    },
+  "requests": "طلباتي",
+  "all": "الكل",
+  "completed": "مكتملة",
+  "cancelled": "ملغاة",
+  "no_requests": "لا توجد طلبات حالياً"
+},
+
 
     "profile_screen": {
       "profile": "الملف الشخصي",

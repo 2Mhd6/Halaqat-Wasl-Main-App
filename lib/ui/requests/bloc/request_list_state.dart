@@ -1,20 +1,20 @@
-// part of 'request_list_bloc.dart';
+part of 'request_list_bloc.dart';
 
-// @immutable
-// abstract class RequestListState {}
+@immutable
+abstract class RequestListState {}
 
-// class RequestListInitial extends RequestListState {}
+class RequestListInitial extends RequestListState {}
 
-// class RequestListLoading extends RequestListState {}
+class RequestListLoading extends RequestListState {}
 
-// class RequestListLoaded extends RequestListState {
-//   final List<RequestModel> requests;
+class RequestListLoaded extends RequestListState {
+  final List<RequestModel> requests;
 
-//   RequestListLoaded(this.requests);
-// }
+  RequestListLoaded({required this.requests});
+}
 
-// class RequestListError extends RequestListState {
-//   final String message;
+class RequestListError extends RequestListState {
+  final String message;
 
-//   RequestListError(this.message);
-// }
+  RequestListError(this.message);
+}

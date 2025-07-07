@@ -14,7 +14,7 @@ class DriverRepo {
 
       if (response == null) return null;
 
-      return response['name'] as String;
+      return response['full_name'] as String;
     } catch (e) {
       print('Error fetching driver name: $e');
       return null;

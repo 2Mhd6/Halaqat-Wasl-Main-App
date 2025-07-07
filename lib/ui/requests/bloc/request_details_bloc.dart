@@ -17,8 +17,8 @@ class RequestDetailsBloc
     on<StartWritingComplaint>(_onStartWritingComplaint);
     on<WritingComplaintEmpty>(_onWritingComplaintEmpty);
     on<SubmitComplaint>(_onSubmitComplaint);
-    on<WaitForResponse>((event, emit) => emit(ComplaintWaitingResponse()));
-    on<ReceiveResponse>((event, emit) => emit(ComplaintResponded()));
+    // on<WaitForResponse>((event, emit) => emit(ComplaintWaitingResponse()));
+    // on<ReceiveResponse>((event, emit) => emit(ComplaintResponded()));
     on<CancelRequest>(_onCancelRequest);
   }
   //Load the RequestModel and ComplaintModel data, and specify the appropriate initial status to display on the user interface.
@@ -80,12 +80,11 @@ class RequestDetailsBloc
 
   //When the user clicks the "Cancel" button in the pending request state -> the state inside the request object changes to 'cancelled', sending the new state RequestCancelled
   void _onCancelRequest(
-  CancelRequest event,
-  Emitter<RequestDetailsState> emit,
-) async {
-  await RequestRepo.cancelRequest(request!.requestId); //  Update to Supabase
-  request?.status = 'cancelled'; //Update locally 
-  emit(RequestCancelled());
-}
-
+    CancelRequest event,
+    Emitter<RequestDetailsState> emit,
+  ) async {
+    await RequestRepo.cancelRequest(request!.requestId); //  Update to Supabase
+    request?.status = 'cancelled'; //Update locally
+    emit(RequestCancelled());
+  }
 }

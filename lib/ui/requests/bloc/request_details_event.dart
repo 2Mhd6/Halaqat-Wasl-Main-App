@@ -19,9 +19,8 @@ class SubmitComplaint extends RequestDetailsEvent {
   SubmitComplaint(this.complaintText);
 }
 
+// class WaitForResponse extends RequestDetailsEvent {}
 
-class WaitForResponse extends RequestDetailsEvent {}
-
-class ReceiveResponse extends RequestDetailsEvent {}
+// class ReceiveResponse extends RequestDetailsEvent {}
 
 class CancelRequest extends RequestDetailsEvent {}
