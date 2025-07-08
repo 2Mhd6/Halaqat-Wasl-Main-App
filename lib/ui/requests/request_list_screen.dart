@@ -94,22 +94,29 @@ class _RequestsListView extends StatelessWidget {
             separatorBuilder: (_, __) => Gap.gapH16,
             itemBuilder: (context, index) {
               final request = filteredRequests[index];
-String? readableAddress;
+              String? readableAddress;
               return InkWell(
-                onTap: () async =>readableAddress =  await ReadableLocation.readableAddress(request.pickupLat, request.pickupLong) ,
+                onTap: () async =>
+                    readableAddress = await ReadableLocation.readableAddress(
+                      request.pickupLat,
+                      request.pickupLong,
+                    ),
                 child: InkWell(
                   onTap: () async {
-                
-                
-                    final readableAddress = await ReadableLocation.readableAddress(request.pickupLat, request.pickupLong);
+                    final readableAddress =
+                        await ReadableLocation.readableAddress(
+                          request.pickupLat,
+                          request.pickupLong,
+                        );
                     //Fetches details of the selected order from Supabase, fetches order complaint (if present).
                     final requestDetails = await RequestRepo.getRequestById(
                       request.requestId,
                     );
-                
-                    final complaint = await ComplaintRepo.getComplaintByRequestId(
-                      request.requestId,
-                    );
+
+                    final complaint =
+                        await ComplaintRepo.getComplaintByRequestId(
+                          request.requestId,
+                        );
                     //If the request is modified, the previous screen returns with true and the page is updated.
                     if (requestDetails != null && context.mounted) {
                       final updated = await Navigator.push(
@@ -130,7 +137,7 @@ String? readableAddress;
                           ),
                         ),
                       );
-                
+
                       //refresh the list
                       if (updated == true && context.mounted) {
                         context.read<RequestListBloc>().add(FetchRequests());
@@ -140,7 +147,7 @@ String? readableAddress;
                   //Data for each order is inside a special card.
                   child: RequestInfoCard(
                     requestId: request.requestId,
-                    pickup: readableAddress??'hf',
+                    pickup: readableAddress ?? 'hf',
                     destination: request.hospital?.hospitalName ?? 'gt',
                     time: formattedRequest(request.requestDate),
                     status: request.status,
