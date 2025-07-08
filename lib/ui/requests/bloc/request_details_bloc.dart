@@ -84,7 +84,7 @@ class RequestDetailsBloc
     Emitter<RequestDetailsState> emit,
   ) async {
     await RequestRepo.cancelRequest(request!.requestId); //  Update to Supabase
-    request?.status = 'cancelled'; //Update locally
+    request!.status = 'cancelled'; //Update locally
     emit(RequestCancelled());
   }
 }

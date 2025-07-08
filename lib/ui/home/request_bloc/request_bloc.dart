@@ -79,7 +79,7 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
       charityId: null,
       hospitalId: selectedHospital!.hospitalId,
       complaintId: null,
-      driverId: 'cfbd7c7a-6124-4353-b8e6-fb660c733e4a',
+      driverId: null,
       pickupLat: userLocation!.latitude,
       pickupLong: userLocation!.longitude,
       destinationLat: selectedHospital!.hospitalLat,

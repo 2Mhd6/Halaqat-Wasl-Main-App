@@ -1,5 +1,9 @@
 import 'package:dart_mappable/dart_mappable.dart';
-
+import 'package:halaqat_wasl_main_app/model/charity_model/charity_model.dart';
+import 'package:halaqat_wasl_main_app/model/complaint_model/complaint_model.dart';
+import 'package:halaqat_wasl_main_app/model/driver_model/driver_model.dart';
+import 'package:halaqat_wasl_main_app/model/hospital_model/hospital_model.dart';
+import 'package:halaqat_wasl_main_app/model/user_model/user_model.dart';
 part 'request_model.mapper.dart';
 
 @MappableClass()
@@ -18,6 +22,11 @@ class RequestModel with RequestModelMappable {
     required this.requestDate,
     required this.status,
     this.note,
+    this.user,
+    this.charity,
+    this.driver,
+    this.hospital,
+    this.complaint,
   });
 
   @MappableField(key: 'request_id')
@@ -44,6 +53,8 @@ class RequestModel with RequestModelMappable {
   @MappableField(key: 'pick_up_long')
   final double pickupLong;
 
+  
+
   @MappableField(key: 'destination_lat')
   final double destinationLat;
 
@@ -53,7 +64,14 @@ class RequestModel with RequestModelMappable {
   @MappableField(key: 'request_date')
   final DateTime requestDate;
 
-  String status;
+  late final String status;
 
   final String? note;
+
+  // Nested models for joined tables
+  final UserModel? user;
+  final CharityModel? charity;
+  final DriverModel? driver;
+  final HospitalModel? hospital;
+  final ComplaintModel? complaint;
 }

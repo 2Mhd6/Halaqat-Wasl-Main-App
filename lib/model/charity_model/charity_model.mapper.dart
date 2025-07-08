@@ -34,9 +34,9 @@ class CharityModelMapper extends ClassMapperBase<CharityModel> {
   static double _$charityLat(CharityModel v) => v.charityLat;
   static const Field<CharityModel, double> _f$charityLat =
       Field('charityLat', _$charityLat, key: r'charity_lat');
-  static double _$charityLang(CharityModel v) => v.charityLang;
-  static const Field<CharityModel, double> _f$charityLang =
-      Field('charityLang', _$charityLang, key: r'charity_lang');
+  static double _$charityLong(CharityModel v) => v.charityLong;
+  static const Field<CharityModel, double> _f$charityLong =
+      Field('charityLong', _$charityLong, key: r'charity_long');
   static int _$totalServices(CharityModel v) => v.totalServices;
   static const Field<CharityModel, int> _f$totalServices =
       Field('totalServices', _$totalServices, key: r'total_services');
@@ -48,7 +48,7 @@ class CharityModelMapper extends ClassMapperBase<CharityModel> {
     #charityName: _f$charityName,
     #role: _f$role,
     #charityLat: _f$charityLat,
-    #charityLang: _f$charityLang,
+    #charityLong: _f$charityLong,
     #totalServices: _f$totalServices,
   };
 
@@ -59,7 +59,7 @@ class CharityModelMapper extends ClassMapperBase<CharityModel> {
         charityName: data.dec(_f$charityName),
         role: data.dec(_f$role),
         charityLat: data.dec(_f$charityLat),
-        charityLang: data.dec(_f$charityLang),
+        charityLong: data.dec(_f$charityLong),
         totalServices: data.dec(_f$totalServices));
   }
 
@@ -122,7 +122,7 @@ abstract class CharityModelCopyWith<$R, $In extends CharityModel, $Out>
       String? charityName,
       String? role,
       double? charityLat,
-      double? charityLang,
+      double? charityLong,
       int? totalServices});
   CharityModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
@@ -142,7 +142,7 @@ class _CharityModelCopyWithImpl<$R, $Out>
           String? charityName,
           Object? role = $none,
           double? charityLat,
-          double? charityLang,
+          double? charityLong,
           int? totalServices}) =>
       $apply(FieldCopyWithData({
         if (charityId != null) #charityId: charityId,
@@ -150,7 +150,7 @@ class _CharityModelCopyWithImpl<$R, $Out>
         if (charityName != null) #charityName: charityName,
         if (role != $none) #role: role,
         if (charityLat != null) #charityLat: charityLat,
-        if (charityLang != null) #charityLang: charityLang,
+        if (charityLong != null) #charityLong: charityLong,
         if (totalServices != null) #totalServices: totalServices
       }));
   @override
@@ -160,7 +160,7 @@ class _CharityModelCopyWithImpl<$R, $Out>
       charityName: data.get(#charityName, or: $value.charityName),
       role: data.get(#role, or: $value.role),
       charityLat: data.get(#charityLat, or: $value.charityLat),
-      charityLang: data.get(#charityLang, or: $value.charityLang),
+      charityLong: data.get(#charityLong, or: $value.charityLong),
       totalServices: data.get(#totalServices, or: $value.totalServices));
 
   @override

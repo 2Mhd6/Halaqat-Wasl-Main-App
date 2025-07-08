@@ -6,7 +6,7 @@ part 'hospital_model.mapper.dart';
 class HospitalModel with HospitalModelMappable {
   HospitalModel({
     required this.hospitalId,
-    required this.name,
+    required this.hospitalName,
     required this.hospitalLat,
     required this.hospitalLong,
   });
@@ -14,7 +14,8 @@ class HospitalModel with HospitalModelMappable {
   @MappableField(key: 'hospital_id')
   final String hospitalId;
 
-  final String name;
+  @MappableField(key: 'hospital_name')
+  final String hospitalName;
 
   @MappableField(key: 'hospital_lat')
   final double hospitalLat;

@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:halaqat_wasl_main_app/helpers/format_date_time.dart';
+import 'package:halaqat_wasl_main_app/helpers/readable_address.dart';
 import 'package:halaqat_wasl_main_app/repo/request/complaint_repo.dart';
 import 'package:halaqat_wasl_main_app/repo/request/request_repo.dart';
 import 'package:halaqat_wasl_main_app/theme/app_colors.dart';
@@ -25,7 +29,7 @@ class RequestListScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              'my_request_screen.requests'.tr(),
+              'my_request_screen.my_request'.tr(),
               style: AppTextStyle.sfProBold20,
             ),
             centerTitle: false,
@@ -81,6 +85,8 @@ class _RequestsListView extends StatelessWidget {
                     .where((r) => r.status.toLowerCase() == filter)
                     .toList();
 
+          log('-------\n$filteredRequests');
+
           return ListView.separated(
             //Display list
             padding: const EdgeInsets.all(16),
@@ -88,52 +94,57 @@ class _RequestsListView extends StatelessWidget {
             separatorBuilder: (_, __) => Gap.gapH16,
             itemBuilder: (context, index) {
               final request = filteredRequests[index];
-
+String? readableAddress;
               return InkWell(
-                onTap: () async {
-                  //Fetches details of the selected order from Supabase, fetches order complaint (if present).
-                  final requestDetails = await RequestRepo.getRequestById(
-                    request.requestId,
-                  );
-
-                  final complaint = await ComplaintRepo.getComplaintByRequestId(
-                    request.requestId,
-                  );
-                  //If the request is modified, the previous screen returns with true and the page is updated.
-                  if (requestDetails != null && context.mounted) {
-                    final updated = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => BlocProvider(
-                          create: (_) => RequestDetailsBloc()
-                            ..add(
-                              LoadRequestDetails(
-                                request: requestDetails,
-                                complaint: complaint,
+                onTap: () async =>readableAddress =  await ReadableLocation.readableAddress(request.pickupLat, request.pickupLong) ,
+                child: InkWell(
+                  onTap: () async {
+                
+                
+                    final readableAddress = await ReadableLocation.readableAddress(request.pickupLat, request.pickupLong);
+                    //Fetches details of the selected order from Supabase, fetches order complaint (if present).
+                    final requestDetails = await RequestRepo.getRequestById(
+                      request.requestId,
+                    );
+                
+                    final complaint = await ComplaintRepo.getComplaintByRequestId(
+                      request.requestId,
+                    );
+                    //If the request is modified, the previous screen returns with true and the page is updated.
+                    if (requestDetails != null && context.mounted) {
+                      final updated = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                            create: (_) => RequestDetailsBloc()
+                              ..add(
+                                LoadRequestDetails(
+                                  request: requestDetails,
+                                  complaint: complaint,
+                                ),
                               ),
+                            child: RequestDetailsScreen(
+                              request: requestDetails,
+                              complaint: complaint,
                             ),
-                          child: RequestDetailsScreen(
-                            request: requestDetails,
-                            complaint: complaint,
                           ),
                         ),
-                      ),
-                    );
-
-                    //refresh the list
-                    if (updated == true && context.mounted) {
-                      context.read<RequestListBloc>().add(FetchRequests());
+                      );
+                
+                      //refresh the list
+                      if (updated == true && context.mounted) {
+                        context.read<RequestListBloc>().add(FetchRequests());
+                      }
                     }
-                  }
-                },
-                //Data for each order is inside a special card.
-                child: RequestInfoCard(
-                  requestId: request.requestId,
-                  pickup: 'King Abdulaziz Road',
-                  destination: 'Alnahdi Pharmacy, Riyadh',
-                  time:
-                      '${request.requestDate.hour}:${request.requestDate.minute.toString().padLeft(2, '0')}pm ${request.requestDate.day}-${request.requestDate.month}-${request.requestDate.year}',
-                  status: request.status,
+                  },
+                  //Data for each order is inside a special card.
+                  child: RequestInfoCard(
+                    requestId: request.requestId,
+                    pickup: readableAddress??'hf',
+                    destination: request.hospital?.hospitalName ?? 'gt',
+                    time: formattedRequest(request.requestDate),
+                    status: request.status,
+                  ),
                 ),
               );
             },
@@ -141,7 +152,7 @@ class _RequestsListView extends StatelessWidget {
         }
 
         //Displays a "No requests found" message if there are no requests or an error occurred while fetching.
-        return Center(child: Text('my_request_screen.no_requests'.tr()));
+        return Center(child: Text('my_request_screen.noـrequestsـfound'.tr()));
       },
     );
   }

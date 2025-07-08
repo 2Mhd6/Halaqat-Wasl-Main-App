@@ -1,7 +1,12 @@
 import 'dart:developer';
 import 'package:get_it/get_it.dart';
 import 'package:halaqat_wasl_main_app/data/user_data.dart';
+import 'package:halaqat_wasl_main_app/model/charity_model/charity_model.dart';
+import 'package:halaqat_wasl_main_app/model/complaint_model/complaint_model.dart';
+import 'package:halaqat_wasl_main_app/model/driver_model/driver_model.dart';
+import 'package:halaqat_wasl_main_app/model/hospital_model/hospital_model.dart';
 import 'package:halaqat_wasl_main_app/model/request_model/request_model.dart';
+import 'package:halaqat_wasl_main_app/model/user_model/user_model.dart';
 import 'package:halaqat_wasl_main_app/shared/set_up.dart';
 
 class RequestRepo {
@@ -33,14 +38,48 @@ class RequestRepo {
   //getAllRequests function -> fetches all requests from the requests table
   static Future<List<RequestModel>> getAllRequests() async {
     final userId = _requestSupabase.auth.currentUser!.id;
-    final response = await _requestSupabase
+    final requestQuery = await _requestSupabase
         .from('requests')
-        .select()
+        .select('*, users(*), charity(*), driver(*), hospital(*), complaint(*)')
         .eq('user_id', userId);
 
-    return (response as List)
-        .map((map) => RequestModelMapper.fromMap(map))
-        .toList();
+    log('$requestQuery');
+
+    final requests = requestQuery.map((request) {
+      return RequestModel(
+        requestId: request['request_id'],
+        userId: request['user_id'],
+        charityId: request['charity_id'],
+        hospitalId: request['hospital_id'],
+        complaintId: request['complaint_id'],
+        driverId: request['driver_id'],
+        pickupLat: request['pick_up_lat'],
+        pickupLong: request['pick_up_long'],
+        destinationLat: request['destination_lat'],
+        destinationLong: request['destination_long'],
+        requestDate: DateTime.parse(request['request_date']),
+        status: request['status'],
+        note: request['note'],
+        user: request['users'] != null
+            ? UserModelMapper.fromMap(request['users'])
+            : null,
+        charity: request['charity'] != null
+            ? CharityModelMapper.fromMap(request['charity'])
+            : null,
+        driver: request['driver'] != null
+            ? DriverModelMapper.fromMap(request['driver'])
+            : null,
+        hospital: request['hospital'] != null
+            ? HospitalModelMapper.fromMap(request['hospital'])
+            : null,
+        complaint: request['complaint'] != null
+            ? ComplaintModelMapper.fromMap(request['complaint'])
+            : null,
+      );
+    }).toList();
+
+    log('i am in repo');
+    return requests;
   }
 
   final currentUserData = GetIt.I.get<UserData>().user;

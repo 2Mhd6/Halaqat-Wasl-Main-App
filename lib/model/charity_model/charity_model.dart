@@ -15,7 +15,7 @@ class CharityModel with CharityModelMappable {
     required this.charityName,
     required this.role,
     required this.charityLat,
-    required this.charityLang,
+    required this.charityLong,
     required this.totalServices,
   });
 
@@ -33,8 +33,8 @@ class CharityModel with CharityModelMappable {
   @MappableField(key: 'charity_lat')
   final double charityLat;
 
-  @MappableField(key: 'charity_lang')
-  final double charityLang;
+  @MappableField(key: 'charity_long')
+  final double charityLong;
 
   @MappableField(key: 'total_services')
   final int totalServices;

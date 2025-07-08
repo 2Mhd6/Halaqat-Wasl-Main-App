@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:halaqat_wasl_main_app/model/request_model/request_model.dart';
@@ -18,9 +20,12 @@ class RequestListBloc extends Bloc<RequestListEvent, RequestListState> {
     emit(RequestListLoading());
 
     try {
+     
       final requests = await RequestRepo.getAllRequests();
       emit(RequestListLoaded(requests: requests));
+     
     } catch (e) {
+     
       emit(RequestListError('Failed to load requests: $e'));
     }
   }

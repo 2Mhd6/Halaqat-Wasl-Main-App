@@ -128,7 +128,8 @@
         "cancelled": "Cancelled",
         "req_id": "Request ID",
         "hospital_name": "Hospital Name",
-        "date_&_time": "Date & Time"
+        "date_&_time": "Date & Time",
+        "no_requests": "No Requests"
     },
 
     "profile_screen": {

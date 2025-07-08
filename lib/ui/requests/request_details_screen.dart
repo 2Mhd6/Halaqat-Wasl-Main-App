@@ -189,8 +189,8 @@ class RequestDetailsScreen extends StatelessWidget {
                         (complaintStatus == ComplaintStatus.responded ||
                                 complaintStatus ==
                                     ComplaintStatus.waitingResponse)
-                            ? 'request_details_screen.cancel'.tr()
-                            : 'request_details_screen.submit'.tr(),
+                            ? 'Okay'
+                            : 'Submit Complaint',
                         style: AppTextStyle.sfProW60016.copyWith(
                           color: Colors.white,
                         ),
@@ -255,10 +255,7 @@ class RequestDetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text(
-                        'request_details_screen.cancel'.tr(),
-                        style: AppTextStyle.sfProW60016,
-                      ),
+                      child: Text('Okay', style: AppTextStyle.sfProW60016),
                     ),
                   ),
                 ],
@@ -302,10 +299,7 @@ class RequestDetailsScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text(
-                        'request_details_screen.cancel'.tr(),
-                        style: AppTextStyle.sfProW60016,
-                      ),
+                      child: Text('Okay', style: AppTextStyle.sfProW60016),
                     ),
                   ),
                 ],

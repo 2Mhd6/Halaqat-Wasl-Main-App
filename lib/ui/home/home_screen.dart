@@ -106,9 +106,9 @@ class HomeScreen extends StatelessWidget {
                           RequestInput(
                             label: requestBloc.selectedHospital == null
                                 ? tr('home_screen.select_hospital')
-                                : requestBloc.selectedHospital!.name,
+                                : requestBloc.selectedHospital!.hospitalName,
                             icon: Icons.chevron_right_sharp,
-                            isFilled: requestBloc.selectedHospital?.name.isNotEmpty ?? false,
+                            isFilled: requestBloc.selectedHospital?.hospitalName.isNotEmpty ?? false,
                             onPressed: () {
                               showModalBottomSheet(
                                 isScrollControlled: true,

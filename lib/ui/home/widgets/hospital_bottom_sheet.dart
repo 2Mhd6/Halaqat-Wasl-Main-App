@@ -13,7 +13,6 @@ class HospitalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final requestBloc = context.read<RequestBloc>();
 
     return SizedBox(
@@ -24,40 +23,40 @@ class HospitalBottomSheet extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(tr('select_hospital_bottom_sheet_home_screen.select_hospital'), style: AppTextStyle.sfProBold24),
-              
+              Text(
+                tr('select_hospital_bottom_sheet_home_screen.select_hospital'),
+                style: AppTextStyle.sfProBold24,
+              ),
+
               Gap.gapH32,
-                
+
               ListView.separated(
                 shrinkWrap: true,
                 itemCount: hospitalsInRiyadh.length,
-                itemBuilder: (context, index){
+                itemBuilder: (context, index) {
                   return ListTile(
                     onTap: () {
-                      
                       requestBloc.selectedHospital = hospitalsInRiyadh[index];
-                      
+
                       requestBloc.add(GettingHospitalRequest());
-                      
+
                       requestBloc.add(CheckIfAllFieldsAreFilled());
                       context.pop();
                     },
-                    title: Text(hospitalsInRiyadh[index].name),
+                    title: Text(hospitalsInRiyadh[index].hospitalName),
                   );
                 },
                 separatorBuilder: (context, index) {
                   return Column(
                     children: [
                       Gap.gapH16,
-                      Divider(color: Colors.grey,),
-              
-                      if(index == hospitalsInRiyadh.length)
-                      Gap.gapH80
-              
+                      Divider(color: Colors.grey),
+
+                      if (index == hospitalsInRiyadh.length) Gap.gapH80,
                     ],
                   );
                 },
-              )
+              ),
             ],
           ),
         ),
@@ -66,20 +65,18 @@ class HospitalBottomSheet extends StatelessWidget {
   }
 }
 
-
-
-// --- For Testing Only 
+// --- For Testing Only
 final List<HospitalModel> hospitalsInRiyadh = [
   // North Riyadh
   HospitalModel(
     hospitalId: '1',
-    name: 'King Abdullah Bin Abdulaziz University Hospital',
+    hospitalName: 'King Abdullah Bin Abdulaziz University Hospital',
     hospitalLat: 24.774252,
     hospitalLong: 46.729566,
   ),
   HospitalModel(
     hospitalId: '2',
-    name: 'Dr. Sulaiman Al Habib Hospital - Al Takhassusi',
+    hospitalName: 'Dr. Sulaiman Al Habib Hospital - Al Takhassusi',
     hospitalLat: 24.809950,
     hospitalLong: 46.653049,
   ),
@@ -87,13 +84,13 @@ final List<HospitalModel> hospitalsInRiyadh = [
   // Middle Riyadh
   HospitalModel(
     hospitalId: '3',
-    name: 'King Faisal Specialist Hospital & Research Centre',
+    hospitalName: 'King Faisal Specialist Hospital & Research Centre',
     hospitalLat: 24.690089,
     hospitalLong: 46.679340,
   ),
   HospitalModel(
     hospitalId: '4',
-    name: 'King Saud Medical City',
+    hospitalName: 'King Saud Medical City',
     hospitalLat: 24.644111,
     hospitalLong: 46.713081,
   ),
@@ -101,13 +98,13 @@ final List<HospitalModel> hospitalsInRiyadh = [
   // South Riyadh
   HospitalModel(
     hospitalId: '5',
-    name: 'Al Imam Medical Complex',
+    hospitalName: 'Al Imam Medical Complex',
     hospitalLat: 24.573308,
     hospitalLong: 46.734055,
   ),
   HospitalModel(
     hospitalId: '6',
-    name: 'Al Mamlaka Hospital',
+    hospitalName: 'Al Mamlaka Hospital',
     hospitalLat: 24.597202,
     hospitalLong: 46.726781,
   ),
