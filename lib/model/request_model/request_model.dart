@@ -13,8 +13,10 @@ class RequestModel with RequestModelMappable {
     required this.driverId,
     required this.pickupLat,
     required this.pickupLong,
+    required this.pickUpReadableAddress,
     required this.destinationLat,
     required this.destinationLong,
+    required this.destinationReadableAddress,
     required this.requestDate,
     required this.status,
     this.note,
@@ -44,11 +46,17 @@ class RequestModel with RequestModelMappable {
   @MappableField(key: 'pick_up_long')
   final double pickupLong;
 
+  @MappableField(key: 'pick_up_readable_address')
+  final String pickUpReadableAddress;
+
   @MappableField(key: 'destination_lat')
   final double destinationLat;
 
   @MappableField(key: 'destination_long')
   final double destinationLong;
+
+  @MappableField(key: 'destination_readable_address')
+  final String destinationReadableAddress;
 
   @MappableField(key: 'request_date')
   final DateTime requestDate;

@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:halaqat_wasl_main_app/data/user_data.dart';
+import 'package:halaqat_wasl_main_app/helpers/readable_location.dart';
 import 'package:halaqat_wasl_main_app/model/hospital_model/hospital_model.dart';
 import 'package:halaqat_wasl_main_app/model/request_model/request_model.dart';
 import 'package:halaqat_wasl_main_app/repo/request/request_repo.dart';
@@ -70,20 +71,27 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     }
 
     final user = GetIt.I.get<UserData>().user;
+
+    final pickUpReadableAddress = await ReadableLocation.readableAddress(lat: userLocation!.latitude, long: userLocation!.longitude);
+    final destinationReadableAddress = await ReadableLocation.readableAddress(lat: selectedHospital!.hospitalLat, long: selectedHospital!.hospitalLong);
+    
     log(requestDate.toString());
 
     // The static Driver Id for testing purpose
+    // '67fe4cbf-3a3d-454b-aa87-6c026709578e'
     final request = RequestModel(
       requestId: Uuid().v4(),
       userId: user!.userId,
       charityId: null,
       hospitalId: selectedHospital!.hospitalId,
       complaintId: null,
-      driverId: '520568cb-ee01-45e8-b5e7-172278340115',
+      driverId: null,
       pickupLat: userLocation!.latitude,
       pickupLong: userLocation!.longitude,
+      pickUpReadableAddress: pickUpReadableAddress  ,
       destinationLat: selectedHospital!.hospitalLat,
       destinationLong: selectedHospital!.hospitalLong,
+      destinationReadableAddress: destinationReadableAddress,
       note: notesController.text.isEmpty ? null : notesController.text,
       requestDate: requestDate!,
       status: 'pending',

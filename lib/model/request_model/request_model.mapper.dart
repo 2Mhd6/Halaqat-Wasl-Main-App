@@ -44,12 +44,22 @@ class RequestModelMapper extends ClassMapperBase<RequestModel> {
   static double _$pickupLong(RequestModel v) => v.pickupLong;
   static const Field<RequestModel, double> _f$pickupLong =
       Field('pickupLong', _$pickupLong, key: r'pick_up_long');
+  static String _$pickUpReadableAddress(RequestModel v) =>
+      v.pickUpReadableAddress;
+  static const Field<RequestModel, String> _f$pickUpReadableAddress = Field(
+      'pickUpReadableAddress', _$pickUpReadableAddress,
+      key: r'pick_up_readable_address');
   static double _$destinationLat(RequestModel v) => v.destinationLat;
   static const Field<RequestModel, double> _f$destinationLat =
       Field('destinationLat', _$destinationLat, key: r'destination_lat');
   static double _$destinationLong(RequestModel v) => v.destinationLong;
   static const Field<RequestModel, double> _f$destinationLong =
       Field('destinationLong', _$destinationLong, key: r'destination_long');
+  static String _$destinationReadableAddress(RequestModel v) =>
+      v.destinationReadableAddress;
+  static const Field<RequestModel, String> _f$destinationReadableAddress =
+      Field('destinationReadableAddress', _$destinationReadableAddress,
+          key: r'destination_readable_address');
   static DateTime _$requestDate(RequestModel v) => v.requestDate;
   static const Field<RequestModel, DateTime> _f$requestDate =
       Field('requestDate', _$requestDate, key: r'request_date');
@@ -70,8 +80,10 @@ class RequestModelMapper extends ClassMapperBase<RequestModel> {
     #driverId: _f$driverId,
     #pickupLat: _f$pickupLat,
     #pickupLong: _f$pickupLong,
+    #pickUpReadableAddress: _f$pickUpReadableAddress,
     #destinationLat: _f$destinationLat,
     #destinationLong: _f$destinationLong,
+    #destinationReadableAddress: _f$destinationReadableAddress,
     #requestDate: _f$requestDate,
     #status: _f$status,
     #note: _f$note,
@@ -87,8 +99,10 @@ class RequestModelMapper extends ClassMapperBase<RequestModel> {
         driverId: data.dec(_f$driverId),
         pickupLat: data.dec(_f$pickupLat),
         pickupLong: data.dec(_f$pickupLong),
+        pickUpReadableAddress: data.dec(_f$pickUpReadableAddress),
         destinationLat: data.dec(_f$destinationLat),
         destinationLong: data.dec(_f$destinationLong),
+        destinationReadableAddress: data.dec(_f$destinationReadableAddress),
         requestDate: data.dec(_f$requestDate),
         status: data.dec(_f$status),
         note: data.dec(_f$note));
@@ -156,8 +170,10 @@ abstract class RequestModelCopyWith<$R, $In extends RequestModel, $Out>
       String? driverId,
       double? pickupLat,
       double? pickupLong,
+      String? pickUpReadableAddress,
       double? destinationLat,
       double? destinationLong,
+      String? destinationReadableAddress,
       DateTime? requestDate,
       String? status,
       String? note});
@@ -182,8 +198,10 @@ class _RequestModelCopyWithImpl<$R, $Out>
           Object? driverId = $none,
           double? pickupLat,
           double? pickupLong,
+          String? pickUpReadableAddress,
           double? destinationLat,
           double? destinationLong,
+          String? destinationReadableAddress,
           DateTime? requestDate,
           String? status,
           Object? note = $none}) =>
@@ -196,8 +214,12 @@ class _RequestModelCopyWithImpl<$R, $Out>
         if (driverId != $none) #driverId: driverId,
         if (pickupLat != null) #pickupLat: pickupLat,
         if (pickupLong != null) #pickupLong: pickupLong,
+        if (pickUpReadableAddress != null)
+          #pickUpReadableAddress: pickUpReadableAddress,
         if (destinationLat != null) #destinationLat: destinationLat,
         if (destinationLong != null) #destinationLong: destinationLong,
+        if (destinationReadableAddress != null)
+          #destinationReadableAddress: destinationReadableAddress,
         if (requestDate != null) #requestDate: requestDate,
         if (status != null) #status: status,
         if (note != $none) #note: note
@@ -212,8 +234,12 @@ class _RequestModelCopyWithImpl<$R, $Out>
       driverId: data.get(#driverId, or: $value.driverId),
       pickupLat: data.get(#pickupLat, or: $value.pickupLat),
       pickupLong: data.get(#pickupLong, or: $value.pickupLong),
+      pickUpReadableAddress:
+          data.get(#pickUpReadableAddress, or: $value.pickUpReadableAddress),
       destinationLat: data.get(#destinationLat, or: $value.destinationLat),
       destinationLong: data.get(#destinationLong, or: $value.destinationLong),
+      destinationReadableAddress: data.get(#destinationReadableAddress,
+          or: $value.destinationReadableAddress),
       requestDate: data.get(#requestDate, or: $value.requestDate),
       status: data.get(#status, or: $value.status),
       note: data.get(#note, or: $value.note));
