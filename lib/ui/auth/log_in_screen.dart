@@ -104,23 +104,6 @@ class LogInScreen extends StatelessWidget {
 
                       Gap.gapH16,
 
-                      SizedBox(
-                        width: context.getWidth(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: () {},
-                              child: Text(
-                                'Forget your password?',
-                                style:
-                                    AppTextStyle.sfProForgetPasswordColor20012,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
                       Spacer(),
 
                       BlocBuilder<AuthBloc, AuthState>(

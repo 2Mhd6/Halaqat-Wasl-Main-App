@@ -23,8 +23,9 @@ class HospitalModelMapper extends ClassMapperBase<HospitalModel> {
   static String _$hospitalId(HospitalModel v) => v.hospitalId;
   static const Field<HospitalModel, String> _f$hospitalId =
       Field('hospitalId', _$hospitalId, key: r'hospital_id');
-  static String _$name(HospitalModel v) => v.name;
-  static const Field<HospitalModel, String> _f$name = Field('name', _$name);
+  static String _$hospitalName(HospitalModel v) => v.hospitalName;
+  static const Field<HospitalModel, String> _f$hospitalName =
+      Field('hospitalName', _$hospitalName, key: r'hospital_name');
   static double _$hospitalLat(HospitalModel v) => v.hospitalLat;
   static const Field<HospitalModel, double> _f$hospitalLat =
       Field('hospitalLat', _$hospitalLat, key: r'hospital_lat');
@@ -35,7 +36,7 @@ class HospitalModelMapper extends ClassMapperBase<HospitalModel> {
   @override
   final MappableFields<HospitalModel> fields = const {
     #hospitalId: _f$hospitalId,
-    #name: _f$name,
+    #hospitalName: _f$hospitalName,
     #hospitalLat: _f$hospitalLat,
     #hospitalLong: _f$hospitalLong,
   };
@@ -43,7 +44,7 @@ class HospitalModelMapper extends ClassMapperBase<HospitalModel> {
   static HospitalModel _instantiate(DecodingData data) {
     return HospitalModel(
         hospitalId: data.dec(_f$hospitalId),
-        name: data.dec(_f$name),
+        hospitalName: data.dec(_f$hospitalName),
         hospitalLat: data.dec(_f$hospitalLat),
         hospitalLong: data.dec(_f$hospitalLong));
   }
@@ -103,7 +104,7 @@ abstract class HospitalModelCopyWith<$R, $In extends HospitalModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
   $R call(
       {String? hospitalId,
-      String? name,
+      String? hospitalName,
       double? hospitalLat,
       double? hospitalLong});
   HospitalModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
@@ -120,19 +121,19 @@ class _HospitalModelCopyWithImpl<$R, $Out>
   @override
   $R call(
           {String? hospitalId,
-          String? name,
+          String? hospitalName,
           double? hospitalLat,
           double? hospitalLong}) =>
       $apply(FieldCopyWithData({
         if (hospitalId != null) #hospitalId: hospitalId,
-        if (name != null) #name: name,
+        if (hospitalName != null) #hospitalName: hospitalName,
         if (hospitalLat != null) #hospitalLat: hospitalLat,
         if (hospitalLong != null) #hospitalLong: hospitalLong
       }));
   @override
   HospitalModel $make(CopyWithData data) => HospitalModel(
       hospitalId: data.get(#hospitalId, or: $value.hospitalId),
-      name: data.get(#name, or: $value.name),
+      hospitalName: data.get(#hospitalName, or: $value.hospitalName),
       hospitalLat: data.get(#hospitalLat, or: $value.hospitalLat),
       hospitalLong: data.get(#hospitalLong, or: $value.hospitalLong));
 

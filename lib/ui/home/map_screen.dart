@@ -86,8 +86,11 @@ class MapScreen extends StatelessWidget {
 
                       requestBloc.userLocation = await locationBloc.passUserLocation();
                       requestBloc.readableLocation = await locationBloc.passReadableLocation();
+
+                      requestBloc.add(OpenNextFieldEvent(currentFieldIndex: 2));
+                      requestBloc.add(GettingUserLocationToDetermineHospitals(userLocation: locationBloc.userLocation!));
                       
-                      requestBloc.add(CheckIfAllFieldsAreFilled());
+                      // requestBloc.add(CheckIfAllFieldsAreFilled());
                       if(context.mounted){
                         context.pop();
                       }

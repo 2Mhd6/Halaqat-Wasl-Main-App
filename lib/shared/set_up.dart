@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:halaqat_wasl_main_app/data/hospitals_data.dart';
 import 'package:halaqat_wasl_main_app/data/shared_local_storage.dart';
 
 import 'package:halaqat_wasl_main_app/data/user_data.dart';
@@ -30,5 +31,7 @@ class InjectionContainer {
       return shared;
 
     });
+
+    GetIt.I.registerSingleton<HospitalsData>(HospitalsData());
   }
 }

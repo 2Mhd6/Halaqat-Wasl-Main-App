@@ -3,12 +3,15 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:halaqat_wasl_main_app/data/hospitals_data.dart';
 import 'package:halaqat_wasl_main_app/data/user_data.dart';
 import 'package:halaqat_wasl_main_app/helpers/readable_location.dart';
 import 'package:halaqat_wasl_main_app/model/hospital_model/hospital_model.dart';
 import 'package:halaqat_wasl_main_app/model/request_model/request_model.dart';
+import 'package:halaqat_wasl_main_app/repo/hospital/hospital_repo.dart';
 import 'package:halaqat_wasl_main_app/repo/request/request_repo.dart';
 import 'package:meta/meta.dart';
 import 'package:uuid/uuid.dart';
@@ -23,6 +26,9 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
   String? readableLocation;
   HospitalModel? selectedHospital;
   TextEditingController notesController = TextEditingController();
+  bool isFirstField = false;
+  bool isSecondField = false;
+  bool isThirdField = false;
   bool isFilledAllFields = false;
 
   RequestBloc() : super(RequestInitial()) {
@@ -32,8 +38,24 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
 
     on<GettingDateRequest>((event, emit) => emit(SuccessRequestState()));
     on<GettingHospitalRequest>((event, emit) => emit(SuccessRequestState()));
+    on<OpenNextFieldEvent>(openNextField);
     on<CheckIfAllFieldsAreFilled>(checkIfAllFieldsAreFilled);
+    on<GettingUserLocationToDetermineHospitals>(gettingUserLocationToDetermineHospitals);
     on<AddNewRequestEvent>(addNewRequest);
+  }
+
+  FutureOr<void> openNextField(OpenNextFieldEvent event, Emitter<RequestState> emit) {
+    final currentIndex = event.currentFieldIndex;
+
+    switch (currentIndex) {
+      case 1:
+        isSecondField = true;
+        emit(SuccessOpenNextField());
+        break;
+      case 2:
+        isThirdField = true;
+        emit(SuccessOpenNextField());
+    }
   }
 
   FutureOr<void> checkIfAllFieldsAreFilled(
@@ -55,6 +77,24 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     isFilledAllFields = true;
 
     emit(AllFieldsAreFilledSuccessfully());
+  }
+
+  FutureOr<void> gettingUserLocationToDetermineHospitals(GettingUserLocationToDetermineHospitals event, Emitter<RequestState> emit) async {
+
+    final userLocation = event.userLocation;
+
+
+    try{
+      final hospitals = await HospitalRepo.getAllHospital();
+      log('--9--$hospitals');
+      final closeHospitals = filterHospitalsUpToTenKM(userLocation: userLocation, hospitals: hospitals);
+      log('$hospitals');
+      GetIt.I.get<HospitalsData>().hospitals = closeHospitals;
+      emit(DeterminingHospitalsState());
+    }catch(error){
+      log(error.toString());
+      emit(ErrorState(errorMessage: error.toString()));
+    }
   }
 
   FutureOr<void> addNewRequest(
@@ -125,5 +165,22 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
   Future<void> close() {
     notesController.dispose();
     return super.close();
+  }
+
+
+  List<HospitalModel> filterHospitalsUpToTenKM({ required LatLng userLocation, required List<HospitalModel> hospitals})  {
+
+
+    return hospitals.where((hospital) {
+      double distanceInMeters = Geolocator.distanceBetween(
+        userLocation.latitude,
+        userLocation.longitude,
+        hospital.hospitalLat,
+        hospital.hospitalLong
+      );
+
+      double distanceInKm = distanceInMeters / 1000;
+      return distanceInKm <= 7;
+    }).toList();
   }
 }

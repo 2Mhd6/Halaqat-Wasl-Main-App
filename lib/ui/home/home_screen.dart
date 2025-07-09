@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                             style: AppTextStyle.sfPro60024,
                           ),
 
-                          Gap.gapH56,
+                          SizedBox(height: context.getHeight(multiplied: 0.1)),
 
                           RequestInput(
                             label: requestBloc.formattedDate == null
@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                                 : requestBloc.readableLocation!,
                             icon: Icons.location_on,
                             isFilled: requestBloc.readableLocation?.isNotEmpty ?? false,
-                            onPressed: () {
+                            onPressed: requestBloc.isSecondField ? () {
                               context.moveTo(
                                 context: context,
                                 screen: MultiBlocProvider(
@@ -98,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                                   child: MapScreen(),
                                 ),
                               );
-                            },
+                            } : null,
                           ),
 
                           Gap.gapH32,
@@ -106,10 +106,10 @@ class HomeScreen extends StatelessWidget {
                           RequestInput(
                             label: requestBloc.selectedHospital == null
                                 ? tr('home_screen.select_hospital')
-                                : requestBloc.selectedHospital!.name,
+                                : requestBloc.selectedHospital!.hospitalName,
                             icon: Icons.chevron_right_sharp,
-                            isFilled: requestBloc.selectedHospital?.name.isNotEmpty ?? false,
-                            onPressed: () {
+                            isFilled: requestBloc.selectedHospital?.hospitalName.isNotEmpty ?? false,
+                            onPressed: requestBloc.isThirdField ? () {
                               showModalBottomSheet(
                                 isScrollControlled: true,
                                 context: context,
@@ -120,7 +120,7 @@ class HomeScreen extends StatelessWidget {
                                   );
                                 },
                               );
-                            },
+                            } : null,
                           ),
 
                           Gap.gapH32,
@@ -129,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                             notesController: requestBloc.notesController,
                           ),
 
-                          Gap.gapH40,
+                          Gap.gapH56,
 
                           AppCustomButton(
                             label:tr('home_screen.place_request'),
@@ -143,25 +143,6 @@ class HomeScreen extends StatelessWidget {
                                 : null,
                           ),
 
-                          Gap.gapH56,
-
-                          SizedBox(
-                            width: context.getWidth(),
-                            child: Column(
-                              spacing: 8,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset('assets/home/car.svg'),
-                                Text(
-                                  tr('home_screen.no_ride_request'),
-                                  style:
-                                      AppTextStyle.sfPro60014SecondaryTextColor,
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          Gap.gapH80,
                         ],
                       ),
                     ),

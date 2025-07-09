@@ -115,6 +115,8 @@ class ShowDataAndTimePicker extends StatelessWidget {
 
                 requestBloc.add(GettingDateRequest());
 
+                requestBloc.add(OpenNextFieldEvent(currentFieldIndex: 1));
+
                 requestBloc.add(CheckIfAllFieldsAreFilled());
 
                 context.pop();
